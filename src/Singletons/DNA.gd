@@ -4,7 +4,8 @@
 
 extends Node
 
-const NUM_ALLELES: int = 2
+var NUM_ALLELES: int = 2 # This can be increased for more difficulty (more plants needed for crossing)
+const VALUES_POSTFIX := "_VALUES"
 
 enum FEATURES {
 	HAS_FLOWER

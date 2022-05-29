@@ -6,7 +6,7 @@ class_name Plant
 
 enum LIFE_STAGES { SEED, SPROUT, GROWN, ADULT, DEAD}
 
-var id: int
+var type_hash: int = 0
 var genetics: Dictionary = {}
 
 var life_stage = LIFE_STAGES.SEED
@@ -20,11 +20,13 @@ func add_gene(feature, gene) -> void:
 	var feat_genes: Array = genetics[feature]
 	if (feat_genes.size() < DNA.NUM_ALLELES):
 		feat_genes.push_back(gene)
+	type_hash = genetics.hash() # Regenerate id to reflect its DNA
 
 func replate_gene_at(feature, index, new_gene) -> void:
 	var feat_genes: Array = genetics[feature]
 	if (index < feat_genes.size()):
 		feat_genes[index] = new_gene
+	type_hash = genetics.hash() # Regenerate id to reflect its DNA
 
 func meiosis() -> Dictionary:
 	var result := {}
