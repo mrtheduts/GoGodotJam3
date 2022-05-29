@@ -1,3 +1,7 @@
+#
+# PlayerState.gd - State for player accessible for entire game
+#
+
 extends Node
 
 signal money_changed
@@ -10,7 +14,7 @@ func set_money(value: int) -> void:
 	emit_signal("money_changed", _money)
 
 func store_plant(plant: Node2D) -> bool:
-	var has_space := Constants.STARTING_STORAGE_SPACE > _stored_plants.size()
+	var has_space: bool = Constants.STARTING_STORAGE_SPACE > _stored_plants.size()
 	if (has_space):
 		_stored_plants.push_back(plant)
 	return has_space
