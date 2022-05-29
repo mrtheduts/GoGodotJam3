@@ -14,6 +14,8 @@ func _ready():
 	print("Plant B (Type: ", plant_b.type_hash, ") ", plant_b.genetics)
 	var child_plant = cross_plants([plant_a, plant_b])
 	print("Child Plant (Type: ", child_plant.type_hash, ") ", child_plant.genetics)
+	var cloned = clone_plant(child_plant)
+	print("Cloned from child (Type: ", cloned.type_hash, ") ", cloned.genetics)
 
 func gen_random_plant() -> Plant:
 	var new_plant: Plant = PLANT_CLASS.new()
@@ -31,6 +33,7 @@ func clone_plant(plant: Plant, life_stage = Plant.LIFE_STAGES.SEED) -> Plant:
 	var new_plant: Plant = PLANT_CLASS.new()
 	new_plant.life_stage = life_stage
 	new_plant.genetics = plant.genetics.duplicate(true)
+	new_plant.type_hash = new_plant.genetics.hash()
 	return new_plant
 
 func cross_plants(plants: Array, can_mutate: bool = true) -> Plant:
