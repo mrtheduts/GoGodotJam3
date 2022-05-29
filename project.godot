@@ -14,6 +14,12 @@ config/name="Umbrella Kittens"
 run/main_scene="res://src/Main/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerState="*res://src/Singletons/PlayerState/PlayerState.tscn"
+Utils="*res://src/Singletons/Utils.gd"
+Constants="*res://src/Singletons/Constants.gd"
+
 [importer_defaults]
 
 texture={

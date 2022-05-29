@@ -1,0 +1,2 @@
+const STARTING_MONEY: int = 10
+const STARTING_STORAGE_SPACE: int = 5
