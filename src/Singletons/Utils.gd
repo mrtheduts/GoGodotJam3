@@ -22,6 +22,14 @@ func conn_nodes(src_obj: Object,
 		printerr(src_signal + " is already connected to " + dest_func + " for objects: ", src_obj, " ", dest_obj)
 
 #
+# Shuffles and pops a random element from the Array
+#
+func shuffle_and_pop_front(array: Array):
+	randomize()
+	array.shuffle()
+	return array.pop_front()
+
+#
 # Merges two dictionaries which values are ONLY arrays
 #
 func merge_dicts_of_arrays(dict_a: Dictionary, dict_b: Dictionary) -> Dictionary:

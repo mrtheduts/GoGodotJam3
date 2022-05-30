@@ -5,27 +5,28 @@
 extends Node
 
 var PLANT_CLASS = preload("res://src/Plant/Plant.gd")
+var POPUP_CLASS = preload("res://src/PopupDialog/PopupDialog.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var plant_a = gen_random_plant()
 	print("Plant A (Type: ", plant_a.type_hash, ") ", plant_a.genetics)
-	var plant_b = gen_random_plant()
-	print("Plant B (Type: ", plant_b.type_hash, ") ", plant_b.genetics)
-	var child_plant = cross_plants([plant_a, plant_b])
-	print("Child Plant (Type: ", child_plant.type_hash, ") ", child_plant.genetics)
-	var cloned = clone_plant(child_plant)
-	print("Cloned from child (Type: ", cloned.type_hash, ") ", cloned.genetics)
+	plant_a.age()
+	print(plant_a.phenotype)
+#	var plant_b = gen_random_plant()
+#	print("Plant B (Type: ", plant_b.type_hash, ") ", plant_b.genetics)
+#	var child_plant = cross_plants([plant_a, plant_b])
+#	print("Child Plant (Type: ", child_plant.type_hash, ") ", child_plant.genetics)
+#	var cloned = clone_plant(child_plant)
+#	print("Cloned from child (Type: ", cloned.type_hash, ") ", cloned.genetics)
+	pass
 
 func gen_random_plant() -> Plant:
 	var new_plant: Plant = PLANT_CLASS.new()
 	for feature in DNA.FEATURES:
 		for n in DNA.NUM_ALLELES:
-			randomize()
 			var feature_values: Array = DNA[feature + DNA.VALUES_POSTFIX].keys()
-			feature_values.shuffle()
-			
-			var gene = feature_values.pop_front()
+			var gene = Utils.shuffle_and_pop_front(feature_values)
 			new_plant.add_gene(feature, gene)
 	return new_plant
 
@@ -70,4 +71,3 @@ func get_random_gene(feature):
 	var values: Array = DNA[feature + DNA.VALUES_POSTFIX].keys()
 	var rand_index = rand_range(0, values.size()) as int
 	return values[rand_index]
-

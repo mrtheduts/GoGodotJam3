@@ -9,13 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "CloseUpPlant",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/CloseUpPlant.gd"
+}, {
+"base": "Reference",
+"class": "Constants",
+"language": "GDScript",
+"path": "res://src/Singletons/Constants.gd"
+}, {
 "base": "Reference",
 "class": "Plant",
 "language": "GDScript",
 "path": "res://src/Plant/Plant.gd"
+}, {
+"base": "Reference",
+"class": "PlantTypes",
+"language": "GDScript",
+"path": "res://src/Plant/PlantTypes.gd"
 } ]
 _global_script_class_icons={
-"Plant": ""
+"CloseUpPlant": "",
+"Constants": "",
+"Plant": "",
+"PlantTypes": ""
 }
 
 [application]
@@ -28,7 +46,6 @@ config/icon="res://icon.png"
 
 PlayerState="*res://src/Singletons/PlayerState/PlayerState.tscn"
 Utils="*res://src/Singletons/Utils.gd"
-Constants="*res://src/Singletons/Constants.gd"
 DNA="*res://src/Singletons/DNA.gd"
 
 [importer_defaults]

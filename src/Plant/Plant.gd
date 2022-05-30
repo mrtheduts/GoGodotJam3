@@ -8,6 +8,7 @@ enum LIFE_STAGES { SEED, SPROUT, GROWN, ADULT, DEAD}
 
 var type_hash: int = 0
 var genetics: Dictionary = {}
+var phenotype: Dictionary = {}
 
 var life_stage = LIFE_STAGES.SEED
 
@@ -16,13 +17,47 @@ func _init():
 	for feature in DNA.FEATURES:
 		genetics[feature] = []
 
+func _reveal_phenotype():
+	for feature in genetics.keys():
+		if (DNA.is_feature_mixable(feature)):
+			phenotype[feature] = [] + genetics[feature] # Clone Array
+		else:
+			phenotype[feature] = get_predominant_gene(feature, genetics[feature])
+	
+	var features_to_remove := []
+	for feature in phenotype.keys():
+		var requirements = DNA.get(feature + DNA.REQ_POSTFIX)
+		if (requirements != null):
+			for req_feature in requirements.keys():
+				var req_feat_name = DNA.get_feature_name(req_feature)
+				var phen_value = DNA.get_value(req_feat_name)[phenotype[req_feat_name]]
+				if (phen_value != requirements.get(req_feature)):
+					features_to_remove.push_back(feature)
+	
+	for feature in features_to_remove:
+		phenotype[feature] = DNA.get_value(feature).keys()[0]
+
+func get_predominant_gene(feature, genes: Array):
+	# Filtering dominant and recessive genes
+	var dom_genes := []
+	var rec_genes := []
+	
+	for gene in genes:
+		if (DNA.is_gene_dominant(feature, gene)):
+			dom_genes.push_back(gene)
+		else:
+			rec_genes.push_back(gene)
+	
+	var res_genes: Array = dom_genes if (not dom_genes.empty()) else rec_genes
+	return Utils.shuffle_and_pop_front(res_genes)
+
 func add_gene(feature, gene) -> void:
 	var feat_genes: Array = genetics[feature]
 	if (feat_genes.size() < DNA.NUM_ALLELES):
 		feat_genes.push_back(gene)
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
 
-func replate_gene_at(feature, index, new_gene) -> void:
+func replace_gene_at(feature, index, new_gene) -> void:
 	var feat_genes: Array = genetics[feature]
 	if (index < feat_genes.size()):
 		feat_genes[index] = new_gene
@@ -32,14 +67,13 @@ func meiosis() -> Dictionary:
 	var result := {}
 	for feature in genetics.keys():
 		var genes: Array = [] + genetics[feature] # Cloning original array
-		randomize()
-		genes.shuffle()
-		result[feature] = genes.pop_front()
+		result[feature] = Utils.shuffle_and_pop_front(genes)
 	return result
 
 func age() -> void:
 	match life_stage:
 		LIFE_STAGES.SEED:
+			_reveal_phenotype()
 			life_stage = LIFE_STAGES.SPROUT
 		LIFE_STAGES.SPROUT:
 			life_stage = LIFE_STAGES.GROWN

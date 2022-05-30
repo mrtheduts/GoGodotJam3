@@ -4,6 +4,8 @@
 
 extends Node2D
 
+class_name CloseUpPlant
+
 var ROOT_SCENE = preload("res://src/CloseUpPlant/Roots/Roots.tscn")
 var STALK_SCENE = preload("res://src/CloseUpPlant/Stalks/Stalks.tscn")
 var BRANCH_SCENE = preload("res://src/CloseUpPlant/Branches/Branch.tscn")

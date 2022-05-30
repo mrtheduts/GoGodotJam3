@@ -2,7 +2,7 @@
 # Constants.gd - Constants for entire project
 #
 
-extends Node
+class_name Constants
 
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
