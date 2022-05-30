@@ -9,7 +9,6 @@ var SAVE_FUNC_NAME = "save_stats"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_game()
-	pass # Replace with function body.
 
 func _unhandled_input(event):
 	if event.is_action_pressed("save"):

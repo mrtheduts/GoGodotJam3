@@ -30,7 +30,6 @@ func _input(event):
    # Mouse in viewport coordinates.
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-				
 			if event.button_index == BUTTON_LEFT:
 				print("Mouse Click/Unclick at: ", event.position)
 				upgrade_garden_size()
