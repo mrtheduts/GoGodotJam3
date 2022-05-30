@@ -15,6 +15,9 @@ func _unhandled_input(event):
 	if event.is_action_pressed("save"):
 		save_game()
 		
+	if event.is_action_pressed("clear_save"):
+		delete_save()
+		
 
 func save_game():
 	print("Saving Game")
@@ -79,3 +82,9 @@ func load_game():
 		#	new_object.set(i, node_data[i])
 
 	save_game.close()
+	
+func delete_save():
+	print("Deleting save game")
+	
+	var dir = Directory.new()
+	dir.remove(SAVE_FILENAME)
