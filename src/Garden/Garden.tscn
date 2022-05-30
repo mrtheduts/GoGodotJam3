@@ -55,7 +55,7 @@ points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
 } ]
 1/z_index = 0
 
-[node name="Garden" type="TileMap"]
+[node name="Garden" type="TileMap" groups=["Persist"]]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1

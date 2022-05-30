@@ -2,24 +2,29 @@ extends TileMap
 
 
 # Constants
-var PLANT_TILE_ID = 0
-var GRASS_TILE_ID = 1
+var PLANT_TILE_ID : int = 0
+var GRASS_TILE_ID : int = 1
+var X_MARGIN : int = 4
+var Y_MARGIN : int = 3
 
 # Variables
-var gardenSize = 4
-var cellSize = 128
+var garden_size : int = 4
 var plants = []
-var tileStart = Vector2(-4, -3)
-var tileEnd = Vector2(7,6)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	initGarden()
+	print(garden_size)
+	if (len(plants) == 0):
+		print("Initing plants from garden")
+		init_garden()
+	draw_garden_tiles()
+	draw_grass_area()
 	pass # Replace with function body.
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	#print(garden_size)
+	pass
 
 func _input(event):
    # Mouse in viewport coordinates.
@@ -28,50 +33,77 @@ func _input(event):
 				
 			if event.button_index == BUTTON_LEFT:
 				print("Mouse Click/Unclick at: ", event.position)
-				upgradeGardenSize()
-				print(plants)
-				print(gardenSize)
+				upgrade_garden_size()
+				print(garden_size)
 				
-func getGardenCenter():
-	var middle = gardenSize*128/2
+func get_garden_center():
+	var middle = garden_size*cell_size.x/2
 	return Vector2(middle, middle)
 	
-func upgradeGardenSize():
-	gardenSize += 1
+func upgrade_garden_size():
+	garden_size += 1
 	
-	# Increasing plants array
-	for y in range(gardenSize):
-		if (y == gardenSize-1):
+	upgrade_plants_space()
+	draw_garden_tiles()
+	draw_grass_area()
+	get_child(0).update_position()
+
+func upgrade_plants_space():
+	for y in range(garden_size):
+		if (y == garden_size-1):
 			var newPlantsRow = []
-			for x in range(gardenSize):
+			for _x in range(garden_size):
 				newPlantsRow.append(null)
-				set_cell(x, y, PLANT_TILE_ID)
 			plants.append(newPlantsRow)
 		else:
 			plants[y].append(null)
-			set_cell(gardenSize-1, y, PLANT_TILE_ID)
-	
-	increaseGrassArea()
-	get_child(0).updatePosition()
 
-func increaseGrassArea():
-	var firstX = tileStart.x
-	var firstY = tileStart.y
+func draw_garden_tiles():
+	for x in range(garden_size):
+		for y in range(garden_size):
+			set_cell(x, y, PLANT_TILE_ID)
+
+func draw_grass_area():
+	var first_x = -X_MARGIN
+	var first_y = -Y_MARGIN
 	
-	var maxX = tileEnd.x
-	var maxY = tileEnd.y
-	for y in range(firstY, maxY+1):
-		set_cell(maxX+1, y, GRASS_TILE_ID)
+	var max_x = garden_size + X_MARGIN
+	var max_y = garden_size + Y_MARGIN
 	
-	for x in range(firstX, maxX+2):
-		set_cell(x, maxY+1, GRASS_TILE_ID)
+	for y in range(first_y, max_y):
+		for x in range(first_x, max_x):
+			if x >= 0 and x < garden_size and y >= 0 and y < garden_size:
+				continue
+			else:
+				set_cell(x, y, GRASS_TILE_ID)
+
 	
-	tileEnd = Vector2(maxX+1, maxY+1)
+func init_garden():
+	for _y in range(garden_size):
+		var new_plants_row = []
+		for _x in range(garden_size):
+			new_plants_row.append(null)
+		plants.append(new_plants_row)
+		
+		
+func save_stats():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"pos_x" : global_transform.origin.x,
+		"pos_y" : global_transform.origin.y,
+		"garden_size" : garden_size,
+		"plants" : plants
+	}
+	return save_dict
 	
-func initGarden():
-	for _y in range(gardenSize):
-		var newPlantsRow = []
-		for _x in range(gardenSize):
-			newPlantsRow.append(null)
-		plants.append(newPlantsRow)
+func load_stats(stats):
+	global_transform.origin = Vector2(stats.pos_x, stats.pos_y)
+	garden_size = stats.garden_size
+	plants = stats.plants
+	
+	draw_garden_tiles()
+	draw_grass_area()
+	
+	get_child(0).update_position()
 
