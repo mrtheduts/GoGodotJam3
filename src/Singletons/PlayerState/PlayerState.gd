@@ -8,7 +8,7 @@ signal money_changed
 
 var _money: int = 10
 var _stored_plants: Array = []
-
+	
 func set_money(value: int) -> void:
 	_money = value
 	emit_signal("money_changed", _money)
@@ -21,3 +21,18 @@ func store_plant(plant: Node2D) -> bool:
 
 func pop_stored_plant() -> Node2D:
 	return _stored_plants.pop_front()
+
+func save_stats():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"money" : _money,
+		"stored_plants" : _stored_plants
+	}
+	return save_dict
+	
+func load_stats(stats):
+	print("LOADING STATS PLAYER")
+	print(stats)
+	_money = stats.money
+	_stored_plants = stats.stored_plants
