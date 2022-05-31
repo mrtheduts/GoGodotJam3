@@ -6,7 +6,7 @@ extends Node
 
 signal money_changed
 
-var _money: int = 10
+var _money: int = 150
 var _stored_plants: Array = []
 	
 func set_money(value: int) -> void:
@@ -21,7 +21,7 @@ func store_plant(plant: Node2D) -> bool:
 
 func pop_stored_plant() -> Node2D:
 	return _stored_plants.pop_front()
-
+	
 func save_stats():
 	var save_dict = {
 		"filename" : get_filename(),
