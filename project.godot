@@ -10,9 +10,19 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Branch",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Branches/Branch.gd"
+}, {
+"base": "Node2D",
 "class": "CloseUpPlant",
 "language": "GDScript",
 "path": "res://src/CloseUpPlant/CloseUpPlant.gd"
+}, {
+"base": "Node2D",
+"class": "CloseUpPlot",
+"language": "GDScript",
+"path": "res://src/CloseUpPlot/CloseUpPlot.gd"
 }, {
 "base": "Reference",
 "class": "Constants",
@@ -28,12 +38,32 @@ _global_script_classes=[ {
 "class": "PlantTypes",
 "language": "GDScript",
 "path": "res://src/Plant/PlantTypes.gd"
+}, {
+"base": "WindowDialog",
+"class": "PopupWindow",
+"language": "GDScript",
+"path": "res://src/PopupDialog/PopupDialog.gd"
+}, {
+"base": "Node2D",
+"class": "Root",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Roots/Roots.gd"
+}, {
+"base": "Node2D",
+"class": "Stalk",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Stalks/Stalks.gd"
 } ]
 _global_script_class_icons={
+"Branch": "",
 "CloseUpPlant": "",
+"CloseUpPlot": "",
 "Constants": "",
 "Plant": "",
-"PlantTypes": ""
+"PlantTypes": "",
+"PopupWindow": "",
+"Root": "",
+"Stalk": ""
 }
 
 [application]

@@ -114,11 +114,43 @@ var FRUIT_TYPE_SCENES = {
 	FRUIT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Fruits/Fruit.tscn")
 }
 
+#
+# Functions
+#
 func get_value(feature: String):
 	return get(feature + VALUES_POSTFIX)
 
+func get_type(feature: String):
+	return get(feature + TYPE_POSTFIX)
+
+func get_colors(feature: String, genes: Array) -> Array:
+	var values_enum = get(feature + VALUES_POSTFIX)
+	var mapping_enum = get(feature + MAPPING_POSTFIX)
+	var colors := []
+	
+	for gene in genes:
+		var gene_value = values_enum[gene]
+		var color = mapping_enum[gene_value]
+		colors.push_back(color)
+	
+	return colors
+
+func get_scene(feature: String, gene: String):
+	var values_enum = get(feature + VALUES_POSTFIX)
+	var mapping_enum = get(feature + SCENES_POSTFIX)
+	var gene_value = values_enum[gene]
+	return mapping_enum[gene_value]
+
 func get_feature_name(value: int) -> String:
 	return FEATURES.keys()[value]
+func get_feature_value(feature: String) -> int:
+	return FEATURES[feature]
+
+func get_gene_mapping(feature, gene: String):
+	return get(feature + MAPPING_POSTFIX)[gene]
+
+func get_number_of_genes_in_feature(feature: String) -> int:
+	return get(feature + VALUES_POSTFIX).keys().size()
 
 func is_feature_mixable(feature) -> bool:
 	return get(feature + DOM_POSTFIX) == null

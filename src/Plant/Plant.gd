@@ -55,13 +55,10 @@ func add_gene(feature, gene) -> void:
 	var feat_genes: Array = genetics[feature]
 	if (feat_genes.size() < DNA.NUM_ALLELES):
 		feat_genes.push_back(gene)
-	type_hash = genetics.hash() # Regenerate id to reflect its DNA
 
-func replace_gene_at(feature, index, new_gene) -> void:
-	var feat_genes: Array = genetics[feature]
-	if (index < feat_genes.size()):
-		feat_genes[index] = new_gene
+func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
+	_reveal_phenotype()
 
 func meiosis() -> Dictionary:
 	var result := {}
@@ -70,10 +67,10 @@ func meiosis() -> Dictionary:
 		result[feature] = Utils.shuffle_and_pop_front(genes)
 	return result
 
+
 func age() -> void:
 	match life_stage:
 		LIFE_STAGES.SEED:
-			_reveal_phenotype()
 			life_stage = LIFE_STAGES.SPROUT
 		LIFE_STAGES.SPROUT:
 			life_stage = LIFE_STAGES.GROWN

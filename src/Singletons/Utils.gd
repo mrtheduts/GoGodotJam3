@@ -30,6 +30,22 @@ func shuffle_and_pop_front(array: Array):
 	return array.pop_front()
 
 #
+# Mixes an array colors
+#
+func mix_colors(colors: Array) -> Color:
+	var final_color = null
+	for color in colors:
+		final_color = color if(final_color == null) \
+			else final_color.linear_interpolate(color, 1/DNA.NUM_ALLELES as float)
+	return final_color
+
+#
+# Returns a boolean for True or False strings
+#
+func as_bool(value: String) -> bool:
+	return true if (value == "true") else false
+
+#
 # Merges two dictionaries which values are ONLY arrays
 #
 func merge_dicts_of_arrays(dict_a: Dictionary, dict_b: Dictionary) -> Dictionary:

@@ -1,10 +1,8 @@
 extends Node2D
 
-var CLOSE_UP_SCENE = preload("res://src/CloseUpPlant/CloseUpPlant.tscn")
+class_name CloseUpPlot
 
-func _ready():
-	var plant = CLOSE_UP_SCENE.instance()
-	add_node_and_focus_camera(plant)
+var CLOSE_UP_SCENE = preload("res://src/CloseUpPlant/CloseUpPlant.tscn")
 
 func add_node_and_focus_camera(new_node: Node2D, cam_offset: Vector2 = Vector2.ZERO, cam_zoom: float = 1.0):
 	add_child(new_node)
