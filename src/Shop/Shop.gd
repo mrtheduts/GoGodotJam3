@@ -1,131 +1,156 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-var seed_packet_scene = load("res://src/Shop/SeedPacket/SeedPacket.tscn")
-var hoe_scene = load("res://src/Shop/Hoe/Hoe.tscn")
-var bag_scene = load("res://src/Shop/Bag/Bag.tscn")
-var chest_scene = load("res://src/Shop/Chest/Chest.tscn")
+var SEED_PACKET_SCENE = load("res://src/Shop/SeedPacket/SeedPacket.tscn")
+var HOE_SCENE = load("res://src/Shop/Hoe/Hoe.tscn")
+var BAG_SCENE = load("res://src/Shop/Bag/Bag.tscn")
+var CHEST_SCENE = load("res://src/Shop/Chest/Chest.tscn")
+var PURCHASE_ANIMATION_SCENE = load("res://src/Shop/PurchaseAnimation/PurchaseAnimation.tscn")
 
-signal buy_attempt
+const MAX_SEEDPACKET : int = 8
+const TOOLS_ID : Array = ["Hoe", "Chest", "Bag"]
+const SHELF_X : Array = [-390, -260, -130, 0, 130]
+const SHELF_Y : Array = [-170, -30]
 
-var MAX_SEEDPACKET : int = 8
-var SHELF_X : Array = [-390, -260, -130, 0, 130]
-var SHELF_Y : Array = [-170, -30]
+const HOE_POSITION : Vector2 = Vector2(-360, 180)
+const CHEST_POSITION : Vector2 = Vector2(55, -40)
+const BAG_POSITION : Vector2 = Vector2(-195, 160)
+const PURCHASE_POSITION : Vector2 = Vector2(395, 252)
+const PURCHASE_SCALE : Vector2 = Vector2(0.25, 0.25)
+const DIALOG_POSITION : Vector2 = Vector2(-325, 239)
 
-var HOE_POSITION : Vector2 = Vector2(-360, 180)
-var CHEST_POSITION : Vector2 = Vector2(55, -40)
-var BAG_POSITION : Vector2 = Vector2(-195, 160)
+var shop_items : Array = []
+var selected_item : Dictionary
 
-var tools : Array = []
-var seed_slots : Array = []
+func _on_SeedPacket_selection(id: int):
+	selected_item = get_item_by_id(str(id))
+	shopper_sell(selected_item["dialog"])
+	Utils.conn_nodes($Dialog/BuyButton, "pressed", self, "make_purchase")
 
-# Called when the node enters the scene tree for the first time.
+func _on_Tool_selection(id: String):
+	selected_item = get_item_by_id(id)
+	shopper_sell(selected_item["dialog"])
+	Utils.conn_nodes($Dialog/BuyButton, "pressed", self, "make_purchase")
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+			if event.scancode == KEY_ENTER:
+				print("HEY")
+				$Dialog.skip_dialog = true
+
 func _ready():
 	restock()
 	
-	if len(seed_slots) != 0:
-		display_seeds()
+	if shop_items.size() > 0:
+		display_items()
 		
-	if len(tools) != 0:
-		display_tools()
+	shopper_dialog(Constants.SHOP_WELCOME_TEXT)
 
-func _on_SeedPacket_buy_attempt(id: int):
-	var seed_packet = get_seed_by_id(id)
-	var value = seed_packet["item"]._value
-	if make_purchase(value):
-		seed_packet["item"].queue_free()
-		seed_slots.erase(seed_packet)
-
-func _on_Tool_buy_attempt(id: String):
-	var tool_item = get_tool_by_id(id)
-	var value = tool_item["item"]._value
-	if make_purchase(value):
-		tool_item["item"].queue_free()
-		tools.erase(tool_item)
-
-func make_purchase(value: int):
-	print("Buying item by " + str(value))
-	# Check for user money
-	return true
+func shopper_dialog(text: String):
+	$Dialog.talk(text)
+	$Dialog.rect_position = DIALOG_POSITION
 	
-func display_seeds():
-	for seed_packet in seed_slots:
-		var id = seed_packet["id"] - 1
-		var position = Vector2(SHELF_X[id % 5], SHELF_Y[id / 5])
-		seed_packet["item"].position = position
-		Utils.conn_nodes(seed_packet["item"], "buy_attempt", self, "_on_SeedPacket_buy_attempt")
-
-func display_tools():
-	for item_tool in tools:
-		if item_tool["id"] == "Hoe":
-			item_tool["item"].position = HOE_POSITION
-		elif item_tool["id"] == "Chest":
-			item_tool["item"].position = CHEST_POSITION
-		elif item_tool["id"] == "Bag":
-			item_tool["item"].position = BAG_POSITION
-		else:
-			print("Error: The is no item with this name")
+func shopper_sell(text: String):
+	$Dialog.sell(text)
+	$Dialog.rect_position = DIALOG_POSITION
+	
+func make_purchase():
+	var value = selected_item["item"]._value
+	print("Buying item by " + str(value))
+	
+	var new_balance = PlayerState._money - value
+	if new_balance >= 0:
+		PlayerState.set_money(new_balance)
+		shopper_dialog(Constants.SHOP_THANKS_TEXT)
+		show_purchase_animation(-value)
+		selected_item["item"].queue_free()
+		shop_items.erase(selected_item)
+		selected_item = {}
+	else:
+		shopper_dialog(Constants.SHOP_WARN_TEXT)
+		selected_item = {}
 		
-		Utils.conn_nodes(item_tool["item"], "buy_attempt", self, "_on_Tool_buy_attempt")
+
+func show_purchase_animation(value: int):
+	var purchase_animation = PURCHASE_ANIMATION_SCENE.instance()
+	purchase_animation.rect_position = PURCHASE_POSITION
+	purchase_animation.rect_scale = PURCHASE_SCALE
+	purchase_animation.init(value)
+	add_child(purchase_animation)
+
+func display_items():
+	for item in shop_items:
+		if item["id"] in TOOLS_ID:
+			if item ["id"] == "Hoe":
+				item ["item"].position = HOE_POSITION
+			elif item ["id"] == "Chest":
+				item ["item"].position = CHEST_POSITION
+			elif item ["id"] == "Bag":
+				item ["item"].position = BAG_POSITION
+			
+			Utils.conn_nodes(item ["item"], "item_select", self, "_on_Tool_selection")
+		else:
+			var id = item["id"] - 1
+			var position = Vector2(SHELF_X[id % 5], SHELF_Y[id / 5])
+			item["item"].position = position
+			Utils.conn_nodes(item["item"], "item_select", self, "_on_SeedPacket_selection")
+		
 
 func restock():
+	shop_items = []
 	restock_seeds()
 	restock_tools()
 
 func restock_tools():
-	tools = []
-	
-	var new_hoe = hoe_scene.instance()
-	var new_chest = chest_scene.instance()
-	var new_bag = bag_scene.instance()
+	var new_hoe = HOE_SCENE.instance()
+	var new_chest = CHEST_SCENE.instance()
+	var new_bag = BAG_SCENE.instance()
 	
 	add_child(new_hoe)
 	add_child(new_chest)
 	add_child(new_bag)
 	
-	tools.append(
+	shop_items.append(
 		{
 			"id" : "Hoe",
-			"item" : new_hoe
+			"item" : new_hoe,
+			"dialog": Constants.SHOP_HOE_TEXT % str(new_hoe._value)
 		}
 	)
-	tools.append(
+	shop_items.append(
 		{
 			"id" : "Bag",
-			"item" : new_bag
+			"item" : new_bag,
+			"dialog": Constants.SHOP_BAG_TEXT % str(new_bag._value)
 		}
 	)
-	tools.append(
+	shop_items.append(
 		{
 			"id" : "Chest",
-			"item" : new_chest
+			"item" : new_chest,
+			"dialog": Constants.SHOP_CHEST_TEXT % str(new_chest._value)
 		}
 	)
 	
-func restock_seeds():
-	seed_slots = []
-	
+func restock_seeds():	
 	for i in range(1, MAX_SEEDPACKET+1):
+		var seed_instance = get_random_seed(i)
+
 		var seed_packet : Dictionary = {
 			"id" : i,
-			"item" : get_random_seed(i)
+			"item" : seed_instance,
+			"dialog" : Constants.SHOP_SEED_TEXT % ["RANDOM", str(seed_instance._value)]
 		}
-		seed_slots.append(seed_packet)
+		shop_items.append(seed_packet)
 
 func get_random_seed(id: int):
-	var new_seed_instance = seed_packet_scene.instance()
+	var new_seed_instance = SEED_PACKET_SCENE.instance()
 	new_seed_instance.init(id, 10)
 	add_child(new_seed_instance)
 	return new_seed_instance
-
-func get_tool_by_id(id : String):
-	for item in tools:
-		if item["id"] == id:
-			return item
-			
-func get_seed_by_id(id : int):
-	for packet in seed_slots:
-		if packet["id"] == id:
-			return packet
 	
+func get_item_by_id(id : String):
+	for item in shop_items:
+		if str(item["id"]) == id:
+			return item
+

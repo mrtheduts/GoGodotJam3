@@ -1,7 +1,7 @@
 extends Area2D
 
 
-signal buy_attempt
+signal item_select
 
 var _id : int
 var _value : float
@@ -14,13 +14,9 @@ func init(id, value):
 	_id = id
 	_value = value
 	
-func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			if event.button_index == BUTTON_LEFT:
-				buy()
-
-func buy() -> void:
-	print("Buying attempt")
-	emit_signal("buy_attempt", _id)
+func _input_event(_viewport, _event, _shape_idx):
+	if _event is InputEventMouseButton:
+		if _event.is_pressed():
+			if _event.button_index == BUTTON_LEFT:
+				emit_signal("item_select", _id)
 	

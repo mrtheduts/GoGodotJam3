@@ -6,7 +6,7 @@ extends Node
 
 signal money_changed
 
-var _money: int = 10
+var _money: int = 150
 var _stored_plants: Array = []
 	
 func set_money(value: int) -> void:
