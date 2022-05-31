@@ -35,7 +35,6 @@ func _on_Tool_selection(id: String):
 func _input(event):
 	if event is InputEventKey and event.pressed:
 			if event.scancode == KEY_ENTER:
-				print("HEY")
 				$Dialog.skip_dialog = true
 
 func _ready():

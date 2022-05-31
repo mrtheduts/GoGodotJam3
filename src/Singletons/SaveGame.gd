@@ -24,7 +24,6 @@ func save_game():
 	var save_game = File.new()
 	save_game.open(SAVE_FILENAME, File.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	print(save_nodes)
 	
 	for node in save_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.

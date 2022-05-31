@@ -21,7 +21,7 @@ func store_plant(plant: Node2D) -> bool:
 
 func pop_stored_plant() -> Node2D:
 	return _stored_plants.pop_front()
-
+	
 func save_stats():
 	var save_dict = {
 		"filename" : get_filename(),
