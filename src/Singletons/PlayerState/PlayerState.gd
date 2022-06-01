@@ -12,6 +12,12 @@ var _stored_plants: Array = []
 func set_money(value: int) -> void:
 	_money = value
 	emit_signal("money_changed", _money)
+func get_money() -> int:
+	return _money
+
+func add_money(value: int) -> void:
+	_money += value
+	emit_signal("money_changed", _money)
 
 func store_plant(plant: Node2D) -> bool:
 	var has_space: bool = Constants.STARTING_STORAGE_SPACE > _stored_plants.size()
@@ -36,3 +42,7 @@ func load_stats(stats):
 	print(stats)
 	_money = stats.money
 	_stored_plants = stats.stored_plants
+
+
+func _on_UILayer_plant_sold(value: int):
+	add_money(value)

@@ -20,7 +20,6 @@ func _get_build_parts_from_plant(plant: Plant) -> Dictionary:
 			DNA.BOOL:
 				gene = Utils.as_bool(gene)
 		build_parts[DNA.get_feature_value(feature)] = gene
-	print(plant.phenotype)
 	return build_parts
 
 func _build_adult_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> void:

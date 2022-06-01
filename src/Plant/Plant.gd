@@ -16,6 +16,8 @@ var phenotype: Dictionary = {}
 var life_stage = LIFE_STAGES.SEED
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
+var value := 1
+
 func _init():
 	# Build empty genetics dict
 	for feature in DNA.FEATURES:

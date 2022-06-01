@@ -11,6 +11,7 @@ const FLASH_DURATION := 0.25
 # Signals
 signal water_button_hold
 signal photo_button_clicked
+signal sell_button_clicked
 
 var drag_pos = null
 var plant: Plant = null
@@ -36,7 +37,12 @@ func _on_HBoxContainer_gui_input(event):
 		rect_global_position =get_viewport_transform().xform(get_global_mouse_position()) - drag_pos
 
 func _on_CloseButton_pressed():
-	self.queue_free()
+	$TweenClose.interpolate_property(
+		self, "rect_scale",
+		self.rect_scale, Vector2.ZERO, 
+		0.10, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT
+	)
+	$TweenClose.start()
 
 func _on_PhotoButton_pressed():
 	$Tween.interpolate_property(
@@ -57,8 +63,15 @@ func _on_PhotoButton_pressed():
 
 func show_scene(node: CanvasItem) -> void:
 	$VBoxContainer/CenterContainer/ViewportContainer/Viewport.add_child(node)
-	rect_global_position = (get_viewport().size - rect_size) / 2
 	show()
+	rect_global_position = (get_viewport().size - rect_size) / 2
+	$Tween.interpolate_property(
+		self, "rect_scale",
+		Vector2(1, 0),  Vector2(1, 1), 
+		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT
+	)
+	$Tween.start()
+
 
 func _on_WaterButton_button_up():
 	is_watering = false
@@ -68,3 +81,30 @@ func _on_WaterButton_button_up():
 func _on_WaterButton_button_down():
 	is_watering = true
 	emit_signal("water_button_hold", true)
+
+
+func _on_SellButton_pressed():
+	if (plant != null):
+		emit_signal("sell_button_clicked", plant.value)
+	self.rect_pivot_offset = Vector2(self.rect_size.x / 2, 0)
+	$TweenClose.interpolate_property(
+		self, "rect_scale",
+		self.rect_scale, Vector2(0, 1), 
+		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT, 0.1
+	)
+	$TweenClose.interpolate_property(
+		self, "rect_scale",
+		self.rect_scale, Vector2(0, 1), 
+		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT, 0.1
+	)
+	$TweenClose.interpolate_property(
+		$Money, "modulate",
+		$Money.modulate, Color(1,1,1,1), 
+		0.1, $TweenClose.TRANS_SINE, $TweenClose.EASE_IN
+	)
+	$Money.visible = true
+	$TweenClose.start()
+
+
+func _on_TweenClose_tween_all_completed():
+	self.queue_free()

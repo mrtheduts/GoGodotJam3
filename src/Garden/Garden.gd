@@ -36,12 +36,13 @@ func _unhandled_input(event):
 				var plant: Plant = PlantFactory.gen_random_plant()
 				plant.age()
 				plant.age()
-				print("Plant [", plant.type_hash, "]: ", plant.genetics)
+#				print("Plant [", plant.type_hash, "]: ", plant.genetics)
 				plant.close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(plant)
 				show_popup_plant(plant)
 #				print("Mouse Click/Unclick at: ", event.position)
 #				upgrade_garden_size()
 #				print(garden_size)
+				pass
 				
 func get_garden_center():
 	var middle = garden_size*cell_size.x/2
