@@ -17,5 +17,5 @@ func _on_PopupDialog_resized():
 func show_scene(node: CanvasItem) -> void:
 #	var viewport_texture: ViewportTexture = ViewportTexture.new()
 #	viewport_texture.viewport_path("../ViewportContainer/Viewport")
-	$MarginContainer/HSplitContainer/ViewportContainer/Viewport.add_child(node)
+	$MarginContainer/ViewportContainer/Viewport.add_child(node)
 	popup_centered_ratio()
