@@ -55,19 +55,32 @@ size_flags_horizontal = 10
 size_flags_vertical = 10
 texture_normal = ExtResource( 1 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 68.0
 margin_right = 400.0
 margin_bottom = 468.0
+
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/CenterContainer"]
+margin_right = 400.0
+margin_bottom = 400.0
 rect_min_size = Vector2( 400, 400 )
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="VBoxContainer/ViewportContainer"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/CenterContainer/ViewportContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 400.0
+margin_bottom = 400.0
+
+[node name="Viewport" type="Viewport" parent="VBoxContainer/CenterContainer/ViewportContainer"]
 size = Vector2( 400, 400 )
 own_world = true
 handle_input_locally = false
 render_target_update_mode = 3
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="resized" from="." to="." method="_on_PopupDialog_resized"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer" to="." method="_on_HBoxContainer_gui_input"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/WaterButton" to="." method="_on_WaterButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/PhotoButton" to="." method="_on_PhotoButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

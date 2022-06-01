@@ -5,12 +5,16 @@
 class_name Plant
 
 enum LIFE_STAGES { SEED, SPROUT, ADULT, DEAD}
+var life_duration_stages: Dictionary
+
+var close_up_plant: CloseUpPlant = null
 
 var type_hash: int = 0
 var genetics: Dictionary = {}
 var phenotype: Dictionary = {}
 
 var life_stage = LIFE_STAGES.SEED
+var watered_amount := Constants.MIN_WATERED_AMOUNT
 
 func _init():
 	# Build empty genetics dict
@@ -67,8 +71,7 @@ func meiosis() -> Dictionary:
 		result[feature] = Utils.shuffle_and_pop_front(genes)
 	return result
 
-
-func age() -> void:
+func age(days: int = 1) -> void:
 	match life_stage:
 		LIFE_STAGES.SEED:
 			life_stage = LIFE_STAGES.SPROUT
@@ -78,3 +81,7 @@ func age() -> void:
 			life_stage = LIFE_STAGES.DEAD
 		LIFE_STAGES.DEAD:
 			printerr("I'm dead! :(")
+
+func water(amount: int = 1) -> void:
+	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
+	print("New watere amount: ", watered_amount)

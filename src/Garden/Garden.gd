@@ -37,8 +37,8 @@ func _unhandled_input(event):
 				plant.age()
 				plant.age()
 				print("Plant [", plant.type_hash, "]: ", plant.genetics)
-				var close_up_plant: CloseUpPlant = CloseUpPlantFactory.create_close_up_plant_from(plant)
-				show_popup_plant(close_up_plant)
+				plant.close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(plant)
+				show_popup_plant(plant)
 #				print("Mouse Click/Unclick at: ", event.position)
 #				upgrade_garden_size()
 #				print(garden_size)
@@ -114,6 +114,6 @@ func load_stats(stats):
 	
 	get_child(0).update_position()
 
-func show_popup_plant(close_up_plant: CloseUpPlant) -> void:
-	emit_signal("show_close_up_plant", close_up_plant)
+func show_popup_plant(plant: Plant) -> void:
+	emit_signal("show_close_up_plant", plant)
 	

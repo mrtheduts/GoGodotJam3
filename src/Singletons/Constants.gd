@@ -7,7 +7,10 @@ class_name Constants
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
 
+# PLANT
 const MUTATION_ODDS = 100
+const MAX_WATERED_AMOUNT: int = 10
+const MIN_WATERED_AMOUNT: int = 1
 
 
 # SHOP
