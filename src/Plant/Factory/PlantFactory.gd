@@ -5,6 +5,7 @@
 extends Node
 
 var PLANT_CLASS = preload("res://src/Plant/Plant.gd")
+
 var CLOSE_UP_PLOT_SCENE = preload("res://src/CloseUpPlot/CloseUpPlot.tscn")
 var POPUP_SCENE = preload("res://src/PopupDialog/PopupDialog.tscn")
 
@@ -12,7 +13,6 @@ var POPUP_SCENE = preload("res://src/PopupDialog/PopupDialog.tscn")
 func _ready():
 	var plant_a = gen_random_plant()
 #	print("Plant A (Type: ", plant_a.type_hash, ") ", plant_a.genetics)
-	plant_a.age()
 	plant_a.age()
 	plant_a.age()
 #	print(plant_a.phenotype)
@@ -23,8 +23,9 @@ func _ready():
 #	var cloned = clone_plant(child_plant)
 #	print("Cloned from child (Type: ", cloned.type_hash, ") ", cloned.genetics)
 	var close_up_plant: CloseUpPlant = $CloseUpPlantFactory.create_close_up_plant_from(plant_a)
+	close_up_plant.start_idle_animation()
 	var close_up_plot: CloseUpPlot = CLOSE_UP_PLOT_SCENE.instance()
-	close_up_plot.add_node_and_focus_camera(close_up_plant)
+	close_up_plot.add_node_and_focus_camera(close_up_plant, Vector2(0, -50), 2)
 	var popup: PopupWindow = POPUP_SCENE.instance()
 	add_child(popup)
 	popup.show_scene(close_up_plot)

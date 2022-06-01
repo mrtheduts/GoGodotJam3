@@ -4,7 +4,7 @@
 
 class_name Plant
 
-enum LIFE_STAGES { SEED, SPROUT, GROWN, ADULT, DEAD}
+enum LIFE_STAGES { SEED, SPROUT, ADULT, DEAD}
 
 var type_hash: int = 0
 var genetics: Dictionary = {}
@@ -73,8 +73,6 @@ func age() -> void:
 		LIFE_STAGES.SEED:
 			life_stage = LIFE_STAGES.SPROUT
 		LIFE_STAGES.SPROUT:
-			life_stage = LIFE_STAGES.GROWN
-		LIFE_STAGES.GROWN:
 			life_stage = LIFE_STAGES.ADULT
 		LIFE_STAGES.ADULT:
 			life_stage = LIFE_STAGES.DEAD

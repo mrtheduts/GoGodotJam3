@@ -71,7 +71,7 @@ const ROOT_TYPE_TYPE := SCENE
 enum ROOT_TYPE_VALUES { DEFAULT }
 const ROOT_TYPE_DOMINANTS := [ ROOT_TYPE_VALUES.DEFAULT ]
 var ROOT_TYPE_SCENES = {
-	ROOT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Roots/Roots.tscn")
+	ROOT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Roots/FibrousRoot.tscn")
 }
 
 # Stalk
