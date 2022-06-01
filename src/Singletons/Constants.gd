@@ -9,6 +9,8 @@ const STARTING_STORAGE_SPACE: int = 5
 
 # PLANT
 const MUTATION_ODDS = 100
+
+const MIN_TIME_WATERING: float = 5.0
 const MAX_WATERED_AMOUNT: int = 10
 const MIN_WATERED_AMOUNT: int = 1
 

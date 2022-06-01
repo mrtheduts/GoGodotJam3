@@ -6,3 +6,8 @@ func add_node_and_focus_camera(new_node: Node2D, cam_offset: Vector2 = Vector2.Z
 	add_child(new_node)
 	$Camera2D.position += cam_offset
 	$Camera2D.zoom = Vector2(cam_zoom, cam_zoom)
+
+func set_WateringParticles_state(state: bool) -> void:
+	var pos = $Camera2D.position - Vector2(600,800)
+	$WateringParticles.position = pos
+	$WateringParticles.emitting = state

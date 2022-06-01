@@ -17,7 +17,9 @@ func _on_Garden_show_close_up_plant(plant: Plant):
 	close_up_plot.add_node_and_focus_camera(close_up_plant, camera_offset, 3.5)
 	
 	var popup_window: PopupWindow = POPUP_SCENE.instance()
+	Utils.conn_nodes(popup_window, "water_button_hold", close_up_plot, "set_WateringParticles_state")
 	Utils.conn_nodes(popup_window, "photo_button_clicked", self, "_on_PopupWindow_photo_button_clicked")
+	
 	popup_window.plant = plant
 	add_child(popup_window)
 	popup_window.show_scene(close_up_plot)

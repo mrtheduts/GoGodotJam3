@@ -73,14 +73,13 @@ margin_bottom = 400.0
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/CenterContainer/ViewportContainer"]
 size = Vector2( 400, 400 )
-own_world = true
 handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="resized" from="." to="." method="_on_PopupDialog_resized"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer" to="." method="_on_HBoxContainer_gui_input"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/WaterButton" to="." method="_on_WaterButton_pressed"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/HBoxContainer/WaterButton" to="." method="_on_WaterButton_button_down"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/HBoxContainer/WaterButton" to="." method="_on_WaterButton_button_up"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/PhotoButton" to="." method="_on_PhotoButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

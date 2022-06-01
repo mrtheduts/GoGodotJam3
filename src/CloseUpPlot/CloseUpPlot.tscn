@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=1]
 [ext_resource path="res://raw_assets/images/close-up-soil/close-up-soil.png" type="Texture" id=2]
 [ext_resource path="res://src/CloseUpPlot/CloseUpPlot.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2900, 530 )
 
 [node name="CloseUpPlot" type="Node2D"]
 script = ExtResource( 3 )
@@ -43,3 +46,23 @@ texture = ExtResource( 2 )
 use_parent_material = true
 position = Vector2( 1920, 500 )
 texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Gound"]
+position = Vector2( 0, 517 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gound/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="WateringParticles" type="CPUParticles2D" parent="."]
+modulate = Color( 0.266667, 0.529412, 1, 1 )
+position = Vector2( -735, -1002 )
+rotation = -0.785398
+scale = Vector2( 20, 20 )
+emitting = false
+amount = 100
+randomness = 1.0
+lifetime_randomness = 0.1
+initial_velocity = 10.0
+initial_velocity_random = 1.0
+tangential_accel = 45.0
+tangential_accel_random = 0.5

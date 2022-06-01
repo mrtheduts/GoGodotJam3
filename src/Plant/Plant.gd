@@ -84,4 +84,4 @@ func age(days: int = 1) -> void:
 
 func water(amount: int = 1) -> void:
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
-	print("New watere amount: ", watered_amount)
+	print("New watered amount: ", watered_amount)
