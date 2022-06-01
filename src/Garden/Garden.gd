@@ -1,5 +1,7 @@
 extends TileMap
 
+# Signals
+signal show_close_up_plant
 
 # Constants
 var PLANT_TILE_ID : int = 0
@@ -26,14 +28,20 @@ func _process(delta):
 	#print(garden_size)
 	pass
 
-func _input(event):
+func _unhandled_input(event):
    # Mouse in viewport coordinates.
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_LEFT:
-				print("Mouse Click/Unclick at: ", event.position)
-				upgrade_garden_size()
-				print(garden_size)
+				var plant: Plant = PlantFactory.gen_random_plant()
+				plant.age()
+				plant.age()
+				print("Plant [", plant.type_hash, "]: ", plant.genetics)
+				var close_up_plant: CloseUpPlant = CloseUpPlantFactory.create_close_up_plant_from(plant)
+				show_popup_plant(close_up_plant)
+#				print("Mouse Click/Unclick at: ", event.position)
+#				upgrade_garden_size()
+#				print(garden_size)
 				
 func get_garden_center():
 	var middle = garden_size*cell_size.x/2
@@ -106,3 +114,6 @@ func load_stats(stats):
 	
 	get_child(0).update_position()
 
+func show_popup_plant(close_up_plant: CloseUpPlant) -> void:
+	emit_signal("show_close_up_plant", close_up_plant)
+	

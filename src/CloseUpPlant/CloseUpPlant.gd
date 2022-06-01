@@ -19,3 +19,6 @@ func add_to_idle_animation_list(node: Node2D) -> void:
 func start_idle_animation() -> void:
 	for node in nodes_with_idle_animation:
 		node.play_idle_animation()
+
+func get_plant_center() -> Vector2:
+	return Vector2(0, -150)
