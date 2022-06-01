@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Singletons/SaveGame.gd" type="Script" id=1]
 [ext_resource path="res://src/Garden/Garden.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UI/UILayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/PlayerInventory/PlayerInventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Singletons/WorldManager/WorldManager.gd" type="Script" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -14,5 +15,8 @@ tile_data = PoolIntArray( -196602, 1073741825, 0, -196601, 1073741825, 0, -13106
 [node name="PlayerInventory" parent="." instance=ExtResource( 5 )]
 
 [node name="UILayer" parent="." instance=ExtResource( 3 )]
+
+[node name="WorldManager" type="Node" parent="." groups=["Persist"]]
+script = ExtResource( 6 )
 
 [connection signal="show_close_up_plant" from="Garden" to="UILayer" method="_on_Garden_show_close_up_plant"]

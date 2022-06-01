@@ -4,6 +4,8 @@
 
 class_name Constants
 
+const TURNS_PER_TIME_SLOT: int = 2
+
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
 
