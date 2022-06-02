@@ -5,6 +5,7 @@
 extends Node
 
 signal money_changed
+signal inventory_changed
 
 var _money: int = 150
 var _stored_plants: Array = []
@@ -13,10 +14,10 @@ var _inventory : Dictionary = {}
 var _inventory_max_slots : int = 10
 
 func _ready():
-	if (_inventory.empty()):
+	if _inventory.empty():
 		var dict:Dictionary = {}
 		for slot in range (0, _inventory_max_slots):
-			dict[str(slot)] = inventory_empty_slot()
+			dict[String(slot)] = inventory_empty_slot()
 		_inventory = dict
 
 	
@@ -52,44 +53,45 @@ func load_stats(stats):
 func inventory_add_item(item_id: int):
 	# Get Item Data
 	var item_data : Dictionary = ItemDatabase.get_item(String(item_id))
+	var slot : int = -1
 
-	if (item_data.empty()): 
-		return -1
-		
-	# If the item is not stackable, get an empty space for it
-	if (int(item_data["stack_limit"]) <= 1):
-		var slot = inventory_get_empty_slot()
-		
-		if (slot < 0): 
-			return -1
+	if !item_data.empty():
+		# If the item is not stackable, get an empty space for it
+		if int(item_data["stack_limit"]) <= 1:
+			slot = inventory_get_empty_slot()
 			
-		_inventory[String(slot)] = {"id": String(item_id), "amount": 1}
-		
-		return slot
-		
-	# Check if the same item is already in inventory and if it can be stacked	
-	for slot in range (0, _inventory_max_slots):
-		if (_inventory[String(slot)]["id"] == String(item_id)):
-			if (int(item_data["stack_limit"]) > int(_inventory[String(slot)]["amount"])):
-				_inventory[String(slot)]["amount"] = int(_inventory[String(slot)]["amount"] + 1)
-				return slot
+			if slot < 0:
+				emit_signal("inventory_changed", slot)
+				return
+				
+			_inventory[String(slot)] = {"id": String(item_id), "amount": 1}
+		else:
+			# Check if the same item is already in inventory and if it can be stacked	
+			for item_slot in range (0, _inventory_max_slots):
+				if _inventory[String(item_slot)]["id"] == String(item_id):
+					if int(item_data["stack_limit"]) > int(_inventory[String(item_slot)]["amount"]):
+						_inventory[String(item_slot)]["amount"] = int(_inventory[String(item_slot)]["amount"] + 1)
+						emit_signal("inventory_changed", item_slot)
+						return
+			
+			# If the item can't be stacked to another, get an empty slot for it
+			slot = inventory_get_empty_slot()
+			
+			if slot < 0:
+				emit_signal("inventory_changed", slot)
+				return
+				
+			_inventory[String(slot)] = {"id": String(item_id), "amount": 1}
 	
-	# If the item can't be stacked to another, get an empty slot for it
-	var slot = inventory_get_empty_slot()
-	
-	if (slot < 0): 
-		return -1
-		
-	_inventory[String(slot)] = {"id": String(item_id), "amount": 1}
-	
-	return slot
+	emit_signal("inventory_changed", slot)
+	return
 	
 func inventory_get_item(slot: int) -> Dictionary:
 	return _inventory[String(slot)]
 
 func inventory_get_empty_slot() -> int:
 	for slot in range(0, _inventory_max_slots):
-		if (_inventory[String(slot)]["id"] == "0"): 
+		if _inventory[String(slot)]["id"] == "0": 
 			return int(slot)
 	print ("Inventory is full!")
 	return -1
@@ -201,7 +203,7 @@ func inventory_move_item(from_slot: int, to_slot: int):
 			var temp_item : Dictionary = _inventory[String(to_slot)]
 			var new_to_slot = inventory_get_empty_slot()
 			
-			if (new_to_slot >= 0): 
+			if new_to_slot >= 0: 
 				_inventory[String(from_slot)]["amount"] -= 1
 				_inventory[String(to_slot)] = inventory_empty_slot()
 				inventory_update_item(to_slot, int(_inventory[String(from_slot)]["id"]), 1)
@@ -218,5 +220,5 @@ func inventory_move_stack(from_slot: int, to_slot: int):
 	_inventory[String(to_slot)] = _inventory[String(from_slot)]
 	_inventory[String(from_slot)] = temp_item
 	
-func inventory_empty_slot():
+func inventory_empty_slot() -> Dictionary:
 	return {"id": "0", "amount": 0}

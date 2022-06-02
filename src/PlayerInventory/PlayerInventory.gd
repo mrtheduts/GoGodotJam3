@@ -29,7 +29,8 @@ func _ready():
 	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Stack, "pressed", self, "_on_Sell_stack")
 	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Confirm, "pressed", self, "_on_Sell_confirm")
 	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Cancel, "pressed", self, "_on_Sell_cancel")
-			
+	Utils.conn_nodes(PlayerState, "inventory_changed", self, "_on_PlayerState_inventory_changed")
+	
 	load_items()
 
 	set_process(false)
@@ -41,7 +42,6 @@ func _ready():
 			slot = PlayerState.inventory_add_item(4)
 		else:
 			slot = PlayerState.inventory_add_item(i)
-		update_slot(slot)
 
 #warning-ignore:unused_argument
 func _process(delta):
@@ -200,6 +200,9 @@ func move_merge_item():
 			update_slot(dragged_item_slot)
 			update_slot(active_item_slot)
 
+func _on_PlayerState_inventory_changed(slot: int):
+	update_slot(slot)
+	
 func _on_Item_sell_confirm():
 	var screen_center = get_viewport_rect().size / 2
 	var item_data : Dictionary = ItemDatabase.get_item(String(PlayerState._inventory[String(sell_item_slot)]["id"]))

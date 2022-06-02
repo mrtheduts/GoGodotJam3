@@ -19,7 +19,7 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[node name="Control" type="Control"]
+[node name="PlayerInventory" type="Control"]
 script = ExtResource( 2 )
 
 [node name="ItemContainer" type="MarginContainer" parent="."]
@@ -36,7 +36,6 @@ size_flags_horizontal = 3
 [node name="Sprite_DraggedItem" type="Sprite" parent="ItemContainer"]
 
 [node name="PopupPanel_ItemMenu" type="PopupPanel" parent="."]
-visible = true
 margin_right = 202.0
 margin_bottom = 100.0
 theme = ExtResource( 3 )
@@ -92,7 +91,6 @@ size_flags_vertical = 10
 text = "Sell"
 
 [node name="PopupPanel_Confirmation" type="PopupPanel" parent="."]
-visible = true
 margin_left = -3.0
 margin_top = 178.0
 margin_right = 170.0

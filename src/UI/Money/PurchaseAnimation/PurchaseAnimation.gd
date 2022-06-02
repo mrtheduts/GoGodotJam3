@@ -1,10 +1,7 @@
 extends MarginContainer
 
-var speed = -25
-var fade_speed = -0.8
-
-func _ready():
-	pass
+var speed = -60
+var fade_speed = -1
 	
 func init(value: int):
 	$HBoxContainer/Label.text = str(value)
