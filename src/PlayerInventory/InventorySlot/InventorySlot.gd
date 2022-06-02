@@ -8,11 +8,6 @@ func _ready():
 	Utils.conn_nodes($TextureFrame, "mouse_exited", self, "_on_ItemSlot_mouse_exited")
 	
 	$Label_Tooltip.text = " "
-	
-func _input(event):		
-	pass
-	#if event is InputEventMouseMotion:
-	#	print($InventorySlot.get_local_mouse_position())
 
 func _on_ItemSlot_mouse_entered():
 	$Label_Tooltip.text = item["name"]

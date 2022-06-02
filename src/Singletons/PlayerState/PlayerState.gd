@@ -95,13 +95,39 @@ func inventory_get_empty_slot() -> int:
 	return -1
 
 func inventory_update_item(slot: int, new_id: int, new_amount: int):
-	if (slot < 0):
+	if slot < 0:
 		return
-	if (new_amount < 0):
+		
+	if new_amount < 0:
 		return
-	if (ItemDatabase.get_item(String(new_id)).empty()):
+		
+	if ItemDatabase.get_item(String(new_id)).empty():
 		return
+		
 	_inventory[String(slot)] = {"id": String(new_id), "amount": int(new_amount)}
+
+func inventory_sell_item(item_slot: int, sell_amount: int):
+	if item_slot < 0:
+		return
+	
+	if sell_amount < 0:
+		return
+		
+	var sell_price : int = ItemDatabase.get_item(_inventory[String(item_slot)]["id"])["sell_price"]
+	var current_amount : int = _inventory[String(item_slot)]["amount"]
+	
+	if sell_amount > current_amount:
+		sell_amount = current_amount
+	
+	var new_amount = current_amount - sell_amount
+	var new_money = _money + sell_amount * sell_price
+	
+	if new_amount == 0:
+		inventory_update_item(item_slot, 0, 0)
+	else:
+		inventory_update_item(item_slot, int(_inventory[String(item_slot)]["id"]), new_amount)
+		
+	set_money(new_money)
 	
 func inventory_merge_item(from_slot: int, to_slot: int):
 	if from_slot < 0 or to_slot < 0:

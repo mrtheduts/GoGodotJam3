@@ -4,6 +4,11 @@ extends Control
 const ICON_SIZE : Vector2 = Vector2(64, 64)
 const EMPTY_ICON_PATH : String = "res://raw_assets/images/items_icons/empty_slot.png"
 
+const NAME_TEXT_COLOR : String = "#04712f"
+const TYPE_TEXT_COLOR : String = "#ab3639"
+const SELL_TEXT_COLOR : String = "#8c7a30"
+const DESC_TEXT_COLOR : String = "#274a99"
+
 onready var is_dragging_item : bool = false
 onready var mouse_button_released : bool = true
 onready var is_stack_enabled : bool = false
@@ -15,12 +20,16 @@ var INVENTORY_SLOT_SCENE = load("res://src/PlayerInventory/InventorySlot/Invento
 
 var dragged_item_slot : int = -1
 var active_item_slot : int = -1
-var drop_item_slot : int = -1
+var sell_item_slot : int = -1
 
 func _ready():	
 	Utils.conn_nodes($ItemContainer, "mouse_entered", self, "_on_ItemList_mouse_entered")
 	Utils.conn_nodes($ItemContainer, "mouse_exited", self, "_on_ItemList_mouse_exited")
-
+	Utils.conn_nodes($PopupPanel_ItemMenu/MarginContainer/V/Button_SellItem, "pressed", self, "_on_Item_sell_confirm")
+	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Stack, "pressed", self, "_on_Sell_stack")
+	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Confirm, "pressed", self, "_on_Sell_confirm")
+	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Cancel, "pressed", self, "_on_Sell_cancel")
+			
 	load_items()
 
 	set_process(false)
@@ -83,19 +92,20 @@ func load_items():
 		update_slot(slot)
 
 func update_slot(slot: int):
-	if (slot < 0):
+	if slot < 0:
 		return
-	var inventory_item : Dictionary = PlayerState._inventory[str(slot)]
-	var item_meta_data = ItemDatabase.get_item(str(inventory_item["id"])).duplicate()
+		
+	var inventory_item : Dictionary = PlayerState._inventory[String(slot)]
+	var item_meta_data = ItemDatabase.get_item(String(inventory_item["id"])).duplicate()
 	var amount = int(inventory_item["amount"])
 	
 	item_meta_data["amount"] = amount
-	if (!item_meta_data["stackable"]):
+	if !item_meta_data["stackable"]:
 		amount = " "
 		
 	for item_slot in $ItemContainer/Slots.get_children():
 		if item_slot.id == slot:
-			item_slot.update_item(slot, item_meta_data, str(amount))
+			item_slot.update_item(slot, item_meta_data, String(amount))
 			return
 		
 	var new_slot = INVENTORY_SLOT_SCENE.instance()
@@ -103,12 +113,11 @@ func update_slot(slot: int):
 	$ItemContainer/Slots.add_child(new_slot)
 	
 func show_item_options(index: int):
-	
-	if (is_dragging_item):
+	if is_dragging_item:
 		return
 
-	drop_item_slot = index
-	var item_data : Dictionary = ItemDatabase.get_item(String(PlayerState._inventory[str(index)]["id"]))
+	sell_item_slot = index
+	var item_data : Dictionary = ItemDatabase.get_item(String(PlayerState._inventory[String(index)]["id"]))
 	
 	if int(item_data["id"]) < 1: 
 		return
@@ -116,28 +125,28 @@ func show_item_options(index: int):
 	var str_item_info : String = ""
 	
 	$PopupPanel_ItemMenu.set_position(get_viewport().get_mouse_position())
-	$PopupPanel_ItemMenu/V/H_Desc/TextureRect_Icon.set_texture(ResourceLoader.load(item_data["icon"]))
+	$PopupPanel_ItemMenu/MarginContainer/V/H_Desc/TextureRect_Icon.set_texture(ResourceLoader.load(item_data["icon"]))
 
-	str_item_info = "Name: [color=#00aedb] " + item_data["name"] + "[/color]\n"
-	str_item_info = str_item_info + "Type: [color=#f37735] " + item_data["type"] + "[/color]\n"
-	str_item_info = str_item_info + "Sell Price: [color=#ffc425] " + String(item_data["sell_price"]) + "[/color] gold\n"
-	str_item_info = str_item_info + "\n[color=#b3cde0]" + item_data["description"] + "[/color]"
+	str_item_info = "Name: [color="+ NAME_TEXT_COLOR +"] " + item_data["name"] + "[/color]\n"
+	str_item_info = str_item_info + "Type: [color="+ TYPE_TEXT_COLOR +"] " + item_data["type"] + "[/color]\n"
+	str_item_info = str_item_info + "Sell Price: [color="+ SELL_TEXT_COLOR +"] " + String(item_data["sell_price"]) + "[/color] gold\n"
+	str_item_info = str_item_info + "\n[color="+ DESC_TEXT_COLOR +"]" + item_data["description"] + "[/color]"
 	
-	$PopupPanel_ItemMenu/V/H_Desc/RichTextLabel_ItemInfo.set_bbcode(str_item_info)
-	#$Panel/WindowDialog_ItemMenu/Button_DropItem.set_text("(" + String(item_data["amount"]) + ") Drop" )
+	$PopupPanel_ItemMenu/MarginContainer/V/H_Desc/MarginContainer_Text/RichTextLabel_ItemInfo.set_bbcode(str_item_info)
+
 	active_item_slot = index
 	$PopupPanel_ItemMenu.popup()
-
-func begin_drag_item(index:int) -> void:
+	
+func begin_drag_item(index: int):
 	var item_id = PlayerState.inventory_get_item(index)["id"]
 	
 	if item_id == "0":
 		return
 		
-	if (is_dragging_item):
+	if is_dragging_item:
 		return
 		
-	if (index < 0):
+	if index < 0:
 		return
 	
 	var item = ItemDatabase.get_item(item_id)
@@ -150,7 +159,7 @@ func begin_drag_item(index:int) -> void:
 	mouse_button_released = false
 	$ItemContainer/Sprite_DraggedItem.global_translate(get_viewport().get_mouse_position())
 
-func end_drag_item() -> void:
+func end_drag_item():
 	set_process(false)
 	dragged_item_slot = -1
 	$ItemContainer/Sprite_DraggedItem.hide()
@@ -158,17 +167,17 @@ func end_drag_item() -> void:
 	is_dragging_item = false
 	active_item_slot = -1
 
-func move_merge_item() -> void:
-	if (dragged_item_slot < 0):
+func move_merge_item():
+	if dragged_item_slot < 0:
 		return
 		
-	if (active_item_slot < 0):
+	if active_item_slot < 0:
 		return
 
-	if (active_item_slot != dragged_item_slot):
-		if (PlayerState.inventory_get_item(active_item_slot)["id"] == PlayerState.inventory_get_item(dragged_item_slot)["id"]):
+	if active_item_slot != dragged_item_slot:
+		if PlayerState.inventory_get_item(active_item_slot)["id"] == PlayerState.inventory_get_item(dragged_item_slot)["id"]:
 			var itemData = ItemDatabase.get_item(PlayerState.inventory_get_item(active_item_slot)["id"])
-			if (int(itemData["stack_limit"]) >= 2):
+			if int(itemData["stack_limit"]) >= 2:
 				if is_stack_enabled:
 					PlayerState.inventory_merge_stack(dragged_item_slot, active_item_slot)
 				else:
@@ -190,6 +199,45 @@ func move_merge_item() -> void:
 				update_slot(new_slot)
 			update_slot(dragged_item_slot)
 			update_slot(active_item_slot)
+
+func _on_Item_sell_confirm():
+	var screen_center = get_viewport_rect().size / 2
+	var item_data : Dictionary = ItemDatabase.get_item(String(PlayerState._inventory[String(sell_item_slot)]["id"]))
+	var str_confirm_text : String = ""
+	
+	str_confirm_text = "[center] You're about to sell your "
+	str_confirm_text = str_confirm_text + "[color="+ NAME_TEXT_COLOR +"] " + item_data["name"] + "[/color].\n"
+	str_confirm_text = str_confirm_text + "Do you want to proceed?[/center]"
+	
+	$PopupPanel_Confirmation/MarginContainer/V/MarginContainer_Text/RichTextLabel_Text.set_bbcode(str_confirm_text)
+	
+	var popup_size = $PopupPanel_Confirmation.rect_size / 2
+	$PopupPanel_Confirmation.set_position(screen_center - popup_size)
+	
+	$PopupPanel_Confirmation.popup()
+	
+func _on_Sell_stack():
+	print(PlayerState._money)
+	PlayerState.inventory_sell_item(sell_item_slot, PlayerState._inventory[String(sell_item_slot)]["amount"])
+	print(PlayerState._money)
+	update_slot(sell_item_slot)
+	sell_item_slot = -1
+	$PopupPanel_Confirmation.hide()
+	$PopupPanel_ItemMenu.hide()
+	
+func _on_Sell_confirm():
+	print(PlayerState._money)
+	PlayerState.inventory_sell_item(sell_item_slot, 1)
+	print(PlayerState._money)
+	update_slot(sell_item_slot)
+	sell_item_slot = -1
+	$PopupPanel_Confirmation.hide()
+	$PopupPanel_ItemMenu.hide()
+	
+func _on_Sell_cancel():
+	sell_item_slot = -1
+	$PopupPanel_Confirmation.hide()
+	$PopupPanel_ItemMenu.hide()
 
 func _on_ItemList_mouse_entered():
 	cursor_inside_itemlist = true;
