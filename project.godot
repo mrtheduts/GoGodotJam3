@@ -89,8 +89,8 @@ config/icon="res://icon.png"
 PlayerState="*res://src/Singletons/PlayerState/PlayerState.tscn"
 Utils="*res://src/Singletons/Utils.gd"
 DNA="*res://src/Singletons/DNA.gd"
-PlantFactory="*res://src/Plant/Factory/PlantFactory.tscn"
 CloseUpPlantFactory="*res://src/CloseUpPlant/Factory/CloseUpPlantFactory.tscn"
+PlantFactory="*res://src/Plant/Factory/PlantFactory.tscn"
 
 [importer_defaults]
 
