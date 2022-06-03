@@ -5,6 +5,7 @@
 extends Node
 
 var CLOSE_UP_PLANT_SCENE = preload("res://src/CloseUpPlant/CloseUpPlant.tscn")
+var SEED_SCENE = preload("res://src/CloseUpPlant/Seeds/Seed.tscn")
 
 func _get_build_parts_from_plant(plant: Plant) -> Dictionary:
 	var build_parts := {}
@@ -21,6 +22,13 @@ func _get_build_parts_from_plant(plant: Plant) -> Dictionary:
 				gene = Utils.as_bool(gene)
 		build_parts[DNA.get_feature_value(feature)] = gene
 	return build_parts
+
+func _build_seed_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> void:
+	var seed_node = SEED_SCENE.instance()
+	close_up_plant.add_to_idle_animation_list(seed_node)
+	var seed_type_value = DNA.get_gene_value(DNA.FEATURES.SEED_TYPE, build_parts[DNA.FEATURES.SEED_TYPE])
+	seed_node.set_type(seed_type_value)
+	close_up_plant.add_child(seed_node)
 
 func _build_adult_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> void:
 	var stalk: Stalk = build_parts[DNA.FEATURES.STALK_TYPE].instance()
@@ -62,7 +70,7 @@ func create_close_up_plant_from(plant: Plant) -> CloseUpPlant:
 	var build_parts = _get_build_parts_from_plant(plant)
 	match plant.life_stage:
 		Plant.LIFE_STAGES.SEED:
-			pass
+			_build_seed_plant(close_up_plant, build_parts)
 		Plant.LIFE_STAGES.SPROUT:
 			pass
 		Plant.LIFE_STAGES.ADULT:

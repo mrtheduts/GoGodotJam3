@@ -33,8 +33,8 @@ func _unhandled_input(event):
    # Mouse in viewport coordinates.
 	if Input.is_action_pressed("mouse_leftbtn"):
 		var plant: Plant = PlantFactory.gen_random_plant()
-		plant.age()
-		plant.age()
+#		plant.age()
+#		plant.age()
 		plant.close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(plant)
 		show_popup_plant(plant)
 

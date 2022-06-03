@@ -11,7 +11,7 @@ var nodes_with_idle_animation := []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	start_idle_animation()
 
 func add_to_idle_animation_list(node: Node2D) -> void:
 	nodes_with_idle_animation.push_back(node)

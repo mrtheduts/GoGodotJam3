@@ -1,5 +1,9 @@
 extends Node2D
 
+func _ready() -> void:
+	randomize()
+	self.rotation = rand_range(0, 2*PI)
+
 func set_type(type: int) -> void:
 	match type:
 		DNA.SEED_TYPE_VALUES.BEAN:
@@ -14,3 +18,6 @@ func set_type(type: int) -> void:
 			$Gravity.visible = true
 		DNA.SEED_TYPE_VALUES.DRY:
 			$Dry.visible = true
+
+func play_idle_animation() -> void:
+	$AnimationPlayer.play("Idle")

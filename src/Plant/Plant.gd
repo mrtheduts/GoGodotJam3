@@ -26,6 +26,7 @@ func _init():
 func _reveal_phenotype():
 	for feature in genetics.keys():
 		if (DNA.is_feature_mixable(feature)):
+			print(feature, " is mixable")
 			phenotype[feature] = [] + genetics[feature] # Clone Array
 		else:
 			phenotype[feature] = get_predominant_gene(feature, genetics[feature])
@@ -55,6 +56,7 @@ func get_predominant_gene(feature, genes: Array):
 			rec_genes.push_back(gene)
 	
 	var res_genes: Array = dom_genes if (not dom_genes.empty()) else rec_genes
+	print(feature, " -> ", res_genes)
 	return Utils.shuffle_and_pop_front(res_genes)
 
 func add_gene(feature, gene) -> void:

@@ -117,6 +117,11 @@ var FRUIT_TYPE_SCENES = {
 
 # Seed
 enum SEED_TYPE_VALUES { BEAN, FALL, UNIT, GRAIN, GRAVITY, DRY }
+const SEED_TYPE_DOMINANTS := [ 
+	SEED_TYPE_VALUES.BEAN,
+	SEED_TYPE_VALUES.UNIT,
+	SEED_TYPE_VALUES.GRAIN
+]
 
 #
 # Functions
@@ -144,6 +149,11 @@ func get_scene(feature: String, gene: String):
 	var mapping_enum = get(feature + SCENES_POSTFIX)
 	var gene_value = values_enum[gene]
 	return mapping_enum[gene_value]
+
+func get_gene_value(feature: int, gene: String) -> int:
+	var feature_name = get_feature_name(feature)
+	var value_mapping = get_value(feature_name)
+	return value_mapping[gene]
 
 func get_feature_name(value: int) -> String:
 	return FEATURES.keys()[value]
