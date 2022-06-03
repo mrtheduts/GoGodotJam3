@@ -2,8 +2,8 @@ extends TileMap
 
 
 # Constants
-var PLANT_TILE_ID : int = 0
-var GRASS_TILE_ID : int = 1
+var PLANT_TILE_ID : int = 8
+var GRASS_TILE_ID : int = 9
 var X_MARGIN : int = 4
 var Y_MARGIN : int = 3
 
@@ -13,12 +13,13 @@ var plants = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(tile_set.get_tiles_ids())
 	print(garden_size)
 	if (len(plants) == 0):
 		print("Initing plants from garden")
 		init_garden()
-	draw_garden_tiles()
 	draw_grass_area()
+	draw_garden_tiles()
 	pass # Replace with function body.
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,6 +53,7 @@ func draw_garden_tiles():
 	for x in range(garden_size):
 		for y in range(garden_size):
 			set_cell(x, y, PLANT_TILE_ID)
+			update_bitmask_area(Vector2(x, y))
 
 func draw_grass_area():
 	var first_x = -X_MARGIN
