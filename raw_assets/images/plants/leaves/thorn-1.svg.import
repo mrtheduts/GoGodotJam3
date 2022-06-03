@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fibrous.svg-20084eb9af53bf04d353a0a3bbf09888.stex"
+path="res://.import/thorn-1.svg-f1416b35c9432782993280ce376297b5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://raw_assets/images/plants/roots/fibrous.svg"
-dest_files=[ "res://.import/fibrous.svg-20084eb9af53bf04d353a0a3bbf09888.stex" ]
+source_file="res://raw_assets/images/plants/leaves/thorn-1.svg"
+dest_files=[ "res://.import/thorn-1.svg-f1416b35c9432782993280ce376297b5.stex" ]
 
 [params]
 

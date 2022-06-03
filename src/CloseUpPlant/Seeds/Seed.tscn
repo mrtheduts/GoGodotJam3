@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://raw_assets/images/plants/seeds/gravity.svg" type="Texture" id=1]
+[ext_resource path="res://raw_assets/images/plants/seeds/bean.svg" type="Texture" id=2]
+[ext_resource path="res://raw_assets/images/plants/seeds/grain.svg" type="Texture" id=3]
+[ext_resource path="res://raw_assets/images/plants/seeds/unit.svg" type="Texture" id=4]
+[ext_resource path="res://raw_assets/images/plants/seeds/dry-grain.svg" type="Texture" id=5]
+[ext_resource path="res://raw_assets/images/plants/seeds/fall.svg" type="Texture" id=6]
+[ext_resource path="res://src/CloseUpPlant/Seeds/Seed.gd" type="Script" id=7]
+
+[node name="Seed" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Bean" type="Polygon2D" parent="."]
+visible = false
+offset = Vector2( -375, -475 )
+texture = ExtResource( 2 )
+polygon = PoolVector2Array( 304, 439, 368, 391, 432, 439, 432, 551, 368, 583, 304, 551 )
+uv = PoolVector2Array( 304, 439, 368, 391, 432, 439, 432, 551, 368, 583, 304, 551 )
+
+[node name="Fall" type="Polygon2D" parent="."]
+visible = false
+offset = Vector2( -425, -600 )
+texture = ExtResource( 6 )
+polygon = PoolVector2Array( 306.644, 478.536, 400, 408.519, 493.356, 478.536, 493.356, 641.91, 400, 688.588, 306.644, 641.91 )
+uv = PoolVector2Array( 328.49, 467.408, 416, 401.775, 503.51, 467.408, 503.51, 620.551, 416, 664.306, 328.49, 620.551 )
+
+[node name="Unit" type="Polygon2D" parent="."]
+visible = false
+offset = Vector2( -300, -550 )
+texture = ExtResource( 4 )
+polygon = PoolVector2Array( 263.682, 522.735, 304, 492.497, 344.318, 522.735, 344.318, 593.291, 304, 613.45, 263.682, 593.291 )
+uv = PoolVector2Array( 260.414, 520.012, 304, 487.322, 347.586, 520.012, 347.586, 596.287, 304, 618.08, 260.414, 596.287 )
+
+[node name="Grain" type="Polygon2D" parent="."]
+visible = false
+offset = Vector2( -375, -475 )
+texture = ExtResource( 3 )
+polygon = PoolVector2Array( 336.657, 436.881, 384, 401.374, 431.343, 436.881, 431.343, 519.731, 384, 543.402, 336.657, 519.731 )
+uv = PoolVector2Array( 345.247, 430.705, 400, 389.64, 454.753, 430.705, 454.753, 526.524, 400, 553.901, 345.247, 526.524 )
+
+[node name="Gravity" type="Polygon2D" parent="."]
+visible = false
+offset = Vector2( -350, -475 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 258.589, 337.157, 368, 255.099, 477.411, 337.157, 477.411, 528.627, 368, 583.333, 258.589, 528.627 )
+uv = PoolVector2Array( 270.799, 333.999, 384, 249.098, 497.201, 333.999, 497.201, 532.101, 384, 588.702, 270.799, 532.101 )
+
+[node name="Dry" type="Polygon2D" parent="."]
+visible = false
+offset = Vector2( -300, -425 )
+texture = ExtResource( 5 )
+polygon = PoolVector2Array( 155.864, 302.22, 288, 203.118, 420.136, 302.22, 420.136, 533.458, 288, 599.526, 155.864, 533.458 )
+uv = PoolVector2Array( 160.857, 306.381, 288, 211.024, 415.143, 306.381, 415.143, 528.881, 288, 592.452, 160.857, 528.881 )

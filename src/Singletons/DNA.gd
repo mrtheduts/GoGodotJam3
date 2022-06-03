@@ -30,7 +30,8 @@ enum FEATURES {
 	BRANCH_TYPE,
 	LEAF_TYPE,
 	FLOWER_TYPE,
-	FRUIT_TYPE
+	FRUIT_TYPE,
+	SEED_TYPE
 }
 
 # Flower
@@ -113,6 +114,9 @@ const FRUIT_TYPE_DOMINANTS := [ FRUIT_TYPE_VALUES.DEFAULT ]
 var FRUIT_TYPE_SCENES = {
 	FRUIT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Fruits/Fruit.tscn")
 }
+
+# Seed
+enum SEED_TYPE_VALUES { BEAN, FALL, UNIT, GRAIN, GRAVITY, DRY }
 
 #
 # Functions
