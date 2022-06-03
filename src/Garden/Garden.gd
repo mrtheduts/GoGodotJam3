@@ -26,15 +26,6 @@ func _ready():
 func _process(delta):
 	#print(garden_size)
 	pass
-
-func _input(event):
-   # Mouse in viewport coordinates.
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			if event.button_index == BUTTON_LEFT:
-				print("Mouse Click/Unclick at: ", event.position)
-				upgrade_garden_size()
-				print(garden_size)
 				
 func get_garden_center():
 	var middle = garden_size*cell_size.x/2

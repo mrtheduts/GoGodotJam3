@@ -5,7 +5,6 @@ var SEED_PACKET_SCENE = load("res://src/Shop/SeedPacket/SeedPacket.tscn")
 var HOE_SCENE = load("res://src/Shop/Hoe/Hoe.tscn")
 var BAG_SCENE = load("res://src/Shop/Bag/Bag.tscn")
 var CHEST_SCENE = load("res://src/Shop/Chest/Chest.tscn")
-var PURCHASE_ANIMATION_SCENE = load("res://src/Shop/PurchaseAnimation/PurchaseAnimation.tscn")
 
 const MAX_SEEDPACKET : int = 8
 const TOOLS_ID : Array = ["Hoe", "Chest", "Bag"]
@@ -15,8 +14,6 @@ const SHELF_Y : Array = [-170, -30]
 const HOE_POSITION : Vector2 = Vector2(-360, 180)
 const CHEST_POSITION : Vector2 = Vector2(55, -40)
 const BAG_POSITION : Vector2 = Vector2(-195, 160)
-const PURCHASE_POSITION : Vector2 = Vector2(395, 252)
-const PURCHASE_SCALE : Vector2 = Vector2(0.25, 0.25)
 const DIALOG_POSITION : Vector2 = Vector2(-325, 239)
 
 var shop_items : Array = []
@@ -61,21 +58,12 @@ func make_purchase():
 	if new_balance >= 0:
 		PlayerState.set_money(new_balance)
 		shopper_dialog(Constants.SHOP_THANKS_TEXT)
-		show_purchase_animation(-value)
 		selected_item["item"].queue_free()
 		shop_items.erase(selected_item)
 		selected_item = {}
 	else:
 		shopper_dialog(Constants.SHOP_WARN_TEXT)
 		selected_item = {}
-		
-
-func show_purchase_animation(value: int):
-	var purchase_animation = PURCHASE_ANIMATION_SCENE.instance()
-	purchase_animation.rect_position = PURCHASE_POSITION
-	purchase_animation.rect_scale = PURCHASE_SCALE
-	purchase_animation.init(value)
-	add_child(purchase_animation)
 
 func display_items():
 	for item in shop_items:
