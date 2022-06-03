@@ -4,7 +4,11 @@
 
 class_name Plant
 
-enum LIFE_STAGES { SEED, SPROUT, ADULT, DEAD}
+# Signals
+signal water_level_changed
+
+enum LIFE_STAGES { SEED, SPROUT, TEENAGE, ADULT, DEAD}
+
 var life_duration_stages: Dictionary
 
 var close_up_plant: CloseUpPlant = null
@@ -26,7 +30,6 @@ func _init():
 func _reveal_phenotype():
 	for feature in genetics.keys():
 		if (DNA.is_feature_mixable(feature)):
-			print(feature, " is mixable")
 			phenotype[feature] = [] + genetics[feature] # Clone Array
 		else:
 			phenotype[feature] = get_predominant_gene(feature, genetics[feature])
@@ -56,7 +59,6 @@ func get_predominant_gene(feature, genes: Array):
 			rec_genes.push_back(gene)
 	
 	var res_genes: Array = dom_genes if (not dom_genes.empty()) else rec_genes
-	print(feature, " -> ", res_genes)
 	return Utils.shuffle_and_pop_front(res_genes)
 
 func add_gene(feature, gene) -> void:
@@ -66,6 +68,7 @@ func add_gene(feature, gene) -> void:
 
 func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
+	
 	_reveal_phenotype()
 
 func meiosis() -> Dictionary:
@@ -80,12 +83,19 @@ func age(days: int = 1) -> void:
 		LIFE_STAGES.SEED:
 			life_stage = LIFE_STAGES.SPROUT
 		LIFE_STAGES.SPROUT:
+			life_stage = LIFE_STAGES.TEENAGE
+		LIFE_STAGES.TEENAGE:
 			life_stage = LIFE_STAGES.ADULT
 		LIFE_STAGES.ADULT:
 			life_stage = LIFE_STAGES.DEAD
 		LIFE_STAGES.DEAD:
 			printerr("I'm dead! :(")
+	close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(self)
 
 func water(amount: int = 1) -> void:
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
 	print("New watered amount: ", watered_amount)
+	emit_signal("water_level_changed", watered_amount)
+
+func plant() -> void:
+	close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(self)
