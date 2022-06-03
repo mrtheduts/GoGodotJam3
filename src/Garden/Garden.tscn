@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://raw_assets/images/overview-soil/grass-mud-tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://godot_assets/tilesets/selection_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://src/Garden/Garden.gd" type="Script" id=3]
 [ext_resource path="res://src/Camera/Camera.tscn" type="PackedScene" id=4]
 
@@ -9,5 +10,10 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 script = ExtResource( 3 )
+
+[node name="SelectedTiles" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]

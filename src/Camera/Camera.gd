@@ -46,3 +46,4 @@ func _unhandled_input(event):
 
 func update_position():
 	self.position = get_parent().get_garden_center()
+	pass

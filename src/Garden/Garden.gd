@@ -4,109 +4,160 @@ extends TileMap
 signal show_close_up_plant
 
 # Constants
-var PLANT_TILE_ID : int = 8
-var GRASS_TILE_ID : int = 9
-var X_MARGIN : int = 4
-var Y_MARGIN : int = 3
+const PLANT_TILE_ID : int = 8
+const GRASS_TILE_ID : int = 9
+const SELECTION_TILE_ID : int = 0
+const SELECTION_TILE_HOVER_ID : int = 1
 
-# Variables
-var garden_size : int = 4
-var plants = []
+const MIN_X : int = -4
+const MIN_Y : int = -3
+const MAX_X : int = 7
+const MAX_Y : int = 6
 
-# Called when the node enters the scene tree for the first time.
+const OUTBOUND_TILE : Vector2 = Vector2(-1000, -1000)
+
+var crop_tiles : Dictionary = {}
+
+onready var planting_mode : bool = false
+onready var increase_garden_mode : bool = false
+onready var selected_tile : Vector2 = OUTBOUND_TILE
+
 func _ready():
-	print(tile_set.get_tiles_ids())
-	print(garden_size)
-	if (len(plants) == 0):
-		print("Initing plants from garden")
+	Utils.conn_nodes(PlayerState, "planting_mode", self, "_on_PlayerState_planting_mode")
+	Utils.conn_nodes(PlayerState, "edit_garden_mode", self, "_on_PlayerState_edit_garden_mode")
+	
+	if (crop_tiles.empty()):
 		init_garden()
+		
 	draw_grass_area()
 	draw_garden_tiles()
-	pass # Replace with function body.
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	#print(garden_size)
-	pass
-
 func _unhandled_input(event):
-   # Mouse in viewport coordinates.
 	if Input.is_action_pressed("mouse_leftbtn"):
-		var plant: Plant = PlantFactory.gen_random_plant()
-		plant.age()
-		plant.age()
-		plant.close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(plant)
-		show_popup_plant(plant)
+		if planting_mode or increase_garden_mode:
+			var selected_coord = world_to_map(get_local_mouse_position())
+			
+			if $SelectedTiles.get_cell(selected_coord.x, selected_coord.y) == SELECTION_TILE_HOVER_ID:
+				if planting_mode:
+					var seed_obj : Plant = PlayerState.inventory_get_item(PlayerState._holding_item)["seed_obj"]
+					var crop_id : String = get_crop_id_by_coord(selected_coord)
+					
+					crop_tiles[crop_id]["plant"] = seed_obj
+					update_crop(crop_id)
+				else:
+					add_new_crop_area(selected_coord)
+				
+				PlayerState.hold_item_used()
+				end_selection_mode()
+			else:
+				PlayerState.hold_item_cancel()
+				end_selection_mode()
+		
+	if event is InputEventMouseMotion:
+		if planting_mode or increase_garden_mode:
+			var selected_coord = world_to_map(get_local_mouse_position())
+			
+			if selected_tile != selected_coord:
+				$SelectedTiles.set_cell(selected_tile.x, selected_tile.y, SELECTION_TILE_ID)
+				
+				if $SelectedTiles.get_cell(selected_coord.x, selected_coord.y) == SELECTION_TILE_ID:
+					$SelectedTiles.set_cell(selected_coord.x, selected_coord.y, SELECTION_TILE_HOVER_ID)
+					selected_tile = selected_coord
+				else:
+					selected_tile = OUTBOUND_TILE
 
+func _on_PlayerState_planting_mode():
+	planting_mode = true
+	for tile_data in crop_tiles.values():
+		if tile_data["plant"] == null:
+			var tile_pos : Vector2 = tile_data["coord"]
+			$SelectedTiles.set_cell(tile_pos.x, tile_pos.y, SELECTION_TILE_ID)
+	
+func _on_PlayerState_edit_garden_mode():
+	increase_garden_mode = true
+	
+	for tile_data in crop_tiles.values():
+		var tile_pos : Vector2 = tile_data["coord"]
+		
+		for y_diff in range(-1, 2):
+			for x_diff in range(-1, 2):
+				var y = tile_pos.y + y_diff
+				var x = tile_pos.x + x_diff
+				if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
+					$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
+
+func end_selection_mode():
+	planting_mode = false
+	increase_garden_mode = false
+	selected_tile = OUTBOUND_TILE
+	
+	for y in range(MIN_Y, MAX_Y+1):
+		for x in range(MIN_X, MAX_X):
+			$SelectedTiles.set_cell(x, y, -1)
+	
+func update_crop(crop_id: String):
+	print(crop_tiles)
+
+func add_new_crop_area(coord: Vector2):
+	var new_crop_id : int = int(crop_tiles.keys()[-1])+1
+	
+	crop_tiles[String(new_crop_id)] = {
+		"coord" : coord,
+		"plant" : null
+	}
+	
+	set_cell(coord.x, coord.y, PLANT_TILE_ID)
+	update_bitmask_area(coord)
+	
 func get_garden_center():
-	var middle = garden_size*cell_size.x/2
-	return Vector2(middle, middle)
-	
-func upgrade_garden_size():
-	garden_size += 1
-	
-	upgrade_plants_space()
-	draw_garden_tiles()
-	draw_grass_area()
-	get_child(0).update_position()
-
-func upgrade_plants_space():
-	for y in range(garden_size):
-		if (y == garden_size-1):
-			var newPlantsRow = []
-			for _x in range(garden_size):
-				newPlantsRow.append(null)
-			plants.append(newPlantsRow)
-		else:
-			plants[y].append(null)
+	var middle_x = (MAX_X + MIN_X)*cell_size.x/2
+	var middle_y = (MAX_Y + MIN_Y)*cell_size.y/2
+	return Vector2(middle_x, middle_y)
 
 func draw_garden_tiles():
-	for x in range(garden_size):
-		for y in range(garden_size):
-			set_cell(x, y, PLANT_TILE_ID)
-			update_bitmask_area(Vector2(x, y))
+	for tile_data in crop_tiles.values():
+		var tile_pos : Vector2 = tile_data["coord"]
+		set_cell(tile_pos.x, tile_pos.y, PLANT_TILE_ID)
+		update_bitmask_area(Vector2(tile_pos.x, tile_pos.y))
 
 func draw_grass_area():
-	var first_x = -X_MARGIN
-	var first_y = -Y_MARGIN
-	
-	var max_x = garden_size + X_MARGIN
-	var max_y = garden_size + Y_MARGIN
-	
-	for y in range(first_y, max_y):
-		for x in range(first_x, max_x):
-			if x >= 0 and x < garden_size and y >= 0 and y < garden_size:
-				continue
-			else:
-				set_cell(x, y, GRASS_TILE_ID)
-
+	for y in range(MIN_Y, MAX_Y+1):
+		for x in range(MIN_X, MAX_X):
+			set_cell(x, y, GRASS_TILE_ID)
 	
 func init_garden():
-	for _y in range(garden_size):
-		var new_plants_row = []
-		for _x in range(garden_size):
-			new_plants_row.append(null)
-		plants.append(new_plants_row)
-		
-		
+	crop_tiles = {
+		"0" : {
+			"coord" : Vector2(0, 0),
+			"plant" : null
+		},
+		"1": {
+			"coord" : Vector2(0, 1),
+			"plant" : null
+		},
+	}
+
+func get_crop_id_by_coord(coord: Vector2) -> String:
+	for key in crop_tiles:
+		if crop_tiles[key]["coord"] == coord:
+			return key
+	
+	return ""
+	
 func save_stats():
 	var save_dict = {
 		"filename" : get_filename(),
 		"parent" : get_parent().get_path(),
 		"pos_x" : global_transform.origin.x,
-		"pos_y" : global_transform.origin.y,
-		"garden_size" : garden_size,
-		"plants" : plants
+		"pos_y" : global_transform.origin.y
 	}
 	return save_dict
 	
 func load_stats(stats):
 	global_transform.origin = Vector2(stats.pos_x, stats.pos_y)
-	garden_size = stats.garden_size
-	plants = stats.plants
 	
-	draw_garden_tiles()
-	draw_grass_area()
+	#draw_grass_area()
+	#draw_garden_tiles()
 	
 	get_child(0).update_position()
 

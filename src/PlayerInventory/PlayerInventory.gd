@@ -44,7 +44,7 @@ func _ready():
 		if i >= 4:
 			slot = PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
 		else:
-			slot = PlayerState.inventory_add_item(i)
+			slot = PlayerState.inventory_add_item(1)
 	
 
 #warning-ignore:unused_argument

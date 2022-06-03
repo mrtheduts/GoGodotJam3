@@ -14,12 +14,12 @@ var _stored_plants: Array = []
 
 var _inventory : Dictionary = {}
 var _inventory_max_slots : int = 10
-var _holding_item : Dictionary = {}
+var _holding_item : int = -1
 
 onready var _is_editing_garden : bool = false
 onready var _is_planting_seed : bool = false
 
-func _ready():
+func _ready():	
 	if _inventory.empty():
 		var dict:Dictionary = {}
 		for slot in range (0, _inventory_max_slots):
@@ -30,6 +30,7 @@ func _ready():
 func set_money(value: int) -> void:
 	_money = value
 	emit_signal("money_changed", _money)
+	
 func get_money() -> int:
 	return _money
 
@@ -65,15 +66,37 @@ func load_stats(stats):
 func _on_UILayer_plant_sold(value: int):
 	add_money(value)
 
-func inventory_use_item(item_slot: int):
-	_holding_item = inventory_get_item(item_slot)
+func hold_item_used():
+	if _holding_item < 0:
+		return
+		
+	var item = inventory_get_item(_holding_item)
 	
-	if _holding_item["id"] == String(Constants.SEED_ITEM_ID):
+	var new_amount = item["amount"] - 1
+	
+	if new_amount == 0:
+		inventory_update_item(_holding_item, 0, 0, null)
+	else:
+		inventory_update_item(_holding_item, int(item["id"]), new_amount, item["seed_obj"])
+	
+	emit_signal("inventory_changed", _holding_item)
+	hold_item_cancel()
+
+func hold_item_cancel():
+	_holding_item = -1
+	_is_planting_seed = false
+	_is_editing_garden = false
+	
+func inventory_use_item(item_slot: int):
+	var item = inventory_get_item(item_slot)
+	_holding_item = item_slot
+	
+	if item["id"] == String(Constants.SEED_ITEM_ID):
 		_is_planting_seed = true
-		emit_signal("edit_garden_mode")
-	elif _holding_item["id"] == String(Constants.HOE_ITEM_ID):
+		emit_signal("planting_mode")
+	elif item["id"] == String(Constants.HOE_ITEM_ID):
 		_is_editing_garden = true
-		emit_signal("planting_mode", item_slot)
+		emit_signal("edit_garden_mode")
 	
 func inventory_add_item(item_id: int, add_amount: int = 1, seed_obj: Plant = null):
 	# Get Item Data
