@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://raw_assets/images/plants/roots.svg" type="Texture" id=1]
 [ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=2]
 [ext_resource path="res://src/CloseUpPlant/Roots/Roots.gd" type="Script" id=3]
+[ext_resource path="res://raw_assets/images/plants/roots/default.svg" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -168,9 +168,9 @@ material = ExtResource( 2 )
 use_parent_material = true
 scale = Vector2( 0.3, 0.3 )
 offset = Vector2( -80, -60 )
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 32, 56, 32, 224, 80, 336, 128, 224, 128, 56, 80, 136, 80, 200 )
+polygon = PoolVector2Array( 37.3388, 74.9447, 37.3388, 292.768, 99.574, 437.983, 161.809, 292.768, 161.809, 74.9447, 99.574, 178.67, 99.574, 261.65 )
 uv = PoolVector2Array( 32, 56, 32, 224, 80, 336, 128, 224, 128, 56, 80, 136, 80, 200 )
 polygons = [ PoolIntArray( 0, 5, 4 ), PoolIntArray( 5, 0, 1 ), PoolIntArray( 5, 4, 3 ), PoolIntArray( 5, 6, 1 ), PoolIntArray( 3, 6, 5 ), PoolIntArray( 3, 6, 2 ), PoolIntArray( 6, 1, 2 ) ]
 bones = [ "StalkEntry", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ), "StalkEntry/Root1", PoolRealArray( 1, 0, 0, 0, 1, 1, 0.46 ), "StalkEntry/Root1/Root1-1", PoolRealArray( 0, 1, 1, 1, 0, 0, 0.51 ), "StalkEntry/Root2", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ), "StalkEntry/Root2/Root2-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ), "StalkEntry/Root3", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ), "StalkEntry/Root3/Root3-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ) ]
@@ -180,7 +180,7 @@ internal_vertex_count = 2
 use_parent_material = true
 scale = Vector2( 0.3, 0.3 )
 offset = Vector2( -80, -60 )
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 skeleton = NodePath("../../Skeleton2D")
 polygon = PoolVector2Array( 32, 56, 32, 224, 80, 336, 128, 224, 128, 56, 80, 136, 80, 200 )
 uv = PoolVector2Array( 32, 56, 32, 224, 80, 336, 128, 224, 128, 56, 80, 136, 80, 200 )
@@ -192,7 +192,7 @@ internal_vertex_count = 2
 use_parent_material = true
 scale = Vector2( 0.3, 0.3 )
 offset = Vector2( -80, -60 )
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 skeleton = NodePath("../../Skeleton2D")
 polygon = PoolVector2Array( 32, 56, 32, 224, 80, 336, 128, 224, 128, 56, 80, 136, 80, 200 )
 uv = PoolVector2Array( 32, 56, 32, 224, 80, 336, 128, 224, 128, 56, 80, 136, 80, 200 )

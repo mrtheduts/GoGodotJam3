@@ -4,5 +4,7 @@
 
 extends Node2D
 
-func start_idle_animation() -> void:
+class_name Root
+
+func play_idle_animation() -> void:
 	$AnimationPlayer.play("Idle")

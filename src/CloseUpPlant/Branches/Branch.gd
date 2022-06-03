@@ -4,7 +4,9 @@
 
 extends Node2D
 
-func start_idle_animation() -> void:
+class_name Branch
+
+func play_idle_animation() -> void:
 	$AnimationPlayer.play("Idle")
 
 func add_to_begin_bone(node: Node2D) -> void:

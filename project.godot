@@ -9,13 +9,73 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Branch",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Branches/Branch.gd"
+}, {
+"base": "Node2D",
+"class": "CloseUpPlant",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/CloseUpPlant.gd"
+}, {
+"base": "Node2D",
+"class": "CloseUpPlot",
+"language": "GDScript",
+"path": "res://src/CloseUpPlot/CloseUpPlot.gd"
+}, {
+"base": "Reference",
+"class": "Constants",
+"language": "GDScript",
+"path": "res://src/Singletons/Constants.gd"
+}, {
+"base": "Node2D",
+"class": "Flower",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Flowers/Flower.gd"
+}, {
+"base": "Node2D",
+"class": "Fruit",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Fruits/Fruit.gd"
+}, {
 "base": "Reference",
 "class": "Plant",
 "language": "GDScript",
 "path": "res://src/Plant/Plant.gd"
+}, {
+"base": "Reference",
+"class": "PlantTypes",
+"language": "GDScript",
+"path": "res://src/Plant/PlantTypes.gd"
+}, {
+"base": "PanelContainer",
+"class": "PopupWindow",
+"language": "GDScript",
+"path": "res://src/PopupDialog/PopupDialog.gd"
+}, {
+"base": "Node2D",
+"class": "Root",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Roots/Roots.gd"
+}, {
+"base": "Node2D",
+"class": "Stalk",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Stalks/Stalks.gd"
 } ]
 _global_script_class_icons={
-"Plant": ""
+"Branch": "",
+"CloseUpPlant": "",
+"CloseUpPlot": "",
+"Constants": "",
+"Flower": "",
+"Fruit": "",
+"Plant": "",
+"PlantTypes": "",
+"PopupWindow": "",
+"Root": "",
+"Stalk": ""
 }
 
 [application]
@@ -28,8 +88,9 @@ config/icon="res://icon.png"
 
 PlayerState="*res://src/Singletons/PlayerState/PlayerState.tscn"
 Utils="*res://src/Singletons/Utils.gd"
-Constants="*res://src/Singletons/Constants.gd"
 DNA="*res://src/Singletons/DNA.gd"
+CloseUpPlantFactory="*res://src/CloseUpPlant/Factory/CloseUpPlantFactory.tscn"
+PlantFactory="*res://src/Plant/Factory/PlantFactory.tscn"
 ItemDatabase="*res://src/Singletons/ItemDatabase.gd"
 SaveGame="*res://src/Singletons/SaveGame.gd"
 

@@ -4,6 +4,8 @@
 
 extends Node2D
 
+class_name Stalk
+
 func start_wind_animation() -> void:
 	$AnimationPlayer.play("Wind")
 

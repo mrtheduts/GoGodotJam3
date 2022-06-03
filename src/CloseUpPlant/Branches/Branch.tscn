@@ -1,62 +1,79 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://raw_assets/images/plants/branches/default.svg" type="Texture" id=1]
 [ext_resource path="res://src/CloseUpPlant/Branches/Branch.gd" type="Script" id=2]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Idle"
-length = 4.9
-loop = true
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, -0.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1.2, 3.2, 4.9 )
-}
+[ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=3]
 
 [sub_resource type="Animation" id=2]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
+resource_name = "Idle"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/BeginBone/MidBone:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0, 1, 3.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -5.0, 0.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5, 2.5, 2.9, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -30.0, -30.0, -35.0, -35.0, -30.0 ]
 }
 
 [node name="Branch" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 1 )
-anims/RESET = SubResource( 2 )
+anims/Idle = SubResource( 2 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 modulate = Color( 0.403922, 0.262745, 0.262745, 1 )
-scale = Vector2( 1.01562, 0.25 )
-offset = Vector2( 0, -32 )
+material = ExtResource( 3 )
+rotation = -0.0872665
+offset = Vector2( -235, -700 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../Skeleton2D")
-polygon = PoolVector2Array( 0, 64, 64, 64, 64, 0, 0, 0 )
-uv = PoolVector2Array( 0, 64, 64, 64, 64, 0, 0, 0 )
-bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
+polygon = PoolVector2Array( 544, 487, 608, 551, 416, 679, 192, 791, 192, 631, 352, 567, 384, 631 )
+uv = PoolVector2Array( 544, 487, 608, 551, 416, 679, 192, 791, 192, 631, 352, 567, 384, 631 )
+polygons = [ PoolIntArray( 6, 0, 1 ), PoolIntArray( 6, 3, 4 ), PoolIntArray( 6, 0, 5 ), PoolIntArray( 6, 5, 4 ), PoolIntArray( 6, 3, 2 ), PoolIntArray( 6, 1, 2 ) ]
+bones = [ "BeginBone", PoolRealArray( 0, 0, 0.32, 1, 1, 0.32, 0.49 ), "BeginBone/MidBone", PoolRealArray( 1, 1, 0.49, 0, 0, 0.49, 0.43 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ) ]
+internal_vertex_count = 1
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 
 [node name="BeginBone" type="Bone2D" parent="Skeleton2D"]
-rest = Transform2D( 1, 0, 0, 1, 0, 0 )
+rotation = -0.534057
+rest = Transform2D( 0.866026, -0.499999, 0.499999, 0.866026, 0, 0 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
 
 [node name="MidBone" type="Bone2D" parent="Skeleton2D/BeginBone"]
-position = Vector2( 32, 0 )
-rest = Transform2D( 1, 0, 0, 1, 32, 0 )
+position = Vector2( 155.681, -3.64817 )
+rotation = -0.0656295
+rest = Transform2D( 1, 0, 0, 1, 155.681, -3.64817 )
+__meta__ = {
+"_edit_bone_": true
+}
 
 [node name="EndBone" type="Bone2D" parent="Skeleton2D/BeginBone/MidBone"]
-position = Vector2( 32, 0 )
-rest = Transform2D( 1, 0, 0, 1, 32, 0 )
+position = Vector2( 180.502, -6.63858 )
+rotation = 3.66519
+rest = Transform2D( -0.866028, -0.499995, 0.499995, -0.866028, 180.502, -6.63858 )
+__meta__ = {
+"_edit_bone_": true
+}
