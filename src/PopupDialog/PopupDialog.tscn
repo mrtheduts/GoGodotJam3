@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://src/PopupDialog/PopupDialog.gd" type="Script" id=2]
-[ext_resource path="res://raw_assets/images/shop/coin_64.png" type="Texture" id=3]
 
 [node name="PopupDialog" type="PanelContainer"]
 anchor_left = 1.0
@@ -88,18 +87,6 @@ margin_bottom = 400.0
 size = Vector2( 400, 400 )
 handle_input_locally = false
 render_target_update_mode = 3
-
-[node name="Money" type="TextureRect" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 407.0
-margin_bottom = 475.0
-mouse_filter = 2
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 6
 
 [connection signal="tween_all_completed" from="TweenClose" to="." method="_on_TweenClose_tween_all_completed"]
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer" to="." method="_on_HBoxContainer_gui_input"]

@@ -7,7 +7,7 @@ extends Node
 signal money_changed
 signal inventory_changed
 
-var _money: int = 420
+var _money: int = 150
 var _stored_plants: Array = []
 
 var _inventory : Dictionary = {}

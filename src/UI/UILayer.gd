@@ -6,13 +6,9 @@ extends CanvasLayer
 
 # Signals
 signal photo_took
-signal plant_sold
 
 var POPUP_SCENE = preload("res://src/PopupDialog/PopupDialog.tscn")
 var CLOSE_UP_SOIL_SCENE = preload("res://src/CloseUpPlot/CloseUpPlot.tscn")
-
-func _ready():
-	$Money.set_PlayerState_money(get_parent().get_node("PlayerState").get_money())
 
 func _on_Garden_show_close_up_plant(plant: Plant):
 	var close_up_plant: CloseUpPlant = plant.close_up_plant
@@ -34,7 +30,5 @@ func _on_PopupWindow_photo_button_clicked(plant: Plant, photo: Image):
 	emit_signal("photo_took", plant, photo)
 
 func _on_PopupWindow_sell_button_clicked(value: int):
-	emit_signal("plant_sold", value)
+	PlayerState.add_money(value)
 
-func _on_PlayerState_money_changed(value: int):
-	$Money.set_PlayerState_money(value)

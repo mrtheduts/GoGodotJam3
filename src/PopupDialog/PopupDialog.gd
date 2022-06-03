@@ -86,23 +86,18 @@ func _on_WaterButton_button_down():
 func _on_SellButton_pressed():
 	if (plant != null):
 		emit_signal("sell_button_clicked", plant.value)
-	self.rect_pivot_offset = Vector2(self.rect_size.x / 2, 0)
+	self.rect_pivot_offset = Vector2(0, 0)
 	$TweenClose.interpolate_property(
 		self, "rect_scale",
-		self.rect_scale, Vector2(0, 1), 
-		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT, 0.1
+		self.rect_scale, Vector2(0, 0),
+		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT
 	)
+
 	$TweenClose.interpolate_property(
-		self, "rect_scale",
-		self.rect_scale, Vector2(0, 1), 
-		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT, 0.1
+		self, "rect_position",
+		self.rect_position, Vector2.ZERO,
+		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT
 	)
-	$TweenClose.interpolate_property(
-		$Money, "modulate",
-		$Money.modulate, Color(1,1,1,1), 
-		0.1, $TweenClose.TRANS_SINE, $TweenClose.EASE_IN
-	)
-	$Money.visible = true
 	$TweenClose.start()
 
 

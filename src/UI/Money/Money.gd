@@ -17,10 +17,6 @@ func _on_PlayerState_money_changed(value: int):
 	$HBoxContainer/Label.text = String(value)
 	current_money = value
 
-func set_PlayerState_money(value: int):
-	$HBoxContainer/Label.text = String(value)
-	current_money = value
-
 func show_purchase_animation(value: int):
 	var purchase_animation = PURCHASE_ANIMATION_SCENE.instance()
 	purchase_animation.rect_position += PURCHASE_POSITION_REL

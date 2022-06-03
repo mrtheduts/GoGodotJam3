@@ -31,7 +31,6 @@ func _process(delta):
 
 func _unhandled_input(event):
    # Mouse in viewport coordinates.
-	print(event)
 	if Input.is_action_pressed("mouse_leftbtn"):
 		var plant: Plant = PlantFactory.gen_random_plant()
 		plant.age()
