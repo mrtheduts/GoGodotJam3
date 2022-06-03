@@ -5,7 +5,7 @@ signal item_select
 
 var SEED_SCENE = load("res://src/CloseUpPlant/Seed/Seed.tscn")
 
-const ICON_PADDING : Vector2 = Vector2(23, 10)
+const ICON_PADDING : Vector2 = Vector2(0, 5)
 
 var _id : int
 var _value : float
@@ -20,7 +20,7 @@ func init(id, value):
 	var new_seed = SEED_SCENE.instance()
 	new_seed.init_seed(_plant)
 	add_child(new_seed)
-	new_seed.position = position - Vector2(23, 10)
+	new_seed.position = position + ICON_PADDING
 	
 func _input_event(_viewport, _event, _shape_idx):
 	if _event is InputEventMouseButton:

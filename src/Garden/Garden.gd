@@ -79,12 +79,25 @@ func _on_PlayerState_edit_garden_mode():
 	for tile_data in crop_tiles.values():
 		var tile_pos : Vector2 = tile_data["coord"]
 		
-		for y_diff in range(-1, 2):
-			for x_diff in range(-1, 2):
-				var y = tile_pos.y + y_diff
-				var x = tile_pos.x + x_diff
-				if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
-					$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
+		var x = tile_pos.x - 1
+		var y = tile_pos.y
+		if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
+			$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
+			
+		x = tile_pos.x 
+		y = tile_pos.y - 1
+		if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
+			$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
+			
+		x = tile_pos.x + 1
+		y = tile_pos.y
+		if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
+			$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
+			
+		x = tile_pos.x
+		y = tile_pos.y + 1
+		if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
+			$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
 
 func end_selection_mode():
 	planting_mode = false
