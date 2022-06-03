@@ -23,3 +23,7 @@ const SHOP_BAG_TEXT = "Buying all the seeds you see, but don't have enough space
 const SHOP_SEED_TEXT = "A nice %s seed for only %s coins. Interested?"
 const SHOP_THANKS_TEXT = "Thanks for your purchase!"
 const SHOP_WARN_TEXT = "Oops. I think you don't have enough money right now. Come back when you do, okay?"
+
+# ITEMS
+const HOE_ITEM_ID : int = 1
+const SEED_ITEM_ID : int = 4

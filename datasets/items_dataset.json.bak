@@ -26,7 +26,7 @@
 		"type": "consumable",
 		"stackable": false,
 		"stack_limit": 1,
-		"description": "CHEST_DESCRIPTION",
+		"description": "Use to something",
 		"sell_price": 50
 	},
 	
@@ -36,17 +36,17 @@
 		"type": "equipment",
 		"stackable": false,
 		"stack_limit": 1,
-		"description": "SEEDBAD_DESCRIPTION",
+		"description": "Click to open seed inventory",
 		"sell_price": 50
 	},
 	
 	"4": {
-		"name": "Red Seed",
-		"icon": "res://raw_assets/images/items_icons/red_seed_64.png",
+		"name": "Seed",
+		"icon": "res://raw_assets/images/items_icons/seed_64.png",
 		"type": "seed",
 		"stackable": true,
 		"stack_limit": 4,
-		"description": "RED_SEED_DESCRIPTION",
+		"description": "A strange seed",
 		"sell_price": 5
 	}
 		

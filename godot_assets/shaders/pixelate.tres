@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/pixelSize = 10
+shader_param/pixelSize = 1

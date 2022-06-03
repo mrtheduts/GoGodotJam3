@@ -6,18 +6,29 @@ var HOE_SCENE = load("res://src/Shop/Hoe/Hoe.tscn")
 var BAG_SCENE = load("res://src/Shop/Bag/Bag.tscn")
 var CHEST_SCENE = load("res://src/Shop/Chest/Chest.tscn")
 
-const MAX_SEEDPACKET : int = 8
+const MAX_SEEDPACKET : int = 6
 const TOOLS_ID : Array = ["Hoe", "Chest", "Bag"]
-const SHELF_X : Array = [-390, -260, -130, 0, 130]
-const SHELF_Y : Array = [-170, -30]
+const SHELF_X : Array = [-270, -140, -10]
+const SHELF_Y : Array = [-160, -20]
 
-const HOE_POSITION : Vector2 = Vector2(-360, 180)
+const HOE_POSITION : Vector2 = Vector2(-330, 180)
 const CHEST_POSITION : Vector2 = Vector2(55, -40)
 const BAG_POSITION : Vector2 = Vector2(-195, 160)
 const DIALOG_POSITION : Vector2 = Vector2(-325, 239)
 
+const SEED_ITEM_ID : int = 4
+const HOE_ITEM_ID : int = 1
+
+var ITEM_ID_MAPPING : Dictionary = {
+	"Hoe" : HOE_ITEM_ID
+}
+
+var _shop_level : int = 0
+
 var shop_items : Array = []
 var selected_item : Dictionary
+
+var displayed_tools_id : Array = [1]
 
 func _on_SeedPacket_selection(id: int):
 	selected_item = get_item_by_id(str(id))
@@ -52,12 +63,22 @@ func shopper_sell(text: String):
 	
 func make_purchase():
 	var value = selected_item["item"]._value
-	print("Buying item by " + str(value))
-	
 	var new_balance = PlayerState._money - value
+		
 	if new_balance >= 0:
 		PlayerState.set_money(new_balance)
+		
+		var item_global_id : int = -1
+		var shop_id = selected_item["id"]
+		
+		if shop_id in TOOLS_ID:
+			item_global_id = ITEM_ID_MAPPING[shop_id]
+			PlayerState.inventory_add_item(ITEM_ID_MAPPING[shop_id])
+		else:
+			PlayerState.inventory_add_item(SEED_ITEM_ID, 4, selected_item["item"]._plant)
+		
 		shopper_dialog(Constants.SHOP_THANKS_TEXT)
+		
 		selected_item["item"].queue_free()
 		shop_items.erase(selected_item)
 		selected_item = {}
@@ -78,7 +99,7 @@ func display_items():
 			Utils.conn_nodes(item ["item"], "item_select", self, "_on_Tool_selection")
 		else:
 			var id = item["id"] - 1
-			var position = Vector2(SHELF_X[id % 5], SHELF_Y[id / 5])
+			var position = Vector2(SHELF_X[id % SHELF_X.size()], SHELF_Y[id / SHELF_X.size()])
 			item["item"].position = position
 			Utils.conn_nodes(item["item"], "item_select", self, "_on_SeedPacket_selection")
 		
@@ -90,32 +111,12 @@ func restock():
 
 func restock_tools():
 	var new_hoe = HOE_SCENE.instance()
-	var new_chest = CHEST_SCENE.instance()
-	var new_bag = BAG_SCENE.instance()
-	
 	add_child(new_hoe)
-	add_child(new_chest)
-	add_child(new_bag)
-	
 	shop_items.append(
 		{
 			"id" : "Hoe",
 			"item" : new_hoe,
 			"dialog": Constants.SHOP_HOE_TEXT % str(new_hoe._value)
-		}
-	)
-	shop_items.append(
-		{
-			"id" : "Bag",
-			"item" : new_bag,
-			"dialog": Constants.SHOP_BAG_TEXT % str(new_bag._value)
-		}
-	)
-	shop_items.append(
-		{
-			"id" : "Chest",
-			"item" : new_chest,
-			"dialog": Constants.SHOP_CHEST_TEXT % str(new_chest._value)
 		}
 	)
 	
@@ -132,8 +133,12 @@ func restock_seeds():
 
 func get_random_seed(id: int):
 	var new_seed_instance = SEED_PACKET_SCENE.instance()
-	new_seed_instance.init(id, 10)
+	
+	var value = ItemDatabase.get_item(String(SEED_ITEM_ID))["sell_price"]
+	
+	new_seed_instance.init(id, value)
 	add_child(new_seed_instance)
+	
 	return new_seed_instance
 	
 func get_item_by_id(id : String):

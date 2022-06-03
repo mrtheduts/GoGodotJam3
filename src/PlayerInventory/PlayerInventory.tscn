@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://raw_assets/fonts/Terminal-Grotesque-master/terminal-grotesque.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/PlayerInventory/PlayerInventory.gd" type="Script" id=2]
 [ext_resource path="res://raw_assets/themes/Inventory.tres" type="Theme" id=3]
+[ext_resource path="res://src/CloseUpPlant/Seed/Seed.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -27,6 +28,9 @@ margin_right = 75.0
 margin_bottom = 75.0
 rect_rotation = -0.185077
 theme = ExtResource( 3 )
+
+[node name="Seed" parent="ItemContainer" instance=ExtResource( 4 )]
+visible = false
 
 [node name="Slots" type="HBoxContainer" parent="ItemContainer"]
 margin_right = 75.0
