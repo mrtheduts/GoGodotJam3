@@ -15,6 +15,10 @@ export(PoolRealArray) var _weather_probs = [0.7, 0.2, 0.1, 0.00001]
 var _weather_objects: Array
 var _total_weather_weight: float
 
+# Signals
+signal time_changed
+signal new_day
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_day = 1
@@ -27,6 +31,7 @@ func _ready() -> void:
 
 func next_day() -> void:
 	_day += 1
+	emit_signal("new_day")
 
 func pass_time() -> void:
 	# Next time of day
@@ -41,12 +46,14 @@ func pass_time() -> void:
 
 	if _time == TimeOfDay.DAY:
 		next_day()
+	print(self)
 
 func world_info() -> Dictionary:
-	return {"day":_day, "time":_time}
+	return {"day":_day, "time":_time, "weather":_weather}
 
 func _to_string() -> String:
-	return "Day: " + String(_day) + "\n" + TimeOfDay.keys()[_time].capitalize()
+	return "World Manager:\nDay " + String(_day) + "\n" + TimeOfDay.keys()[_time].capitalize() \
+		+ "\n" + Weather.keys()[_weather].capitalize()
 
 func save_stats() -> Dictionary:
 	var save_dict = {
