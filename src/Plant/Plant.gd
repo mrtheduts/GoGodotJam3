@@ -90,6 +90,7 @@ func age(days: int) -> void:
 			life_stage = Constants.LIFE_STAGES.ADULT
 		Constants.LIFE_STAGES.ADULT:
 			life_stage = Constants.LIFE_STAGES.DEAD
+			value = 0
 			close_up_plant.die()
 	
 	overview_plant.set_age(life_stage)

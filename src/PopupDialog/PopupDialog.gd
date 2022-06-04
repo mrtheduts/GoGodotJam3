@@ -13,6 +13,7 @@ signal water_button_hold
 signal photo_button_clicked
 signal sell_button_clicked
 signal closed
+signal discard_button_clicked
 
 var drag_pos = null
 var plant: Plant = null
@@ -87,7 +88,7 @@ func _on_WaterButton_button_down():
 
 func _on_SellButton_pressed():
 	if (plant != null):
-		emit_signal("sell_button_clicked", plant.value)
+		emit_signal("sell_button_clicked", plant)
 	self.rect_pivot_offset = Vector2(0, 0)
 	$TweenClose.interpolate_property(
 		self, "rect_scale",
@@ -103,7 +104,26 @@ func _on_SellButton_pressed():
 	$TweenClose.start()
 
 func _on_TweenClose_tween_all_completed():
-	if (close_up_plant):
+	if (close_up_plant and is_instance_valid(close_up_plant)):
+		print('close_up_plant ', close_up_plant)
 		close_up_plant.get_parent().remove_child(close_up_plant)
 	emit_signal("closed", plant)
 	self.queue_free()
+
+
+func _on_DiscardButton_pressed():
+	if (plant != null):
+		emit_signal("discard_button_clicked", plant)
+	self.rect_pivot_offset.x = self.rect_pivot_offset.x/2
+	$TweenClose.interpolate_property(
+		self, "rect_scale",
+		self.rect_scale, Vector2(0, 1),
+		0.25, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT
+	)
+	$TweenClose.start()
+	
+
+func _on_Plant_update_ui(life_state: int):
+	if(life_state == Constants.LIFE_STAGES.DEAD):
+		$VBoxContainer/HBoxContainer/HBoxContainer/SellButton.visible = false
+		$VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton.visible = true
