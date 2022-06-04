@@ -32,14 +32,11 @@ func _ready():
 	set_process(false)
 	set_process_input(true)
 	
-	var plantinha : Plant = PlantFactory.gen_random_plant()
-	
 	for i in range(1,6):
-		var slot = 0
 		if i >= 4:
-			slot = PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
+			PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
 		else:
-			slot = PlayerState.inventory_add_item(1)
+			PlayerState.inventory_add_item(1)
 	
 
 func _process(_delta):

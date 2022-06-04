@@ -139,6 +139,8 @@ func add_new_crop_area(coord: Vector2):
 		"plant" : null
 	}
 	
+	# warning-ignore:narrowing_conversion
+	# warning-ignore:narrowing_conversion
 	set_cell(coord.x, coord.y, PLANT_TILE_ID)
 	update_bitmask_area(coord)
 	
@@ -150,6 +152,8 @@ func get_garden_center():
 func draw_garden_tiles():
 	for tile_data in crop_tiles.values():
 		var tile_pos : Vector2 = tile_data["coord"]
+		# warning-ignore:narrowing_conversion
+		# warning-ignore:narrowing_conversion
 		set_cell(tile_pos.x, tile_pos.y, PLANT_TILE_ID)
 		update_bitmask_area(Vector2(tile_pos.x, tile_pos.y))
 

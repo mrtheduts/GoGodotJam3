@@ -94,6 +94,7 @@ func age(days: int) -> void:
 	emit_signal("ask_for_close_up_plant", self)
 
 func water(amount: int = 1) -> void:
+	# warning-ignore:narrowing_conversion
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
 	print("New watered amount: ", watered_amount)
 	emit_signal("water_level_changed", watered_amount)

@@ -44,4 +44,5 @@ func _on_PopupWindow_sell_button_clicked(value: int):
 
 func _on_PopupWindow_closed(plant: Plant):
 	if (opened_plants.has(plant)):
+		# warning-ignore:return_value_discarded
 		opened_plants.erase(plant)
