@@ -14,6 +14,5 @@ tile_data = PoolIntArray( -196602, 1073741825, 0, -196601, 1073741825, 0, -13106
 
 [connection signal="combine_plants" from="Garden" to="UILayer" method="_on_Garden_combine_plants"]
 [connection signal="show_close_up_plant" from="Garden" to="UILayer" method="_on_Garden_show_close_up_plant"]
-
 [connection signal="combine_crop" from="UILayer" to="Garden" method="_on_UILayer_combine_crop"]
 [connection signal="remove_plant" from="UILayer" to="Garden" method="_on_UILayer_remove_plant"]

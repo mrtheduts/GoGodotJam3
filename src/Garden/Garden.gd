@@ -206,6 +206,19 @@ func get_crop_id_by_plant(plant: Plant) -> String:
 
 	return ""
 
+func remove_plant(crop_id: String):
+	var plant = crop_tiles[crop_id]["plant"]
+
+	var overview_plant = plant.overview_plant
+	plant.overview_plant = null
+	overview_plant.queue_free()
+
+	var close_up_plant = plant.close_up_plant
+	plant.close_up_plant = null
+	close_up_plant.queue_free()
+
+	crop_tiles[crop_id].plant = null
+	
 func save_stats():
 	var save_dict = {
 		"filename" : get_filename(),
@@ -244,7 +257,7 @@ func _on_UILayer_combine_crop(plant: Plant):
 			crops_to_delete.append(crop_id)
 
 		for crop in crops_to_delete:
-			crop_tiles[crop]["plant"] = null
+			remove_plant(crop)
 
 		var new_plant : Plant = PlantFactory.cross_plants(combining_array)
 		PlayerState.inventory_add_item(Constants.SEED_ITEM_ID, 1, new_plant)
@@ -257,13 +270,5 @@ func _on_UILayer_remove_plant(plant: Plant):
 	print("Removendo planta ", plant)
 	var crop_id = get_crop_id_by_plant(plant);
 
-	var overview_plant = plant.overview_plant
-	plant.overview_plant = null
-	overview_plant.queue_free()
-
-	var close_up_plant = plant.close_up_plant
-	plant.close_up_plant = null
-	close_up_plant.queue_free()
-
-	crop_tiles[crop_id].plant = null
+	remove_plant(crop_id)
 	print("Planta removida")
