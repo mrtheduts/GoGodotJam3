@@ -15,6 +15,7 @@ var close_up_plant: CloseUpPlant = null
 var overview_plant: OverviewPlant = null
 
 var type_hash: int = 0
+var phenotype_hash: int = 0
 var genetics: Dictionary = {}
 var phenotype: Dictionary = {}
 
@@ -23,6 +24,9 @@ var life_days := 0
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
 var value := 1
+
+var last_photo: Image = null
+var name: String = Constants.DEFAULT_PLANT_NAME
 
 func _init():
 	# Build empty genetics dict
@@ -72,6 +76,7 @@ func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
 	
 	_reveal_phenotype()
+	phenotype_hash = phenotype.hash()
 
 func meiosis() -> Dictionary:
 	var result := {}

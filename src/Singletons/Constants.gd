@@ -56,4 +56,6 @@ const HOE_ITEM_ID : int = 1
 const SEED_ITEM_ID : int = 4
 
 # INDEX
-const INDEX_PAGES: int = 20
+const LOCKED_PLANT_NAME: String = "LOCKED"
+const DEFAULT_PLANT_NAME: String = "New Plant"
+const INDEX_ENTRIES: int = 20

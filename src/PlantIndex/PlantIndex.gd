@@ -7,7 +7,14 @@ signal index_closed
 # State
 var _page: int = 2
 
+# Components
+onready var _back_button: TextureButton = $VBoxContainer/HBoxContainerBot/BackButton
+onready var _next_button: TextureButton = $VBoxContainer/HBoxContainerBot/NextButton
+onready var _page_1: IndexEntry = $VBoxContainer/HBoxContainerMid/Page1
+onready var _page_2: IndexEntry = $VBoxContainer/HBoxContainerMid/Page2
+
 func _ready():
+	update_entries()
 	update_buttons()
 
 func _on_CloseButton_pressed():
@@ -40,12 +47,19 @@ func _on_NextButton_pressed():
 
 func change_page(increment: int):
 	_page += increment
+	update_entries()
+
+func update_entries():
+	var entry = PlayerState.get_index_plant(_page - 2)
+	_page_1.init_plant(entry)
+	entry = PlayerState.get_index_plant(_page - 1)
+	_page_2.init_plant(entry)
 
 func update_buttons():
 	var first_page = bool(_page - 2)
-	$VBoxContainer/HBoxContainerBot/BackButton.visible = first_page
-	$VBoxContainer/HBoxContainerBot/BackButton.disabled = !first_page
+	_back_button.visible = first_page
+	_back_button.disabled = !first_page
 	
-	var last_page = bool(Constants.INDEX_PAGES - _page)
-	$VBoxContainer/HBoxContainerBot/NextButton.visible = last_page
-	$VBoxContainer/HBoxContainerBot/NextButton.disabled = !last_page
+	var last_page = bool(Constants.INDEX_ENTRIES - _page)
+	_next_button.visible = last_page
+	_next_button.disabled = !last_page

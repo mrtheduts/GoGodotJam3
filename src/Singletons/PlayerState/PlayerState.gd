@@ -20,6 +20,11 @@ var _sell_per : float = 0.75
 var _shop_items : Array = []
 var _shop_can_restock : bool = true
 
+# Game goal variables
+# Handles the plant list of the objective and its status (collected or not)
+var _plant_goal_list: Array = []
+var _plant_goal_status: Dictionary = {}
+
 onready var _is_editing_garden : bool = false
 onready var _is_planting_seed : bool = false
 
@@ -30,6 +35,12 @@ func _ready():
 		for slot in range (0, _inventory_max_slots):
 			dict[String(slot)] = inventory_empty_slot()
 		_inventory = dict
+	
+	if _plant_goal_list.empty():
+		for _i in range(Constants.INDEX_ENTRIES):
+			var plant = PlantFactory.gen_random_plant()
+			_plant_goal_list.append(plant)
+			_plant_goal_status[plant.phenotype_hash] = false
 
 	
 func set_money(value: int) -> void:
@@ -58,7 +69,9 @@ func save_stats():
 		"parent" : get_parent().get_path(),
 		"money" : _money,
 		"stored_plants" : _stored_plants,
-		"inventory" : _inventory
+		"inventory" : _inventory,
+		"goal_plants" : _plant_goal_list,
+		"goal_status" : _plant_goal_status
 	}
 	return save_dict
 	
@@ -67,6 +80,9 @@ func load_stats(stats):
 	print(stats)
 	_money = stats.money
 	_stored_plants = stats.stored_plants
+	_inventory = stats.inventory
+	_plant_goal_list = stats.goal_plants
+	_plant_goal_status = stats.goal_status
 
 func _on_UILayer_plant_sold(value: int):
 	add_money(value)
@@ -296,3 +312,20 @@ func inventory_move_stack(from_slot: int, to_slot: int):
 	
 func inventory_empty_slot() -> Dictionary:
 	return {"id": "0", "amount": 0, "seed_obj": null}
+
+func get_index_plant(index: int) -> Plant:
+	return _plant_goal_list[index]
+
+func collect_plant(plant: Plant, photo: Image) -> void:
+	if _plant_goal_status.has(plant.phenotype_hash):
+		_plant_goal_status[plant.phenotype_hash] = true
+		for p in _plant_goal_list:
+			if p.phenotype_hash == plant.phenotype_hash:
+				p.last_photo = photo
+				return
+
+func check_plant(plant: Plant) -> bool:
+	if _plant_goal_status.has(plant.phenotype_hash):
+		return _plant_goal_status[plant.phenotype_hash]
+	else:
+		return false

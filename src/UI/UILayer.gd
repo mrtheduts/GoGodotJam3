@@ -68,7 +68,7 @@ func _on_Garden_show_close_up_plant(plant):
 	popup_window.show_scene(close_up_plot)
 
 func _on_PopupWindow_photo_button_clicked(plant: Plant, photo: Image):
-	emit_signal("photo_took", plant, photo)
+	PlayerState.collect_plant(plant, photo)
 
 func _on_PopupWindow_sell_button_clicked(plant: Plant):
 	PlayerState.add_money(plant.value)
