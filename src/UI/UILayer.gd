@@ -9,7 +9,7 @@ signal photo_took
 
 var POPUP_SCENE = preload("res://src/PopupDialog/PopupDialog.tscn")
 var CLOSE_UP_SOIL_SCENE = preload("res://src/CloseUpPlot/CloseUpPlot.tscn")
-
+	
 func _on_Garden_show_close_up_plant(plant: Plant):
 	var close_up_plant: CloseUpPlant = plant.close_up_plant
 	var close_up_plot: CloseUpPlot = CLOSE_UP_SOIL_SCENE.instance()

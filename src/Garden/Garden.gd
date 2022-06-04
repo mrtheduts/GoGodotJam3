@@ -25,12 +25,14 @@ onready var selected_tile : Vector2 = OUTBOUND_TILE
 func _ready():
 	Utils.conn_nodes(PlayerState, "planting_mode", self, "_on_PlayerState_planting_mode")
 	Utils.conn_nodes(PlayerState, "edit_garden_mode", self, "_on_PlayerState_edit_garden_mode")
+	Utils.conn_nodes(WorldManager, "time_changed", self, "_on_WorldManager_time_changed")
 	
 	if (crop_tiles.empty()):
 		init_garden()
 		
 	draw_grass_area()
 	draw_garden_tiles()
+	self.modulate = WorldManager.current_color()
 	
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_leftbtn"):
@@ -98,6 +100,16 @@ func _on_PlayerState_edit_garden_mode():
 		y = tile_pos.y + 1
 		if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
 			$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
+
+func _on_WorldManager_time_changed() -> void:
+	var color = WorldManager.current_color()
+	$Tween.interpolate_property(
+		self, "modulate",
+		self.modulate, color, 
+		Constants.TIME_TRANSITION_DURATION,
+		Constants.TIME_TRANSITION_CURVE, Constants.TIME_TRANSITION_EASE
+	)
+	$Tween.start()
 
 func end_selection_mode():
 	planting_mode = false
