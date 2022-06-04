@@ -8,12 +8,14 @@
 [node name="Garden" type="TileMap" groups=["Persist"]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
+cell_tile_origin = 1
 format = 1
 script = ExtResource( 3 )
 
 [node name="SelectedTiles" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 128, 128 )
+cell_tile_origin = 1
 format = 1
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]

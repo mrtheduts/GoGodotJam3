@@ -137,6 +137,7 @@ func inventory_add_item(item_id: int, add_amount: int = 1, seed_obj: Plant = nul
 	return
 	
 func inventory_get_item(slot: int) -> Dictionary:
+	print(slot)
 	return _inventory[String(slot)]
 
 func inventory_get_empty_slot() -> int:

@@ -8,6 +8,7 @@ enum LIFE_STAGES { SEED, SPROUT, ADULT, DEAD}
 var life_duration_stages: Dictionary
 
 var close_up_plant: CloseUpPlant = null
+var overview_plant = null
 
 var type_hash: int = 0
 var genetics: Dictionary = {}

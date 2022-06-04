@@ -68,7 +68,10 @@ func _input(event):
 				if active_item_slot >= 0:
 					show_item_options(active_item_slot)
 		if event.doubleclick:
-			PlayerState.inventory_use_item(active_item_slot)
+			if cursor_inside_itemlist:
+				active_item_slot = get_item_at_position($ItemContainer.get_local_mouse_position())
+				if active_item_slot >= 0:
+					PlayerState.inventory_use_item(active_item_slot)
 			
 	if event is InputEventMouseMotion:
 		if cursor_inside_itemlist:

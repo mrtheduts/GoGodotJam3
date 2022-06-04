@@ -18,6 +18,8 @@ const OUTBOUND_TILE : Vector2 = Vector2(-1000, -1000)
 
 var crop_tiles : Dictionary = {}
 
+var OVERVIEW_PLANT_SCENE = preload('res://src/OverviewPlant/OverviewPlant.tscn')
+
 onready var planting_mode : bool = false
 onready var increase_garden_mode : bool = false
 onready var selected_tile : Vector2 = OUTBOUND_TILE
@@ -42,7 +44,7 @@ func _unhandled_input(event):
 					var seed_obj : Plant = PlayerState.inventory_get_item(PlayerState._holding_item)["seed_obj"]
 					var crop_id : String = get_crop_id_by_coord(selected_coord)
 					
-					crop_tiles[crop_id]["plant"] = seed_obj
+					crop_tiles[crop_id]["plant"] = PlantFactory.clone_plant(seed_obj)
 					update_crop(crop_id)
 				else:
 					add_new_crop_area(selected_coord)
@@ -109,7 +111,25 @@ func end_selection_mode():
 			$SelectedTiles.set_cell(x, y, -1)
 	
 func update_crop(crop_id: String):
-	print(crop_tiles)
+	var new_plant = crop_tiles[crop_id].plant
+	var new_coord = crop_tiles[crop_id].coord
+	
+	var overview_plant = OVERVIEW_PLANT_SCENE.instance()
+	new_plant.age()
+	new_plant.age()
+	overview_plant.set_age(new_plant.life_stage)
+	
+	var feature_name = DNA.get_feature_name(DNA.FEATURES.FLOWER_COLOR)
+	var flower_color = new_plant.phenotype[feature_name]
+	var colors = DNA.get_colors(feature_name, flower_color)
+	var color = Utils.mix_colors(colors)
+	overview_plant.set_flower_color(color)
+	
+	add_child(overview_plant)
+	overview_plant.position = map_to_world(new_coord) + cell_size/2
+	
+	new_plant.overview_plant = overview_plant
+	print(crop_tiles[crop_id])
 
 func add_new_crop_area(coord: Vector2):
 	var new_crop_id : int = int(crop_tiles.keys()[-1])+1
