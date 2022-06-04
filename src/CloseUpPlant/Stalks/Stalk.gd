@@ -12,7 +12,7 @@ var root = null
 
 var _entry_points := {}
 
-func _ready():
+func init_entry_points():
 	_entry_points[$StalkSkeleton/SkelDown/SkelMid] = []
 
 

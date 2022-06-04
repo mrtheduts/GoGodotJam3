@@ -232,8 +232,7 @@ __meta__ = {
 
 [node name="EndBone" type="Bone2D" parent="Skeleton2D/BeginBone/MidBone"]
 position = Vector2( 180.502, -6.63858 )
-rotation = -2.618
-scale = Vector2( 1, 1 )
+rotation = -2.61799
 rest = Transform2D( -0.866026, -0.499999, 0.499999, -0.866026, 180.502, -6.63858 )
 __meta__ = {
 "_edit_bone_": true

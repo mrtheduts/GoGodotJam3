@@ -1,11 +1,31 @@
 #
 # Constants.gd - Constants for entire project
 #
-
 class_name Constants
 
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
+
+# WORLD COLORS
+
+# TIME
+const DAY_COLOR = Color.white
+const NIGHT_COLOR = Color.midnightblue
+const DAY_COLOR_FACTOR = 0.0
+const NIGHT_COLOR_FACTOR = 0.2
+
+const TIME_TRANSITION_DURATION = 0.8
+const TIME_TRANSITION_CURVE = Tween.TRANS_LINEAR
+const TIME_TRANSITION_EASE = Tween.EASE_IN_OUT
+
+# WEATHER
+const CLOUDY_COLOR = Color.black
+const RAINY_COLOR = Color.black
+const METEOR_COLOR = Color.red
+
+const CLOUDY_COLOR_FACTOR = 0.1
+const RAINY_COLOR_FACTOR = 0.1
+const METEOR_COLOR_FACTOR = 0.0
 
 # PLANT
 enum LIFE_STAGES { SEED, SPROUT, TEENAGE, ADULT, DEAD}
@@ -30,3 +50,7 @@ const SHOP_BAG_TEXT = "Buying all the seeds you see, but don't have enough space
 const SHOP_SEED_TEXT = "A nice %s seed for only %s coins. Interested?"
 const SHOP_THANKS_TEXT = "Thanks for your purchase!"
 const SHOP_WARN_TEXT = "Oops. I think you don't have enough money right now. Come back when you do, okay?"
+
+# ITEMS
+const HOE_ITEM_ID : int = 1
+const SEED_ITEM_ID : int = 4

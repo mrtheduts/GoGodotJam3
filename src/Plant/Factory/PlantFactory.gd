@@ -5,7 +5,8 @@
 extends Node
 
 var PLANT_CLASS = preload("res://src/Plant/Plant.gd")
-
+	
+	
 func _did_mutation_happen() -> bool:
 	randomize()
 	return rand_range(1, Constants.MUTATION_ODDS) as int == 1
@@ -36,8 +37,9 @@ func gen_random_plant() -> Plant:
 	new_plant.finish_gene_config()
 	return new_plant
 
-func clone_plant(plant: Plant, life_stage = Plant.LIFE_STAGES.SEED) -> Plant:
+func clone_plant(plant: Plant, life_stage = Constants.LIFE_STAGES.SEED) -> Plant:
 	var new_plant: Plant = PLANT_CLASS.new()
+	Utils.conn_nodes(new_plant, "ask_for_close_up_plant", $"/root/CloseUpPlantFactory", "create_close_up_plant_from")
 	new_plant.life_stage = life_stage
 	new_plant.genetics = plant.genetics.duplicate(true)
 	new_plant.finish_gene_config()
@@ -61,3 +63,9 @@ func cross_plants(plants: Array, can_mutate: bool = true) -> Plant:
 			new_plant.add_gene(feature, gene)
 	new_plant.finish_gene_config()
 	return new_plant
+	
+func are_plants_equal(plant1: Plant, plant2: Plant):
+	if plant1 == null or plant2 == null:
+		return false
+		
+	return plant1.get_seed_code() == plant2.get_seed_code()

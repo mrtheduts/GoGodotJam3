@@ -36,6 +36,7 @@ func _build_seed_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) ->
 
 func _build_sprout_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> CloseUpPlant:
 	var stalk: Stalk = build_parts[DNA.FEATURES.STALK_TYPE].instance()
+	stalk.init_entry_points()
 	close_up_plant.add_stalk(stalk)
 	close_up_plant.add_to_idle_animation_list(stalk)
 	
@@ -96,6 +97,9 @@ func _fill_with(scene, close_up_plant: CloseUpPlant, amount: int = -1, has_color
 	var has_space = true
 	while(has_space and (amount == -1 or count < amount)):
 		var node = scene.instance()
+		
+		if (node is Branch):
+			node.init_entry_points()
 		if (has_color):
 			node.modulate = modulate_color
 		
@@ -104,6 +108,7 @@ func _fill_with(scene, close_up_plant: CloseUpPlant, amount: int = -1, has_color
 
 func create_close_up_plant_from(plant: Plant) -> CloseUpPlant:
 	var close_up_plant: CloseUpPlant = CLOSE_UP_PLANT_SCENE.instance() if not plant.close_up_plant else plant.close_up_plant
+	print(plant.close_up_plant, close_up_plant)
 	var build_parts = _get_build_parts_from_plant(plant)
 	print("Create_close_up - plant life stage: ", plant.life_stage)
 	match plant.life_stage:

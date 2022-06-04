@@ -10,7 +10,7 @@ var _entry_points := {}
 
 var life_stage = Constants.LIFE_STAGES.TEENAGE
 
-func _ready():
+func init_entry_points():
 	_entry_points[$Skeleton2D/BeginBone/MidBone] = []
 
 func age() -> void:

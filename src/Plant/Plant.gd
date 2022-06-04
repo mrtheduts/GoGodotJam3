@@ -78,7 +78,7 @@ func meiosis() -> Dictionary:
 		result[feature] = Utils.shuffle_and_pop_front(genes)
 	return result
 
-func age(days: int = 1) -> void:
+func age(days: int) -> void:
 	life_days += days
 	match life_stage:
 		Constants.LIFE_STAGES.SEED:
@@ -100,3 +100,10 @@ func water(amount: int = 1) -> void:
 
 func plant() -> void:
 	emit_signal("ask_for_close_up_plant", self)
+
+# Get identifer code for unique seed
+func get_seed_code() -> String:
+	var fruit_colors : Array = genetics["FRUIT_COLOR"]
+	var flower_colors : Array = genetics["FLOWER_COLOR"]
+	
+	return fruit_colors[0][0] + fruit_colors[1][0] + flower_colors[0][0] + flower_colors[1][0] 

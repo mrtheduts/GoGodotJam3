@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/UILayer.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Money/Money.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/WorldUI/WorldUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/PlayerInventory/PlayerInventory.tscn" type="PackedScene" id=4]
 
 [node name="UILayer" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -15,3 +17,11 @@ margin_left = 0.0
 margin_top = 0.0
 margin_right = 88.0
 margin_bottom = 68.0
+
+[node name="WorldUI" parent="." instance=ExtResource( 3 )]
+
+[node name="PlayerInventory" parent="." instance=ExtResource( 4 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -106.0
+margin_bottom = 0.0

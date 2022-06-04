@@ -99,6 +99,7 @@ CloseUpPlantFactory="*res://src/CloseUpPlant/Factory/CloseUpPlantFactory.tscn"
 PlantFactory="*res://src/Plant/Factory/PlantFactory.tscn"
 ItemDatabase="*res://src/Singletons/ItemDatabase.gd"
 SaveGame="*res://src/Singletons/SaveGame.gd"
+WorldManager="*res://src/Singletons/WorldManager/WorldManager.gd"
 
 [importer_defaults]
 
