@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Singletons/Constants.gd"
 }, {
-"base": "Node2D",
+"base": "RigidBody2D",
 "class": "Flower",
 "language": "GDScript",
 "path": "res://src/CloseUpPlant/Flowers/Flower.gd"
@@ -43,6 +43,11 @@ _global_script_classes=[ {
 "class": "Leaf",
 "language": "GDScript",
 "path": "res://src/CloseUpPlant/Leaves/Leaf.gd"
+}, {
+"base": "Node2D",
+"class": "OverviewPlant",
+"language": "GDScript",
+"path": "res://src/OverviewPlant/OverviewPlant.gd"
 }, {
 "base": "Reference",
 "class": "Plant",
@@ -58,11 +63,6 @@ _global_script_classes=[ {
 "class": "PopupWindow",
 "language": "GDScript",
 "path": "res://src/PopupDialog/PopupDialog.gd"
-}, {
-"base": "Node2D",
-"class": "Root",
-"language": "GDScript",
-"path": "res://src/CloseUpPlant/Roots/Roots.gd"
 }, {
 "base": "Node2D",
 "class": "Seed",
@@ -82,10 +82,10 @@ _global_script_class_icons={
 "Flower": "",
 "Fruit": "",
 "Leaf": "",
+"OverviewPlant": "",
 "Plant": "",
 "PlantTypes": "",
 "PopupWindow": "",
-"Root": "",
 "Seed": "",
 "Stalk": ""
 }
