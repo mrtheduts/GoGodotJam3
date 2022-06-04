@@ -101,7 +101,6 @@ func _on_SellButton_pressed():
 	)
 	$TweenClose.start()
 
-
 func _on_TweenClose_tween_all_completed():
 	if (close_up_plant):
 		close_up_plant.get_parent().remove_child(close_up_plant)

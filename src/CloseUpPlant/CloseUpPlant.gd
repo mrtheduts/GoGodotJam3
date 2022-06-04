@@ -22,6 +22,13 @@ var leaf_nodes := []
 var flower_nodes := []
 var fruit_nodes := []
 
+var has_to_die := false
+
+func _ready():
+	if (has_to_die):
+		has_to_die = false
+		die()
+
 func add_to_random_entry_point(node: Node) -> bool:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
@@ -71,6 +78,10 @@ func age() -> void:
 				_entry_points = Utils.merge_dicts_of_arrays(_entry_points, node._entry_points, true)
 
 func die() -> void:
+	if (not self.is_inside_tree()):
+		has_to_die = true
+		return
+	
 	for entry in _entry_points.keys():
 		var curr_children: Array = _entry_points[entry]
 		var new_children := []
