@@ -6,7 +6,9 @@ class_name Constants
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
 
-# WORLD
+# WORLD COLORS
+
+# TIME
 const DAY_COLOR = Color.white
 const NIGHT_COLOR = Color.midnightblue
 const DAY_COLOR_FACTOR = 0.0
@@ -15,6 +17,15 @@ const NIGHT_COLOR_FACTOR = 0.2
 const TIME_TRANSITION_DURATION = 0.8
 const TIME_TRANSITION_CURVE = Tween.TRANS_LINEAR
 const TIME_TRANSITION_EASE = Tween.EASE_IN_OUT
+
+# WEATHER
+const CLOUDY_COLOR = Color.black
+const RAINY_COLOR = Color.black
+const METEOR_COLOR = Color.red
+
+const CLOUDY_COLOR_FACTOR = 0.1
+const RAINY_COLOR_FACTOR = 0.1
+const METEOR_COLOR_FACTOR = 0.0
 
 # PLANT
 const MUTATION_ODDS = 100

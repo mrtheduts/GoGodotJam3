@@ -11,7 +11,7 @@ export(TimeOfDay) var _time: int
 # Weather variables
 # TODO: better way of initializing probs?
 export(Weather) var _weather: int
-export(PoolRealArray) var _weather_probs = [0.7, 0.2, 0.1, 0.00001]
+export(PoolRealArray) var _weather_probs = [0.7, 0.2, 0.1, 0.0001]
 var _weather_objects: Array
 var _total_weather_weight: float
 
@@ -43,7 +43,6 @@ func pass_time() -> void:
 	_weather = clamp(_weather, 0, Weather.size())
 	
 	emit_signal("time_changed")
-
 	if _time == TimeOfDay.DAY:
 		next_day()
 	print(self)
@@ -56,11 +55,19 @@ func _to_string() -> String:
 		+ "\n" + Weather.keys()[_weather].capitalize()
 
 func current_color() -> Color:
-	var colorArray = [
+	var timeColorArray = [
 		Constants.DAY_COLOR.lightened(Constants.DAY_COLOR_FACTOR),
 		Constants.NIGHT_COLOR.lightened(Constants.NIGHT_COLOR_FACTOR)
 	]
-	return colorArray[_time]
+	var timeColor = timeColorArray[_time]
+	var weatherColorArray = [
+		timeColor,
+		Constants.CLOUDY_COLOR.lightened(Constants.CLOUDY_COLOR_FACTOR),
+		Constants.RAINY_COLOR.lightened(Constants.RAINY_COLOR_FACTOR),
+		Constants.METEOR_COLOR.lightened(Constants.METEOR_COLOR_FACTOR)
+	]
+	var colorArray = [timeColor, weatherColorArray[_weather]]
+	return Utils.mix_colors(colorArray)
 
 func save_stats() -> Dictionary:
 	var save_dict = {

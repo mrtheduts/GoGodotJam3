@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/UI/UILayer.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Money/Money.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/UI/DayTime/DayTime.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/UI/WorldUI/WorldUI.tscn" type="PackedScene" id=3]
 
 [node name="UILayer" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -17,4 +17,4 @@ margin_top = 0.0
 margin_right = 88.0
 margin_bottom = 68.0
 
-[node name="DayTime" parent="." instance=ExtResource( 3 )]
+[node name="WorldUI" parent="." instance=ExtResource( 3 )]
