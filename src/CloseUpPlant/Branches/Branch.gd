@@ -14,7 +14,6 @@ func _ready():
 	_entry_points[$Skeleton2D/BeginBone/MidBone] = []
 
 func age() -> void:
-	print("Aging branch to: ", life_stage + 1)
 	$AnimationPlayer.play("RESET")
 	match life_stage + 1:
 		Constants.LIFE_STAGES.ADULT:

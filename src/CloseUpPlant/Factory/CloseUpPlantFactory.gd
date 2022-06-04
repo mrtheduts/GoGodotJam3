@@ -70,7 +70,7 @@ func _build_adult_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -
 	close_up_plant.erase_leaves()
 	close_up_plant.age()
 	
-	var branch_number := Utils.randi_range(1, 2)
+	var branch_number := Utils.randi_range(1, 3)
 	var branch_scene = build_parts[DNA.FEATURES.BRANCH_TYPE]
 	_fill_with(branch_scene, close_up_plant, branch_number)
 	
@@ -79,11 +79,13 @@ func _build_adult_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -
 		var flower_color = build_parts[DNA.FEATURES.FLOWER_COLOR]
 		var flower_amount = Utils.randi_range(1, 3)
 		_fill_with(flower_scene, close_up_plant, flower_amount, true, flower_color)
-#
-#	if (build_parts[DNA.FEATURES.HAS_FRUIT]):
-#		var fruit: Fruit = build_parts[DNA.FEATURES.FRUIT_TYPE].instance()
-#		fruit.set_color(build_parts[DNA.FEATURES.FRUIT_COLOR])
-#		branches[1].add_to_end_bone(fruit)
+
+	if (build_parts[DNA.FEATURES.HAS_FRUIT]):
+		print('HAS FRUIT')
+		var fruit_scene = build_parts[DNA.FEATURES.FRUIT_TYPE]
+		var fruit_color = build_parts[DNA.FEATURES.FRUIT_COLOR]
+		var fruit_amount = Utils.randi_range(1,3)
+		_fill_with(fruit_scene, close_up_plant, fruit_amount, true, fruit_color)
 
 	var leaf_scene = build_parts[DNA.FEATURES.LEAF_TYPE]
 	_fill_with(leaf_scene, close_up_plant)
@@ -103,6 +105,7 @@ func _fill_with(scene, close_up_plant: CloseUpPlant, amount: int = -1, has_color
 func create_close_up_plant_from(plant: Plant) -> CloseUpPlant:
 	var close_up_plant: CloseUpPlant = CLOSE_UP_PLANT_SCENE.instance() if not plant.close_up_plant else plant.close_up_plant
 	var build_parts = _get_build_parts_from_plant(plant)
+	print("Create_close_up - plant life stage: ", plant.life_stage)
 	match plant.life_stage:
 		Constants.LIFE_STAGES.SEED:
 			close_up_plant = _build_seed_plant(close_up_plant, build_parts)
@@ -112,9 +115,9 @@ func create_close_up_plant_from(plant: Plant) -> CloseUpPlant:
 			close_up_plant = _build_teenage_plant(close_up_plant, build_parts)
 		Constants.LIFE_STAGES.ADULT:
 			close_up_plant = _build_adult_plant(close_up_plant, build_parts)
-		Constants.LIFE_STAGES.DEAD:
-			pass
+	
 	if (plant.life_stage != Constants.LIFE_STAGES.DEAD):
 		close_up_plant.play_idle_animation()
+	
 	plant.close_up_plant = close_up_plant
 	return close_up_plant

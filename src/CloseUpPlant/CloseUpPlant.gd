@@ -65,7 +65,7 @@ func erase_node(node: Node) -> void:
 func age() -> void:
 	var nodes = [root_node, stalk_node] + branch_nodes
 	for node in nodes:
-		if (node.has_method("age")):
+		if (node and node.has_method("age")):
 			node.age()
 			if (node.get("_entry_points")):
 				_entry_points = Utils.merge_dicts_of_arrays(_entry_points, node._entry_points, true)
@@ -75,13 +75,8 @@ func die() -> void:
 		var curr_children: Array = _entry_points[entry]
 		var new_children := []
 		for child in curr_children:
-			print(child)
 			var has_fallen: bool = child.die() if (child.has_method("die")) else false
-			if (has_fallen):
-#				Utils.reparent_node(child, entry, self)
-				pass
-			else:
-				new_children.push_back(child)
+			new_children.push_back(child)
 		_entry_points[entry] = new_children
 	
 	var nodes = [root_node, stalk_node] + branch_nodes

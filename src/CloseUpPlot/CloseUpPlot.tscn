@@ -52,6 +52,7 @@ texture = ExtResource( 2 )
 [node name="StaticBody2D" type="StaticBody2D" parent="Ground"]
 position = Vector2( 0, 517 )
 collision_layer = 128
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/StaticBody2D"]
 shape = SubResource( 1 )

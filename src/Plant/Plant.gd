@@ -90,8 +90,7 @@ func age(days: int = 1) -> void:
 		Constants.LIFE_STAGES.ADULT:
 			life_stage = Constants.LIFE_STAGES.DEAD
 			close_up_plant.die()
-		Constants.LIFE_STAGES.DEAD:
-			printerr("I'm dead! :(")
+	
 	emit_signal("ask_for_close_up_plant", self)
 
 func water(amount: int = 1) -> void:

@@ -17,7 +17,6 @@ func _ready():
 
 
 func age() -> void:
-	print("Aging stalk to: ", life_stage + 1)
 	$AnimationPlayer.play("RESET")
 	match life_stage + 1:
 		Constants.LIFE_STAGES.TEENAGE:
@@ -43,7 +42,6 @@ func die():
 		Constants.DYING_DURATION, $Tween.TRANS_LINEAR, $Tween.EASE_OUT
 	)
 	$AnimationPlayer.play("Dead")
-	print("Stalk curr anim: ", $AnimationPlayer.current_animation)
 	if (root != null and root.get("die")):
 		root.die()
 	$Tween.start()
