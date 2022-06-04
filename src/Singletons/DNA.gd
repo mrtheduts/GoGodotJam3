@@ -80,7 +80,7 @@ const STALK_TYPE_TYPE := SCENE
 enum STALK_TYPE_VALUES { DEFAULT }
 const STALK_TYPE_DOMINANTS := [ STALK_TYPE_VALUES.DEFAULT ]
 var STALK_TYPE_SCENES = {
-	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/Stalks.tscn")
+	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/DefaultStalk.tscn")
 }
 
 # Branch

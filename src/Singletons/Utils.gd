@@ -59,3 +59,11 @@ func merge_dicts_of_arrays(dict_a: Dictionary, dict_b: Dictionary) -> Dictionary
 			else:
 				new_dict[key] = new_dict[key] + dict[key]
 	return new_dict
+
+#
+# Reparent a node from src to target
+#
+func reparent_node(node: Node, src: Node, target: Node) -> void:
+	src.remove_child(node)
+	target.add_child(node)
+	node.set_owner(target)

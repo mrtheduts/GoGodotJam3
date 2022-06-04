@@ -6,8 +6,7 @@ class_name Plant
 
 # Signals
 signal water_level_changed
-
-enum LIFE_STAGES { SEED, SPROUT, TEENAGE, ADULT, DEAD}
+signal ask_for_close_up_plant
 
 var life_duration_stages: Dictionary
 
@@ -17,7 +16,7 @@ var type_hash: int = 0
 var genetics: Dictionary = {}
 var phenotype: Dictionary = {}
 
-var life_stage = LIFE_STAGES.SEED
+var life_stage = Constants.LIFE_STAGES.SEED
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
 var value := 1
@@ -80,17 +79,17 @@ func meiosis() -> Dictionary:
 
 func age(days: int = 1) -> void:
 	match life_stage:
-		LIFE_STAGES.SEED:
-			life_stage = LIFE_STAGES.SPROUT
-		LIFE_STAGES.SPROUT:
-			life_stage = LIFE_STAGES.TEENAGE
-		LIFE_STAGES.TEENAGE:
-			life_stage = LIFE_STAGES.ADULT
-		LIFE_STAGES.ADULT:
-			life_stage = LIFE_STAGES.DEAD
-		LIFE_STAGES.DEAD:
+		Constants.LIFE_STAGES.SEED:
+			life_stage = Constants.LIFE_STAGES.SPROUT
+		Constants.LIFE_STAGES.SPROUT:
+			life_stage = Constants.LIFE_STAGES.TEENAGE
+		Constants.LIFE_STAGES.TEENAGE:
+			life_stage = Constants.LIFE_STAGES.ADULT
+		Constants.LIFE_STAGES.ADULT:
+			life_stage = Constants.LIFE_STAGES.DEAD
+		Constants.LIFE_STAGES.DEAD:
 			printerr("I'm dead! :(")
-	close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(self)
+	emit_signal("ask_for_close_up_plant", self)
 
 func water(amount: int = 1) -> void:
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
@@ -98,4 +97,4 @@ func water(amount: int = 1) -> void:
 	emit_signal("water_level_changed", watered_amount)
 
 func plant() -> void:
-	close_up_plant = CloseUpPlantFactory.create_close_up_plant_from(self)
+	emit_signal("ask_for_close_up_plant", self)

@@ -1,4 +1,10 @@
+#
+# Seed.gd
+#
+
 extends Node2D
+
+class_name Seed
 
 func _ready() -> void:
 	randomize()

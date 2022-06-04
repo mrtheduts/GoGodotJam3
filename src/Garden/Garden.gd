@@ -13,6 +13,8 @@ var Y_MARGIN : int = 3
 var garden_size : int = 4
 var plants = []
 
+var plant_hold: Plant = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print(tile_set.get_tiles_ids())
@@ -33,11 +35,14 @@ func _unhandled_input(event):
    # Mouse in viewport coordinates.
 	if Input.is_action_pressed("mouse_leftbtn"):
 		var plant: Plant = PlantFactory.gen_random_plant()
+		plant_hold = plant
 		plant.plant()
-		plant.age()
-		plant.age()
-		plant.age()
+#		plant.age()
+#		plant.age()
+#		plant.age()
 		show_popup_plant(plant)
+	elif Input.is_action_pressed("mouse_rightbtn"):
+		plant_hold.age()
 
 func get_garden_center():
 	var middle = garden_size*cell_size.x/2

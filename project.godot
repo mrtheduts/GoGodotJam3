@@ -55,14 +55,9 @@ _global_script_classes=[ {
 "path": "res://src/PopupDialog/PopupDialog.gd"
 }, {
 "base": "Node2D",
-"class": "Root",
+"class": "Seed",
 "language": "GDScript",
-"path": "res://src/CloseUpPlant/Roots/Roots.gd"
-}, {
-"base": "Node2D",
-"class": "Stalk",
-"language": "GDScript",
-"path": "res://src/CloseUpPlant/Stalks/Stalks.gd"
+"path": "res://src/CloseUpPlant/Seeds/Seed.gd"
 } ]
 _global_script_class_icons={
 "Branch": "",
@@ -74,8 +69,7 @@ _global_script_class_icons={
 "Plant": "",
 "PlantTypes": "",
 "PopupWindow": "",
-"Root": "",
-"Stalk": ""
+"Seed": ""
 }
 
 [application]
