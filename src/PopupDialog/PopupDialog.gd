@@ -12,6 +12,7 @@ const FLASH_DURATION := 0.25
 signal water_button_hold
 signal photo_button_clicked
 signal sell_button_clicked
+signal closed
 
 var drag_pos = null
 var plant: Plant = null
@@ -104,4 +105,5 @@ func _on_SellButton_pressed():
 func _on_TweenClose_tween_all_completed():
 	if (close_up_plant):
 		close_up_plant.get_parent().remove_child(close_up_plant)
+	emit_signal("closed", plant)
 	self.queue_free()
