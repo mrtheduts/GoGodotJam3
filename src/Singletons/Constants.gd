@@ -1,13 +1,20 @@
 #
 # Constants.gd - Constants for entire project
 #
-
 class_name Constants
-
-const TURNS_PER_TIME_SLOT: int = 2
 
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
+
+# WORLD
+const DAY_COLOR = Color.white
+const NIGHT_COLOR = Color.midnightblue
+const DAY_COLOR_FACTOR = 0.0
+const NIGHT_COLOR_FACTOR = 0.2
+
+const TIME_TRANSITION_DURATION = 0.8
+const TIME_TRANSITION_CURVE = Tween.TRANS_LINEAR
+const TIME_TRANSITION_EASE = Tween.EASE_IN_OUT
 
 # PLANT
 const MUTATION_ODDS = 100

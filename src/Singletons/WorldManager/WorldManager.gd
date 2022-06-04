@@ -55,6 +55,13 @@ func _to_string() -> String:
 	return "World Manager:\nDay " + String(_day) + "\n" + TimeOfDay.keys()[_time].capitalize() \
 		+ "\n" + Weather.keys()[_weather].capitalize()
 
+func current_color() -> Color:
+	var colorArray = [
+		Constants.DAY_COLOR.lightened(Constants.DAY_COLOR_FACTOR),
+		Constants.NIGHT_COLOR.lightened(Constants.NIGHT_COLOR_FACTOR)
+	]
+	return colorArray[_time]
+
 func save_stats() -> Dictionary:
 	var save_dict = {
 		"filename" : get_filename(),
