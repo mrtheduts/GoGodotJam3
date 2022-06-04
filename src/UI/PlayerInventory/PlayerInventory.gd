@@ -50,22 +50,25 @@ func _input(event):
 		if event.is_action_pressed("mouse_leftbtn"):
 			mouse_button_released = false
 			initial_mouse_pos = get_viewport().get_mouse_position()
+			
 		if event.is_action_released("mouse_leftbtn"):
 			move_merge_item()
 			end_drag_item()
+			
 		if event.is_action("mouse_rightbtn"):
 			if cursor_inside_itemlist:
-				active_item_slot = get_item_at_position(get_local_mouse_position())
+				active_item_slot = get_item_at_position(get_viewport().get_mouse_position())
 				if active_item_slot >= 0:
 					show_item_options(active_item_slot)
+					
 		if event.doubleclick:
-			active_item_slot = get_item_at_position(get_local_mouse_position())
+			active_item_slot = get_item_at_position(get_viewport().get_mouse_position())
 			if active_item_slot >= 0:
 				PlayerState.inventory_use_item(active_item_slot)
 			
 	if event is InputEventMouseMotion:
 		if cursor_inside_itemlist:
-			active_item_slot = get_item_at_position(get_local_mouse_position())
+			active_item_slot = get_item_at_position(get_viewport().get_mouse_position())
 			if active_item_slot >= 0:
 				if is_dragging_item or mouse_button_released or is_dragging_seed:
 					return
@@ -116,7 +119,7 @@ func update_slot(slot: int):
 func show_item_options(index: int):
 	if is_dragging_item or is_dragging_seed:
 		return
-
+	
 	sell_item_slot = index
 	var item_data : Dictionary = ItemDatabase.get_item(String(PlayerState._inventory[String(index)]["id"]))
 	
