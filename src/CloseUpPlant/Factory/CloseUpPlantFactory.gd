@@ -5,6 +5,7 @@
 extends Node
 
 var CLOSE_UP_PLANT_SCENE = preload("res://src/CloseUpPlant/CloseUpPlant.tscn")
+var SEED_SCENE = preload("res://src/CloseUpPlant/Seeds/Seed.tscn")
 
 func _get_build_parts_from_plant(plant: Plant) -> Dictionary:
 	var build_parts := {}
@@ -22,51 +23,106 @@ func _get_build_parts_from_plant(plant: Plant) -> Dictionary:
 		build_parts[DNA.get_feature_value(feature)] = gene
 	return build_parts
 
-func _build_adult_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> void:
+func _build_seed_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> CloseUpPlant:
+	var seed_node = SEED_SCENE.instance()
+	close_up_plant.add_to_idle_animation_list(seed_node)
+	close_up_plant.add_seed(seed_node)
+	
+	var seed_type_value = DNA.get_gene_value(DNA.FEATURES.SEED_TYPE, build_parts[DNA.FEATURES.SEED_TYPE])
+	seed_node.set_type(seed_type_value)
+	
+	close_up_plant.set_depth_as(Constants.LIFE_STAGES.SEED)
+	return close_up_plant
+
+func _build_sprout_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> CloseUpPlant:
 	var stalk: Stalk = build_parts[DNA.FEATURES.STALK_TYPE].instance()
-	stalk.start_wind_animation()
-	close_up_plant.add_child(stalk)
+	stalk.init_entry_points()
+	close_up_plant.add_stalk(stalk)
+	close_up_plant.add_to_idle_animation_list(stalk)
 	
-	var root: Root = build_parts[DNA.FEATURES.ROOT_TYPE].instance()
+	var root = build_parts[DNA.FEATURES.ROOT_TYPE].instance()
+	close_up_plant.add_root(root)
 	close_up_plant.add_to_idle_animation_list(root)
-	stalk.add_to_skel_down(root)
 	
-	var branches := []
-	if (true): # Has branches
-		for n in 2:
-			branches.push_back(build_parts[DNA.FEATURES.BRANCH_TYPE].instance())
-			close_up_plant.add_to_idle_animation_list(branches[n])
-		stalk.add_to_skel_up(branches[0])
-		stalk.add_to_skel_mid(branches[1])
-		branches[1].scale.x *= -1
+	var leaf_scene = build_parts[DNA.FEATURES.LEAF_TYPE]
+	_fill_with(leaf_scene, close_up_plant)
 	
-	var leaves := []
-	for n in 2:
-		leaves.push_back(build_parts[DNA.FEATURES.LEAF_TYPE].instance())
-	stalk.add_to_skel_mid(leaves[0])
-	branches[0].add_to_mid_bone(leaves[1])
+	close_up_plant.move_seed_to_top()
+	close_up_plant.set_depth_as(Constants.LIFE_STAGES.SPROUT)
+	return close_up_plant
+
+func _build_teenage_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> CloseUpPlant:
+	close_up_plant.free_seed()
+	close_up_plant.erase_leaves()
+	
+	close_up_plant.set_depth_as(Constants.LIFE_STAGES.TEENAGE)
+	close_up_plant.age()
+	
+	var branch_number := Utils.randi_range(0, 1)
+	var branch_scene = build_parts[DNA.FEATURES.BRANCH_TYPE]
+	_fill_with(branch_scene, close_up_plant, branch_number)
+	
+	var leaf_scene = build_parts[DNA.FEATURES.LEAF_TYPE]
+	_fill_with(leaf_scene, close_up_plant)
+		
+	return close_up_plant
+
+func _build_adult_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -> CloseUpPlant:
+	close_up_plant.erase_leaves()
+	close_up_plant.age()
+	
+	var branch_number := Utils.randi_range(1, 3)
+	var branch_scene = build_parts[DNA.FEATURES.BRANCH_TYPE]
+	_fill_with(branch_scene, close_up_plant, branch_number)
 	
 	if (build_parts[DNA.FEATURES.HAS_FLOWER]):
-		var flower: Flower = build_parts[DNA.FEATURES.FLOWER_TYPE].instance()
-		flower.set_color(build_parts[DNA.FEATURES.FLOWER_COLOR])
-		stalk.add_to_skel_top(flower)
-		
+		var flower_scene = build_parts[DNA.FEATURES.FLOWER_TYPE]
+		var flower_color = build_parts[DNA.FEATURES.FLOWER_COLOR]
+		var flower_amount = Utils.randi_range(1, 3)
+		_fill_with(flower_scene, close_up_plant, flower_amount, true, flower_color)
+
 	if (build_parts[DNA.FEATURES.HAS_FRUIT]):
-		var fruit: Fruit = build_parts[DNA.FEATURES.FRUIT_TYPE].instance()
-		fruit.set_color(build_parts[DNA.FEATURES.FRUIT_COLOR])
-		branches[1].add_to_end_bone(fruit)
-	
+		print('HAS FRUIT')
+		var fruit_scene = build_parts[DNA.FEATURES.FRUIT_TYPE]
+		var fruit_color = build_parts[DNA.FEATURES.FRUIT_COLOR]
+		var fruit_amount = Utils.randi_range(1,3)
+		_fill_with(fruit_scene, close_up_plant, fruit_amount, true, fruit_color)
+
+	var leaf_scene = build_parts[DNA.FEATURES.LEAF_TYPE]
+	_fill_with(leaf_scene, close_up_plant)
+	return close_up_plant
+
+func _fill_with(scene, close_up_plant: CloseUpPlant, amount: int = -1, has_color: bool = false, modulate_color: Color = Color.white) -> void:
+	var count := 0
+	var has_space = true
+	while(has_space and (amount == -1 or count < amount)):
+		var node = scene.instance()
+		
+		if (node is Branch):
+			node.init_entry_points()
+		if (has_color):
+			node.modulate = modulate_color
+		
+		has_space = close_up_plant.add_to_random_entry_point(node)
+		count += 1
 
 func create_close_up_plant_from(plant: Plant) -> CloseUpPlant:
-	var close_up_plant: CloseUpPlant = CLOSE_UP_PLANT_SCENE.instance()
+	var close_up_plant: CloseUpPlant = CLOSE_UP_PLANT_SCENE.instance() if not plant.close_up_plant else plant.close_up_plant
+	print(plant.close_up_plant, close_up_plant)
 	var build_parts = _get_build_parts_from_plant(plant)
+	print("Create_close_up - plant life stage: ", plant.life_stage)
 	match plant.life_stage:
-		Plant.LIFE_STAGES.SEED:
-			pass
-		Plant.LIFE_STAGES.SPROUT:
-			pass
-		Plant.LIFE_STAGES.ADULT:
-			_build_adult_plant(close_up_plant, build_parts)
-		Plant.LIFE_STAGES.DEAD:
-			pass
+		Constants.LIFE_STAGES.SEED:
+			close_up_plant = _build_seed_plant(close_up_plant, build_parts)
+		Constants.LIFE_STAGES.SPROUT:
+			close_up_plant = _build_sprout_plant(close_up_plant, build_parts)
+		Constants.LIFE_STAGES.TEENAGE:
+			close_up_plant = _build_teenage_plant(close_up_plant, build_parts)
+		Constants.LIFE_STAGES.ADULT:
+			close_up_plant = _build_adult_plant(close_up_plant, build_parts)
+	
+	if (plant.life_stage != Constants.LIFE_STAGES.DEAD):
+		close_up_plant.play_idle_animation()
+	
+	plant.close_up_plant = close_up_plant
 	return close_up_plant

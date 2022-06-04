@@ -33,19 +33,19 @@ func _ready():
 	draw_grass_area()
 	draw_garden_tiles()
 	self.modulate = WorldManager.current_color()
+	print("OI!")
 	
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_leftbtn"):
+		var selected_coord = world_to_map(get_local_mouse_position())
 		if planting_mode or increase_garden_mode:
-			var selected_coord = world_to_map(get_local_mouse_position())
 			
 			if $SelectedTiles.get_cell(selected_coord.x, selected_coord.y) == SELECTION_TILE_HOVER_ID:
 				if planting_mode:
 					var seed_obj : Plant = PlayerState.inventory_get_item(PlayerState._holding_item)["seed_obj"]
 					var crop_id : String = get_crop_id_by_coord(selected_coord)
-					
-					crop_tiles[crop_id]["plant"] = seed_obj
-					update_crop(crop_id)
+					var new_plant: Plant = PlantFactory.clone_plant(seed_obj)
+					plant_crop(crop_id, new_plant)
 				else:
 					add_new_crop_area(selected_coord)
 				
@@ -54,6 +54,11 @@ func _unhandled_input(event):
 			else:
 				PlayerState.hold_item_cancel()
 				end_selection_mode()
+		else:
+			var crop_id: String = get_crop_id_by_coord(selected_coord)
+			if (crop_tiles.has(crop_id) and crop_tiles[crop_id].plant):
+				var plant: Plant = crop_tiles[crop_id].plant
+				show_popup_plant(plant)
 		
 	if event is InputEventMouseMotion:
 		if planting_mode or increase_garden_mode:
@@ -120,8 +125,11 @@ func end_selection_mode():
 		for x in range(MIN_X, MAX_X):
 			$SelectedTiles.set_cell(x, y, -1)
 	
-func update_crop(crop_id: String):
-	print(crop_tiles)
+func plant_crop(crop_id: String, plant: Plant):
+	Utils.conn_nodes(WorldManager, "new_day", plant, "age", [1])
+	crop_tiles[crop_id]["plant"] = plant
+	plant.plant()
+	
 
 func add_new_crop_area(coord: Vector2):
 	var new_crop_id : int = int(crop_tiles.keys()[-1])+1

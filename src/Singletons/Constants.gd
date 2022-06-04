@@ -28,6 +28,13 @@ const RAINY_COLOR_FACTOR = 0.1
 const METEOR_COLOR_FACTOR = 0.0
 
 # PLANT
+enum LIFE_STAGES { SEED, SPROUT, TEENAGE, ADULT, DEAD}
+const NUM_CHILDREN_PER_ENTRY := 2
+
+const DEAD_LEAF_COLOR := Color('#ff6464')
+const DEAD_COLOR := Color("#add5ff")
+const DYING_DURATION := 5
+
 const MUTATION_ODDS = 100
 
 const MIN_TIME_WATERING: float = 5.0

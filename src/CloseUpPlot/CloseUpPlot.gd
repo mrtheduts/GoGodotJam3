@@ -2,6 +2,9 @@ extends Node2D
 
 class_name CloseUpPlot
 
+const WATER_LEVEL_RATE := 0.05
+const WATER_COLOR_SPEED := 0.75
+
 func _ready():
 	Utils.conn_nodes(WorldManager, "time_changed", self, "_on_WorldManager_time_changed")
 	self.modulate = WorldManager.current_color()
@@ -15,6 +18,15 @@ func set_WateringParticles_state(state: bool) -> void:
 	var pos = $Camera2D.position - Vector2(600,800)
 	$WateringParticles.position = pos
 	$WateringParticles.emitting = state
+
+func change_water_level(water_level: int) -> void:
+	var final_color = Color.white.darkened(water_level * WATER_LEVEL_RATE)
+	$Tween.interpolate_property(
+		$Ground, "modulate",
+		$Ground.modulate,  final_color,
+		WATER_COLOR_SPEED, $Tween.TRANS_SINE, $Tween.EASE_IN
+	)
+	$Tween.start()
 
 func _on_WorldManager_time_changed():
 	var color = WorldManager.current_color()

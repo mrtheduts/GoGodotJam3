@@ -12,9 +12,11 @@ const FLASH_DURATION := 0.25
 signal water_button_hold
 signal photo_button_clicked
 signal sell_button_clicked
+signal closed
 
 var drag_pos = null
 var plant: Plant = null
+var close_up_plant: CloseUpPlant = null
 
 var is_watering := false
 var watering_counter: float = 0
@@ -100,6 +102,8 @@ func _on_SellButton_pressed():
 	)
 	$TweenClose.start()
 
-
 func _on_TweenClose_tween_all_completed():
+	if (close_up_plant):
+		close_up_plant.get_parent().remove_child(close_up_plant)
+	emit_signal("closed", plant)
 	self.queue_free()

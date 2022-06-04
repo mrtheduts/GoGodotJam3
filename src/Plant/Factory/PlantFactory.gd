@@ -28,6 +28,7 @@ func _get_random_gene(feature):
 
 func gen_random_plant() -> Plant:
 	var new_plant: Plant = PLANT_CLASS.new()
+	Utils.conn_nodes(new_plant, "ask_for_close_up_plant", $"/root/CloseUpPlantFactory", "create_close_up_plant_from")
 	for feature in DNA.FEATURES:
 		for n in DNA.NUM_ALLELES:
 			var feature_values: Array = DNA[feature + DNA.VALUES_POSTFIX].keys()
@@ -36,8 +37,9 @@ func gen_random_plant() -> Plant:
 	new_plant.finish_gene_config()
 	return new_plant
 
-func clone_plant(plant: Plant, life_stage = Plant.LIFE_STAGES.SEED) -> Plant:
+func clone_plant(plant: Plant, life_stage = Constants.LIFE_STAGES.SEED) -> Plant:
 	var new_plant: Plant = PLANT_CLASS.new()
+	Utils.conn_nodes(new_plant, "ask_for_close_up_plant", $"/root/CloseUpPlantFactory", "create_close_up_plant_from")
 	new_plant.life_stage = life_stage
 	new_plant.genetics = plant.genetics.duplicate(true)
 	new_plant.finish_gene_config()

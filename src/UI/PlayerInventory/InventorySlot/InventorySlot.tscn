@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://raw_assets/images/items_icons/inventory_frame_75.png" type="Texture" id=1]
-[ext_resource path="res://src/PlayerInventory/InventorySlot/InventorySlot.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/PlayerInventory/InventorySlot/InventorySlot.gd" type="Script" id=2]
 [ext_resource path="res://raw_assets/fonts/Terminal-Grotesque-master/terminal-grotesque.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=3]
