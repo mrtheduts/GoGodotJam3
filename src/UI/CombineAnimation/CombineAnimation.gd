@@ -12,7 +12,7 @@ func _input(event):
 func _process(delta):
 	$Lights/Light2D.rotation_degrees += delta * rotation_speed
 	
-func init(plant: Plant, center: Vector2):
+func init(plant, center: Vector2):
 	$Display/Seed.init_seed(plant)
 	$Display/Seed.position = center
 	$Lights/Light2D.position = center

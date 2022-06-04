@@ -54,3 +54,6 @@ const SHOP_WARN_TEXT = "Oops. I think you don't have enough %s right now. Come b
 # ITEMS
 const HOE_ITEM_ID : int = 1
 const SEED_ITEM_ID : int = 4
+
+# INDEX
+const INDEX_PAGES: int = 20
