@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/CloseUpPlot/CloseUpPlot.gd"
 }, {
+"base": "CanvasLayer",
+"class": "CombineAnimation",
+"language": "GDScript",
+"path": "res://src/UI/CombineAnimation/CombineAnimation.gd"
+}, {
 "base": "Reference",
 "class": "Constants",
 "language": "GDScript",
@@ -78,6 +83,7 @@ _global_script_class_icons={
 "Branch": "",
 "CloseUpPlant": "",
 "CloseUpPlot": "",
+"CombineAnimation": "",
 "Constants": "",
 "Flower": "",
 "Fruit": "",

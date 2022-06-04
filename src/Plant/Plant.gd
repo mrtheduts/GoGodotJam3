@@ -7,6 +7,7 @@ class_name Plant
 # Signals
 signal water_level_changed
 signal ask_for_close_up_plant
+signal plant_is_adult
 
 var life_duration_stages: Dictionary
 
@@ -88,6 +89,7 @@ func age(days: int) -> void:
 			life_stage = Constants.LIFE_STAGES.TEENAGE
 		Constants.LIFE_STAGES.TEENAGE:
 			life_stage = Constants.LIFE_STAGES.ADULT
+			emit_signal("plant_is_adult")
 		Constants.LIFE_STAGES.ADULT:
 			life_stage = Constants.LIFE_STAGES.DEAD
 			value = 0

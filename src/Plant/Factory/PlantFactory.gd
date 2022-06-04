@@ -68,4 +68,4 @@ func are_plants_equal(plant1: Plant, plant2: Plant):
 	if plant1 == null or plant2 == null:
 		return false
 		
-	return plant1.get_seed_code() == plant2.get_seed_code()
+	return plant1.type_hash == plant2.type_hash

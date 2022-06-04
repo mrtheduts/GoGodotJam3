@@ -45,7 +45,6 @@ func pass_time() -> void:
 	emit_signal("time_changed")
 	if _time == TimeOfDay.DAY:
 		next_day()
-	print(self)
 
 func world_info() -> Dictionary:
 	return {"day":_day, "time":_time, "weather":_weather}
