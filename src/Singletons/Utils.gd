@@ -48,7 +48,7 @@ func as_bool(value: String) -> bool:
 #
 # Merges two dictionaries which values are ONLY arrays
 #
-func merge_dicts_of_arrays(dict_a: Dictionary, dict_b: Dictionary) -> Dictionary:
+func merge_dicts_of_arrays(dict_a: Dictionary, dict_b: Dictionary, unique_values: bool = false) -> Dictionary:
 	var new_dict := {}
 	var dicts = [dict_a, dict_b]
 	for dict in dicts:
@@ -57,7 +57,14 @@ func merge_dicts_of_arrays(dict_a: Dictionary, dict_b: Dictionary) -> Dictionary
 			if (not new_dict.has(key)):
 				new_dict[key] = dict[key]
 			else:
-				new_dict[key] = new_dict[key] + dict[key]
+				var res_array: Array = new_dict[key]
+				if (unique_values):
+					for value in dict[key]:
+						if (not value in res_array):
+							res_array.push_back(value)
+				else:
+					res_array += dict[key]
+				new_dict[key] = res_array
 	return new_dict
 
 #
@@ -67,3 +74,11 @@ func reparent_node(node: Node, src: Node, target: Node) -> void:
 	src.remove_child(node)
 	target.add_child(node)
 	node.set_owner(target)
+
+#
+# Returns a random integer between a and b
+#
+func randi_range(a: int, b: int) -> int:
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	return rng.randi_range(a, b)

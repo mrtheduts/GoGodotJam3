@@ -17,6 +17,7 @@ var genetics: Dictionary = {}
 var phenotype: Dictionary = {}
 
 var life_stage = Constants.LIFE_STAGES.SEED
+var life_days := 0
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
 var value := 1
@@ -78,6 +79,7 @@ func meiosis() -> Dictionary:
 	return result
 
 func age(days: int = 1) -> void:
+	life_days += days
 	match life_stage:
 		Constants.LIFE_STAGES.SEED:
 			life_stage = Constants.LIFE_STAGES.SPROUT
@@ -87,6 +89,7 @@ func age(days: int = 1) -> void:
 			life_stage = Constants.LIFE_STAGES.ADULT
 		Constants.LIFE_STAGES.ADULT:
 			life_stage = Constants.LIFE_STAGES.DEAD
+			close_up_plant.die()
 		Constants.LIFE_STAGES.DEAD:
 			printerr("I'm dead! :(")
 	emit_signal("ask_for_close_up_plant", self)

@@ -9,6 +9,11 @@ const STARTING_STORAGE_SPACE: int = 5
 
 # PLANT
 enum LIFE_STAGES { SEED, SPROUT, TEENAGE, ADULT, DEAD}
+const NUM_CHILDREN_PER_ENTRY := 2
+
+const DEAD_LEAF_COLOR := Color('#ff6464')
+const DEAD_COLOR := Color("#add5ff")
+const DYING_DURATION := 5
 
 const MUTATION_ODDS = 100
 

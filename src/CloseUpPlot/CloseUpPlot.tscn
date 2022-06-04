@@ -50,8 +50,8 @@ position = Vector2( 1920, 500 )
 texture = ExtResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Ground"]
-visible = false
 position = Vector2( 0, 517 )
+collision_layer = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/StaticBody2D"]
 shape = SubResource( 1 )

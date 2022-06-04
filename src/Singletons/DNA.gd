@@ -88,7 +88,7 @@ const BRANCH_TYPE_TYPE := SCENE
 enum BRANCH_TYPE_VALUES { DEFAULT }
 const BRANCH_TYPE_DOMINANTS := [ BRANCH_TYPE_VALUES.DEFAULT ]
 var BRANCH_TYPE_SCENES = {
-	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/Branch.tscn")
+	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/DefaultBranch.tscn")
 }
 
 # Leaf

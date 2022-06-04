@@ -21,5 +21,8 @@ func set_age(age: int) -> void:
 		Constants.LIFE_STAGES.DEAD:
 			$AnimationPlayer.play("Dead")
 
+func die():
+	$AnimationPlayer.stop()
+
 func play_idle_animation() -> void:
 	$AnimationPlayer.play("Idle")

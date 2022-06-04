@@ -1,13 +1,11 @@
 extends RigidBody2D
 
-class_name Flower
+class_name Leaf
 
 var has_fallen := false
 
 func die():
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	has_fallen = rng.randi_range(0, 1)
+	has_fallen = Utils.randi_range(0, 1)
 	$Tween.interpolate_property(
 		self, "modulate",
 		self.modulate, Constants.DEAD_LEAF_COLOR, 
@@ -16,9 +14,6 @@ func die():
 	$Tween.start()
 
 	return has_fallen
-
-func set_color(color: Color) -> void:
-	$Polygon2D.modulate = color
 
 
 func _on_Tween_tween_all_completed():
