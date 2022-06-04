@@ -28,7 +28,9 @@ func _on_Garden_show_close_up_plant(plant: Plant):
 	Utils.conn_nodes(popup_window, "water_button_hold", close_up_plot, "set_WateringParticles_state")
 	Utils.conn_nodes(popup_window, "photo_button_clicked", self, "_on_PopupWindow_photo_button_clicked")
 	Utils.conn_nodes(popup_window, "sell_button_clicked", self, "_on_PopupWindow_sell_button_clicked")
+	Utils.conn_nodes(popup_window, "discard_button_clicked", self, "_on_PopupWindow_discard_button_clicked")
 	Utils.conn_nodes(popup_window, "closed", self, "_on_PopupWindow_closed")
+	Utils.conn_nodes(close_up_plant, "update_ui", popup_window, "_on_Plant_update_ui")
 	
 	opened_plants[plant] = popup_window
 	
@@ -48,3 +50,6 @@ func _on_PopupWindow_closed(plant: Plant):
 	if (opened_plants.has(plant)):
 		# warning-ignore:return_value_discarded
 		opened_plants.erase(plant)
+		
+func _on_PopupWindow_discard_button_clicked(plant: Plant):
+	emit_signal("remove_plant", plant)
