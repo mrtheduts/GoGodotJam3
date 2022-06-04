@@ -5,7 +5,8 @@
 extends Node
 
 var PLANT_CLASS = preload("res://src/Plant/Plant.gd")
-
+	
+	
 func _did_mutation_happen() -> bool:
 	randomize()
 	return rand_range(1, Constants.MUTATION_ODDS) as int == 1
@@ -60,3 +61,9 @@ func cross_plants(plants: Array, can_mutate: bool = true) -> Plant:
 			new_plant.add_gene(feature, gene)
 	new_plant.finish_gene_config()
 	return new_plant
+	
+func are_plants_equal(plant1: Plant, plant2: Plant):
+	if plant1 == null or plant2 == null:
+		return false
+		
+	return plant1.get_seed_code() == plant2.get_seed_code()

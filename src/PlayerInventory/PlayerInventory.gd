@@ -10,6 +10,7 @@ const SELL_TEXT_COLOR : String = "#8c7a30"
 const DESC_TEXT_COLOR : String = "#274a99"
 
 onready var is_dragging_item : bool = false
+onready var is_dragging_seed : bool = false
 onready var mouse_button_released : bool = true
 onready var is_stack_enabled : bool = false
 
@@ -36,17 +37,22 @@ func _ready():
 	set_process(false)
 	set_process_input(true)
 	
-	for i in range(1,20):
+	var plantinha : Plant = PlantFactory.gen_random_plant()
+	
+	for i in range(1,6):
 		var slot = 0
 		if i >= 4:
-			slot = PlayerState.inventory_add_item(4)
+			slot = PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
 		else:
-			slot = PlayerState.inventory_add_item(i)
+			slot = PlayerState.inventory_add_item(1)
+	
 
 #warning-ignore:unused_argument
 func _process(delta):
 	if is_dragging_item:
 		$ItemContainer/Sprite_DraggedItem.global_position = get_viewport().get_mouse_position()
+	elif is_dragging_seed:
+		$ItemContainer/Seed.global_position = get_viewport().get_mouse_position()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -61,12 +67,14 @@ func _input(event):
 				active_item_slot = get_item_at_position($ItemContainer.get_local_mouse_position())
 				if active_item_slot >= 0:
 					show_item_options(active_item_slot)
+		if event.doubleclick:
+			PlayerState.inventory_use_item(active_item_slot)
 			
 	if event is InputEventMouseMotion:
 		if cursor_inside_itemlist:
 			active_item_slot = get_item_at_position($ItemContainer.get_local_mouse_position())
 			if active_item_slot >= 0:
-				if is_dragging_item or mouse_button_released:
+				if is_dragging_item or mouse_button_released or is_dragging_seed:
 					return
 				if initial_mouse_pos.distance_to(get_viewport().get_mouse_position()) > 0.0:
 					begin_drag_item(active_item_slot)
@@ -113,7 +121,7 @@ func update_slot(slot: int):
 	$ItemContainer/Slots.add_child(new_slot)
 	
 func show_item_options(index: int):
-	if is_dragging_item:
+	if is_dragging_item or is_dragging_seed:
 		return
 
 	sell_item_slot = index
@@ -138,12 +146,13 @@ func show_item_options(index: int):
 	$PopupPanel_ItemMenu.popup()
 	
 func begin_drag_item(index: int):
-	var item_id = PlayerState.inventory_get_item(index)["id"]
+	var inv_item = PlayerState.inventory_get_item(index)
+	var item_id = inv_item["id"]
 	
 	if item_id == "0":
 		return
 		
-	if is_dragging_item:
+	if is_dragging_item or is_dragging_seed:
 		return
 		
 	if index < 0:
@@ -151,20 +160,32 @@ func begin_drag_item(index: int):
 	
 	var item = ItemDatabase.get_item(item_id)
 	set_process(true)
-	$ItemContainer/Sprite_DraggedItem.texture =  ResourceLoader.load(item["icon"])
-	$ItemContainer/Sprite_DraggedItem.show()
+	
+	if item_id == String(Constants.SEED_ITEM_ID):
+		$ItemContainer/Seed.init_seed(inv_item["seed_obj"])
+		$ItemContainer/Seed.scale = Vector2(3.5, 3.5)
+		$ItemContainer/Seed.show()
+		is_dragging_seed = true
+	else:
+		$ItemContainer/Sprite_DraggedItem.texture =  ResourceLoader.load(item["icon"])
+		$ItemContainer/Sprite_DraggedItem.show()
+		is_dragging_item = true
 
 	dragged_item_slot = index
-	is_dragging_item = true
 	mouse_button_released = false
-	$ItemContainer/Sprite_DraggedItem.global_translate(get_viewport().get_mouse_position())
+	if item_id == String(Constants.SEED_ITEM_ID):
+		$ItemContainer/Seed.global_translate(get_viewport().get_mouse_position())
+	else:
+		$ItemContainer/Sprite_DraggedItem.global_translate(get_viewport().get_mouse_position())
 
 func end_drag_item():
 	set_process(false)
 	dragged_item_slot = -1
 	$ItemContainer/Sprite_DraggedItem.hide()
+	$ItemContainer/Seed.hide()
 	mouse_button_released = true
 	is_dragging_item = false
+	is_dragging_seed = false
 	active_item_slot = -1
 
 func move_merge_item():
@@ -220,18 +241,14 @@ func _on_Item_sell_confirm():
 	$PopupPanel_Confirmation.popup()
 	
 func _on_Sell_stack():
-	print(PlayerState._money)
 	PlayerState.inventory_sell_item(sell_item_slot, PlayerState._inventory[String(sell_item_slot)]["amount"])
-	print(PlayerState._money)
 	update_slot(sell_item_slot)
 	sell_item_slot = -1
 	$PopupPanel_Confirmation.hide()
 	$PopupPanel_ItemMenu.hide()
 	
 func _on_Sell_confirm():
-	print(PlayerState._money)
 	PlayerState.inventory_sell_item(sell_item_slot, 1)
-	print(PlayerState._money)
 	update_slot(sell_item_slot)
 	sell_item_slot = -1
 	$PopupPanel_Confirmation.hide()

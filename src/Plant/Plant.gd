@@ -87,3 +87,10 @@ func age(days: int = 1) -> void:
 func water(amount: int = 1) -> void:
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
 	print("New watered amount: ", watered_amount)
+
+# Get identifer code for unique seed
+func get_seed_code() -> String:
+	var fruit_colors : Array = genetics["FRUIT_COLOR"]
+	var flower_colors : Array = genetics["FLOWER_COLOR"]
+	
+	return fruit_colors[0][0] + fruit_colors[1][0] + flower_colors[0][0] + flower_colors[1][0] 

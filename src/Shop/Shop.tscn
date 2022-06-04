@@ -25,7 +25,6 @@ margin_right = 450.0
 margin_bottom = 342.0
 
 [node name="PlayerInventory" parent="." instance=ExtResource( 4 )]
-visible = false
 margin_left = -418.0
 margin_top = 251.0
 margin_right = -418.0
