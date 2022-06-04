@@ -1,0 +1,239 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/CloseUpPlant/Branches/Branch.gd" type="Script" id=1]
+[ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=2]
+[ext_resource path="res://raw_assets/images/plants/branches/default.svg" type="Texture" id=3]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -13.0955 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/BeginBone/MidBone:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 13.8118 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/BeginBone/MidBone:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -5.0, 0.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5, 2.5, 2.9, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -30.0, -30.0, -35.0, -35.0, -30.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/BeginBone:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Skeleton2D/BeginBone:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Skeleton2D/BeginBone/MidBone:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 196.217, -6.70319 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Skeleton2D/BeginBone/MidBone:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Skeleton2D/BeginBone/MidBone:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 180.502, -6.63858 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -150.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[node name="DefaultBranch" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Dead = SubResource( 3 )
+anims/Idle = SubResource( 2 )
+anims/RESET = SubResource( 4 )
+
+[node name="Teenage" type="Node2D" parent="."]
+
+[node name="End" type="Polygon2D" parent="Teenage"]
+modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
+material = ExtResource( 2 )
+offset = Vector2( -340, -645 )
+texture = ExtResource( 3 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 336, 759, 576, 743, 576, 407, 336, 519 )
+uv = PoolVector2Array( 400, 727, 608, 727, 608, 391, 400, 487 )
+bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Adult" type="Node2D" parent="."]
+
+[node name="Begin" type="Polygon2D" parent="Adult"]
+modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
+material = ExtResource( 2 )
+offset = Vector2( -240, -700 )
+texture = ExtResource( 3 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 208, 791, 416, 791, 416, 455, 208, 551 )
+uv = PoolVector2Array( 208, 791, 416, 791, 416, 455, 208, 551 )
+bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="End" type="Polygon2D" parent="Adult"]
+modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
+material = ExtResource( 2 )
+offset = Vector2( -241, -710 )
+texture = ExtResource( 3 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 416, 727, 624, 727, 624, 391, 416, 487 )
+uv = PoolVector2Array( 400, 727, 608, 727, 608, 391, 400, 487 )
+bones = [ "BeginBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="BeginBone" type="Bone2D" parent="Skeleton2D"]
+rotation = -0.523599
+rest = Transform2D( 0.866025, -0.5, 0.5, 0.866025, 0, 0 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="MidBone" type="Bone2D" parent="Skeleton2D/BeginBone"]
+position = Vector2( 196.217, -6.70319 )
+rest = Transform2D( 1, 0, 0, 1, 196.217, -6.70319 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="EndBone" type="Bone2D" parent="Skeleton2D/BeginBone/MidBone"]
+position = Vector2( 180.502, -6.63858 )
+rotation = -2.61799
+rest = Transform2D( -0.866026, -0.499999, 0.499999, -0.866026, 180.502, -6.63858 )
+__meta__ = {
+"_edit_bone_": true
+}

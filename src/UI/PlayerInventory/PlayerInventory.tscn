@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UI/PlayerInventory/PlayerInventory.gd" type="Script" id=2]
+[ext_resource path="res://raw_assets/themes/Inventory.tres" type="Theme" id=3]
+[ext_resource path="res://src/CloseUpPlant/Seed/Seed.tscn" type="PackedScene" id=4]
+
+[node name="PlayerInventory" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 3 )
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+script = ExtResource( 2 )
+
+[node name="Seed" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="Sprite_DraggedItem" type="Sprite" parent="."]
+visible = false
+
+[node name="Slots" type="HBoxContainer" parent="."]
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_PlayerInventory_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_PlayerInventory_mouse_exited"]

@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Singletons/Constants.gd"
 }, {
-"base": "Node2D",
+"base": "RigidBody2D",
 "class": "Flower",
 "language": "GDScript",
 "path": "res://src/CloseUpPlant/Flowers/Flower.gd"
@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "Fruit",
 "language": "GDScript",
 "path": "res://src/CloseUpPlant/Fruits/Fruit.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Leaf",
+"language": "GDScript",
+"path": "res://src/CloseUpPlant/Leaves/Leaf.gd"
 }, {
 "base": "Node2D",
 "class": "OverviewPlant",
@@ -60,14 +65,14 @@ _global_script_classes=[ {
 "path": "res://src/PopupDialog/PopupDialog.gd"
 }, {
 "base": "Node2D",
-"class": "Root",
+"class": "Seed",
 "language": "GDScript",
-"path": "res://src/CloseUpPlant/Roots/Roots.gd"
+"path": "res://src/CloseUpPlant/Seeds/Seed.gd"
 }, {
 "base": "Node2D",
 "class": "Stalk",
 "language": "GDScript",
-"path": "res://src/CloseUpPlant/Stalks/Stalks.gd"
+"path": "res://src/CloseUpPlant/Stalks/Stalk.gd"
 } ]
 _global_script_class_icons={
 "Branch": "",
@@ -76,11 +81,12 @@ _global_script_class_icons={
 "Constants": "",
 "Flower": "",
 "Fruit": "",
+"Leaf": "",
 "OverviewPlant": "",
 "Plant": "",
 "PlantTypes": "",
 "PopupWindow": "",
-"Root": "",
+"Seed": "",
 "Stalk": ""
 }
 
@@ -99,6 +105,7 @@ CloseUpPlantFactory="*res://src/CloseUpPlant/Factory/CloseUpPlantFactory.tscn"
 PlantFactory="*res://src/Plant/Factory/PlantFactory.tscn"
 ItemDatabase="*res://src/Singletons/ItemDatabase.gd"
 SaveGame="*res://src/Singletons/SaveGame.gd"
+WorldManager="*res://src/Singletons/WorldManager/WorldManager.gd"
 
 [importer_defaults]
 

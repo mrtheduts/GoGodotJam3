@@ -6,6 +6,38 @@ extends Node2D
 
 class_name Branch
 
+var _entry_points := {}
+
+var life_stage = Constants.LIFE_STAGES.TEENAGE
+
+func init_entry_points():
+	_entry_points[$Skeleton2D/BeginBone/MidBone] = []
+
+func age() -> void:
+	$AnimationPlayer.play("RESET")
+	match life_stage + 1:
+		Constants.LIFE_STAGES.ADULT:
+			life_stage += 1
+			_entry_points[$Skeleton2D/BeginBone/MidBone/EndBone] = []
+			$Teenage.visible = false
+			$Adult.visible = true
+	
+	for entry in _entry_points.keys():
+		var curr_children: Array = _entry_points[entry]
+		for child in curr_children:
+			if (child.has_method("age")):
+				child.age()
+
+func die():
+	$AnimationPlayer.play("Dead")
+	return false
+
+func get_mid_bone():
+	return $Skeleton2D/BeginBone/MidBone
+
+func get_end_bone():
+	return $Skeleton2D/BeginBone/MidBone/EndBone
+
 func play_idle_animation() -> void:
 	$AnimationPlayer.play("Idle")
 

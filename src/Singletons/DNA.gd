@@ -30,7 +30,8 @@ enum FEATURES {
 	BRANCH_TYPE,
 	LEAF_TYPE,
 	FLOWER_TYPE,
-	FRUIT_TYPE
+	FRUIT_TYPE,
+	SEED_TYPE
 }
 
 # Flower
@@ -79,7 +80,7 @@ const STALK_TYPE_TYPE := SCENE
 enum STALK_TYPE_VALUES { DEFAULT }
 const STALK_TYPE_DOMINANTS := [ STALK_TYPE_VALUES.DEFAULT ]
 var STALK_TYPE_SCENES = {
-	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/Stalks.tscn")
+	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/DefaultStalk.tscn")
 }
 
 # Branch
@@ -87,7 +88,7 @@ const BRANCH_TYPE_TYPE := SCENE
 enum BRANCH_TYPE_VALUES { DEFAULT }
 const BRANCH_TYPE_DOMINANTS := [ BRANCH_TYPE_VALUES.DEFAULT ]
 var BRANCH_TYPE_SCENES = {
-	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/Branch.tscn")
+	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/DefaultBranch.tscn")
 }
 
 # Leaf
@@ -113,6 +114,14 @@ const FRUIT_TYPE_DOMINANTS := [ FRUIT_TYPE_VALUES.DEFAULT ]
 var FRUIT_TYPE_SCENES = {
 	FRUIT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Fruits/Fruit.tscn")
 }
+
+# Seed
+enum SEED_TYPE_VALUES { BEAN, FALL, UNIT, GRAIN, GRAVITY, DRY }
+const SEED_TYPE_DOMINANTS := [ 
+	SEED_TYPE_VALUES.BEAN,
+	SEED_TYPE_VALUES.UNIT,
+	SEED_TYPE_VALUES.GRAIN
+]
 
 #
 # Functions
@@ -140,6 +149,11 @@ func get_scene(feature: String, gene: String):
 	var mapping_enum = get(feature + SCENES_POSTFIX)
 	var gene_value = values_enum[gene]
 	return mapping_enum[gene_value]
+
+func get_gene_value(feature: int, gene: String) -> int:
+	var feature_name = get_feature_name(feature)
+	var value_mapping = get_value(feature_name)
+	return value_mapping[gene]
 
 func get_feature_name(value: int) -> String:
 	return FEATURES.keys()[value]

@@ -17,42 +17,33 @@ onready var is_stack_enabled : bool = false
 onready var initial_mouse_pos : Vector2 = Vector2()
 onready var cursor_inside_itemlist : bool = false
 
-var INVENTORY_SLOT_SCENE = load("res://src/PlayerInventory/InventorySlot/InventorySlot.tscn")
+var INVENTORY_SLOT_SCENE = preload("res://src/UI/PlayerInventory/InventorySlot/InventorySlot.tscn")
+var CONFIRMATION_POPUP_SCENE = preload("res://src/UI/PlayerInventory/ItemMenu/PopupPanel_Confirmation.tscn")
+var ITEM_MENU_POPUP_SCENE = preload("res://src/UI/PlayerInventory/ItemMenu/PopupPanel_ItemMenu.tscn")
 
 var dragged_item_slot : int = -1
 var active_item_slot : int = -1
 var sell_item_slot : int = -1
 
-func _ready():	
-	Utils.conn_nodes($ItemContainer, "mouse_entered", self, "_on_ItemList_mouse_entered")
-	Utils.conn_nodes($ItemContainer, "mouse_exited", self, "_on_ItemList_mouse_exited")
-	Utils.conn_nodes($PopupPanel_ItemMenu/MarginContainer/V/Button_SellItem, "pressed", self, "_on_Item_sell_confirm")
-	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Stack, "pressed", self, "_on_Sell_stack")
-	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Confirm, "pressed", self, "_on_Sell_confirm")
-	Utils.conn_nodes($PopupPanel_Confirmation/MarginContainer/V/H/Button_Cancel, "pressed", self, "_on_Sell_cancel")
+func _ready():
 	Utils.conn_nodes(PlayerState, "inventory_changed", self, "_on_PlayerState_inventory_changed")
 	
 	load_items()
-
 	set_process(false)
 	set_process_input(true)
 	
-	var plantinha : Plant = PlantFactory.gen_random_plant()
-	
 	for i in range(1,6):
-		var slot = 0
 		if i >= 4:
-			slot = PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
+			PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
 		else:
-			slot = PlayerState.inventory_add_item(1)
+			PlayerState.inventory_add_item(1)
 	
 
-#warning-ignore:unused_argument
-func _process(delta):
+func _process(_delta):
 	if is_dragging_item:
-		$ItemContainer/Sprite_DraggedItem.global_position = get_viewport().get_mouse_position()
+		$Sprite_DraggedItem.global_position = get_viewport().get_mouse_position()
 	elif is_dragging_seed:
-		$ItemContainer/Seed.global_position = get_viewport().get_mouse_position()
+		$Seed.global_position = get_viewport().get_mouse_position()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -64,18 +55,17 @@ func _input(event):
 			end_drag_item()
 		if event.is_action("mouse_rightbtn"):
 			if cursor_inside_itemlist:
-				active_item_slot = get_item_at_position($ItemContainer.get_local_mouse_position())
+				active_item_slot = get_item_at_position(get_local_mouse_position())
 				if active_item_slot >= 0:
 					show_item_options(active_item_slot)
 		if event.doubleclick:
-			if cursor_inside_itemlist:
-				active_item_slot = get_item_at_position($ItemContainer.get_local_mouse_position())
-				if active_item_slot >= 0:
-					PlayerState.inventory_use_item(active_item_slot)
+			active_item_slot = get_item_at_position(get_local_mouse_position())
+			if active_item_slot >= 0:
+				PlayerState.inventory_use_item(active_item_slot)
 			
 	if event is InputEventMouseMotion:
 		if cursor_inside_itemlist:
-			active_item_slot = get_item_at_position($ItemContainer.get_local_mouse_position())
+			active_item_slot = get_item_at_position(get_local_mouse_position())
 			if active_item_slot >= 0:
 				if is_dragging_item or mouse_button_released or is_dragging_seed:
 					return
@@ -91,13 +81,13 @@ func _input(event):
 			is_stack_enabled = false
 
 func get_item_at_position(pos: Vector2):
-	for slot in $ItemContainer/Slots.get_children():
-		var slot_start = slot.rect_position
+	for slot in $Slots.get_children():
+		var slot_start = $Slots.rect_position + slot.rect_position
 		var slot_end = slot_start + slot.rect_size
 		if pos >= slot_start and pos <= slot_end:
 			return slot.id
 	return -1
-		
+
 func load_items():
 	for slot in range(0, PlayerState._inventory_max_slots):
 		update_slot(slot)
@@ -114,14 +104,14 @@ func update_slot(slot: int):
 	if !item_meta_data["stackable"]:
 		amount = " "
 		
-	for item_slot in $ItemContainer/Slots.get_children():
+	for item_slot in $Slots.get_children():
 		if item_slot.id == slot:
 			item_slot.update_item(slot, item_meta_data, String(amount))
 			return
 		
 	var new_slot = INVENTORY_SLOT_SCENE.instance()
 	new_slot.update_item(slot, item_meta_data, amount)
-	$ItemContainer/Slots.add_child(new_slot)
+	$Slots.add_child(new_slot)
 	
 func show_item_options(index: int):
 	if is_dragging_item or is_dragging_seed:
@@ -134,19 +124,22 @@ func show_item_options(index: int):
 		return
 		
 	var str_item_info : String = ""
+	var item_menu = ITEM_MENU_POPUP_SCENE.instance()
+	add_child(item_menu)
+	Utils.conn_nodes(item_menu.get_node("MarginContainer/V/Button_SellItem"), "pressed", self, "_on_Item_sell_confirm")
 	
-	$PopupPanel_ItemMenu.set_position(get_viewport().get_mouse_position())
-	$PopupPanel_ItemMenu/MarginContainer/V/H_Desc/TextureRect_Icon.set_texture(ResourceLoader.load(item_data["icon"]))
+	item_menu.set_position(get_viewport().get_mouse_position())
+	item_menu.get_node("MarginContainer/V/H_Desc/TextureRect_Icon").set_texture(ResourceLoader.load(item_data["icon"]))
 
 	str_item_info = "Name: [color="+ NAME_TEXT_COLOR +"] " + item_data["name"] + "[/color]\n"
 	str_item_info = str_item_info + "Type: [color="+ TYPE_TEXT_COLOR +"] " + item_data["type"] + "[/color]\n"
 	str_item_info = str_item_info + "Sell Price: [color="+ SELL_TEXT_COLOR +"] " + String(item_data["sell_price"]) + "[/color] gold\n"
 	str_item_info = str_item_info + "\n[color="+ DESC_TEXT_COLOR +"]" + item_data["description"] + "[/color]"
 	
-	$PopupPanel_ItemMenu/MarginContainer/V/H_Desc/MarginContainer_Text/RichTextLabel_ItemInfo.set_bbcode(str_item_info)
+	item_menu.get_node("MarginContainer/V/H_Desc/MarginContainer_Text/RichTextLabel_ItemInfo").set_bbcode(str_item_info)
 
 	active_item_slot = index
-	$PopupPanel_ItemMenu.popup()
+	item_menu.popup()
 	
 func begin_drag_item(index: int):
 	var inv_item = PlayerState.inventory_get_item(index)
@@ -165,27 +158,27 @@ func begin_drag_item(index: int):
 	set_process(true)
 	
 	if item_id == String(Constants.SEED_ITEM_ID):
-		$ItemContainer/Seed.init_seed(inv_item["seed_obj"])
-		$ItemContainer/Seed.scale = Vector2(3.5, 3.5)
-		$ItemContainer/Seed.show()
+		$Seed.init_seed(inv_item["seed_obj"])
+		$Seed.scale = Vector2(3.5, 3.5)
+		$Seed.show()
 		is_dragging_seed = true
 	else:
-		$ItemContainer/Sprite_DraggedItem.texture =  ResourceLoader.load(item["icon"])
-		$ItemContainer/Sprite_DraggedItem.show()
+		$Sprite_DraggedItem.texture =  ResourceLoader.load(item["icon"])
+		$Sprite_DraggedItem.show()
 		is_dragging_item = true
 
 	dragged_item_slot = index
 	mouse_button_released = false
 	if item_id == String(Constants.SEED_ITEM_ID):
-		$ItemContainer/Seed.global_translate(get_viewport().get_mouse_position())
+		$Seed.global_translate(get_viewport().get_mouse_position())
 	else:
-		$ItemContainer/Sprite_DraggedItem.global_translate(get_viewport().get_mouse_position())
+		$Sprite_DraggedItem.global_translate(get_viewport().get_mouse_position())
 
 func end_drag_item():
 	set_process(false)
 	dragged_item_slot = -1
-	$ItemContainer/Sprite_DraggedItem.hide()
-	$ItemContainer/Seed.hide()
+	$Sprite_DraggedItem.hide()
+	$Seed.hide()
 	mouse_button_released = true
 	is_dragging_item = false
 	is_dragging_seed = false
@@ -236,34 +229,41 @@ func _on_Item_sell_confirm():
 	str_confirm_text = str_confirm_text + "[color="+ NAME_TEXT_COLOR +"] " + item_data["name"] + "[/color].\n"
 	str_confirm_text = str_confirm_text + "Do you want to proceed?[/center]"
 	
-	$PopupPanel_Confirmation/MarginContainer/V/MarginContainer_Text/RichTextLabel_Text.set_bbcode(str_confirm_text)
+	var confirmation_menu = CONFIRMATION_POPUP_SCENE.instance()
+	add_child(confirmation_menu)
+	Utils.conn_nodes(confirmation_menu.get_node("MarginContainer/V/H/Button_Stack"), "pressed", self, "_on_Sell_stack")
+	Utils.conn_nodes(confirmation_menu.get_node("MarginContainer/V/H/Button_Confirm"), "pressed", self, "_on_Sell_confirm")
+	Utils.conn_nodes(confirmation_menu.get_node("MarginContainer/V/H/Button_Cancel"), "pressed", self, "_on_Sell_cancel")
 	
-	var popup_size = $PopupPanel_Confirmation.rect_size / 2
-	$PopupPanel_Confirmation.set_position(screen_center - popup_size)
+	confirmation_menu.get_node("MarginContainer/V/MarginContainer_Text/RichTextLabel_Text").set_bbcode(str_confirm_text)
 	
-	$PopupPanel_Confirmation.popup()
+	var popup_size = confirmation_menu.rect_size / 2
+	confirmation_menu.set_position(screen_center - popup_size)
+	
+	confirmation_menu.popup()
 	
 func _on_Sell_stack():
 	PlayerState.inventory_sell_item(sell_item_slot, PlayerState._inventory[String(sell_item_slot)]["amount"])
 	update_slot(sell_item_slot)
 	sell_item_slot = -1
-	$PopupPanel_Confirmation.hide()
-	$PopupPanel_ItemMenu.hide()
+#	$PopupPanel_Confirmation.hide()
+#	$PopupPanel_ItemMenu.hide()
 	
 func _on_Sell_confirm():
 	PlayerState.inventory_sell_item(sell_item_slot, 1)
 	update_slot(sell_item_slot)
 	sell_item_slot = -1
-	$PopupPanel_Confirmation.hide()
-	$PopupPanel_ItemMenu.hide()
+#	$PopupPanel_Confirmation.hide()
+#	$PopupPanel_ItemMenu.hide()
 	
 func _on_Sell_cancel():
 	sell_item_slot = -1
-	$PopupPanel_Confirmation.hide()
-	$PopupPanel_ItemMenu.hide()
+#	$PopupPanel_Confirmation.hide()
+#	$PopupPanel_ItemMenu.hide()
 
-func _on_ItemList_mouse_entered():
-	cursor_inside_itemlist = true;
+func _on_PlayerInventory_mouse_entered():
+	cursor_inside_itemlist = true
 
-func _on_ItemList_mouse_exited():
-	cursor_inside_itemlist = false;
+
+func _on_PlayerInventory_mouse_exited():
+	cursor_inside_itemlist = true

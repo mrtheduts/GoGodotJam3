@@ -27,25 +27,27 @@ onready var selected_tile : Vector2 = OUTBOUND_TILE
 func _ready():
 	Utils.conn_nodes(PlayerState, "planting_mode", self, "_on_PlayerState_planting_mode")
 	Utils.conn_nodes(PlayerState, "edit_garden_mode", self, "_on_PlayerState_edit_garden_mode")
+	Utils.conn_nodes(WorldManager, "time_changed", self, "_on_WorldManager_time_changed")
 	
 	if (crop_tiles.empty()):
 		init_garden()
 		
 	draw_grass_area()
 	draw_garden_tiles()
+	self.modulate = WorldManager.current_color()
+	print("OI!")
 	
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_leftbtn"):
+		var selected_coord = world_to_map(get_local_mouse_position())
 		if planting_mode or increase_garden_mode:
-			var selected_coord = world_to_map(get_local_mouse_position())
 			
 			if $SelectedTiles.get_cell(selected_coord.x, selected_coord.y) == SELECTION_TILE_HOVER_ID:
 				if planting_mode:
 					var seed_obj : Plant = PlayerState.inventory_get_item(PlayerState._holding_item)["seed_obj"]
 					var crop_id : String = get_crop_id_by_coord(selected_coord)
-					
-					crop_tiles[crop_id]["plant"] = PlantFactory.clone_plant(seed_obj)
-					update_crop(crop_id)
+					var plant: Plant = PlantFactory.clone_plant(seed_obj)
+					plant_crop(crop_id, plant)
 				else:
 					add_new_crop_area(selected_coord)
 				
@@ -54,6 +56,11 @@ func _unhandled_input(event):
 			else:
 				PlayerState.hold_item_cancel()
 				end_selection_mode()
+		else:
+			var crop_id: String = get_crop_id_by_coord(selected_coord)
+			if (crop_tiles.has(crop_id) and crop_tiles[crop_id].plant):
+				var plant: Plant = crop_tiles[crop_id].plant
+				show_popup_plant(plant)
 		
 	if event is InputEventMouseMotion:
 		if planting_mode or increase_garden_mode:
@@ -101,6 +108,16 @@ func _on_PlayerState_edit_garden_mode():
 		if get_cell(x, y) == GRASS_TILE_ID and $SelectedTiles.get_cell(x, y) == -1:
 			$SelectedTiles.set_cell(x, y, SELECTION_TILE_ID)
 
+func _on_WorldManager_time_changed() -> void:
+	var color = WorldManager.current_color()
+	$Tween.interpolate_property(
+		self, "modulate",
+		self.modulate, color, 
+		Constants.TIME_TRANSITION_DURATION,
+		Constants.TIME_TRANSITION_CURVE, Constants.TIME_TRANSITION_EASE
+	)
+	$Tween.start()
+
 func end_selection_mode():
 	planting_mode = false
 	increase_garden_mode = false
@@ -110,17 +127,17 @@ func end_selection_mode():
 		for x in range(MIN_X, MAX_X):
 			$SelectedTiles.set_cell(x, y, -1)
 	
-func update_crop(crop_id: String):
-	var new_plant = crop_tiles[crop_id].plant
+func plant_crop(crop_id: String, plant: Plant):
+	Utils.conn_nodes(WorldManager, "new_day", plant, "age", [1])
+	crop_tiles[crop_id]["plant"] = plant
+	plant.plant()
 	var new_coord = crop_tiles[crop_id].coord
 	
 	var overview_plant = OVERVIEW_PLANT_SCENE.instance()
-	new_plant.age()
-	new_plant.age()
-	overview_plant.set_age(new_plant.life_stage)
+	overview_plant.set_age(plant.life_stage)
 	
 	var feature_name = DNA.get_feature_name(DNA.FEATURES.FLOWER_COLOR)
-	var flower_color = new_plant.phenotype[feature_name]
+	var flower_color = plant.phenotype[feature_name]
 	var colors = DNA.get_colors(feature_name, flower_color)
 	var color = Utils.mix_colors(colors)
 	overview_plant.set_flower_color(color)
@@ -128,7 +145,7 @@ func update_crop(crop_id: String):
 	add_child(overview_plant)
 	overview_plant.position = map_to_world(new_coord) + cell_size/2
 	
-	new_plant.overview_plant = overview_plant
+	plant.overview_plant = overview_plant
 	print(crop_tiles[crop_id])
 
 func add_new_crop_area(coord: Vector2):
@@ -139,6 +156,8 @@ func add_new_crop_area(coord: Vector2):
 		"plant" : null
 	}
 	
+	# warning-ignore:narrowing_conversion
+	# warning-ignore:narrowing_conversion
 	set_cell(coord.x, coord.y, PLANT_TILE_ID)
 	update_bitmask_area(coord)
 	
@@ -150,6 +169,8 @@ func get_garden_center():
 func draw_garden_tiles():
 	for tile_data in crop_tiles.values():
 		var tile_pos : Vector2 = tile_data["coord"]
+		# warning-ignore:narrowing_conversion
+		# warning-ignore:narrowing_conversion
 		set_cell(tile_pos.x, tile_pos.y, PLANT_TILE_ID)
 		update_bitmask_area(Vector2(tile_pos.x, tile_pos.y))
 

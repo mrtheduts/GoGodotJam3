@@ -30,6 +30,9 @@ var selected_item : Dictionary
 
 var displayed_tools_id : Array = [1]
 
+func _on_WorldManager_new_day():
+	restock()
+
 func _on_SeedPacket_selection(id: int):
 	selected_item = get_item_by_id(str(id))
 	shopper_sell(selected_item["dialog"])
@@ -46,6 +49,7 @@ func _input(event):
 				$Dialog.skip_dialog = true
 
 func _ready():
+	Utils.conn_nodes(WorldManager, "new_day", self, "_on_WorldManager_new_day")
 	restock()
 	
 	if shop_items.size() > 0:

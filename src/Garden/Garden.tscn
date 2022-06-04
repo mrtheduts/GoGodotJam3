@@ -19,3 +19,5 @@ cell_tile_origin = 1
 format = 1
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
+
+[node name="Tween" type="Tween" parent="."]

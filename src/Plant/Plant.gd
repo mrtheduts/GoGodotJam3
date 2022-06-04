@@ -4,7 +4,10 @@
 
 class_name Plant
 
-enum LIFE_STAGES { SEED, SPROUT, ADULT, DEAD}
+# Signals
+signal water_level_changed
+signal ask_for_close_up_plant
+
 var life_duration_stages: Dictionary
 
 var close_up_plant: CloseUpPlant = null
@@ -14,7 +17,8 @@ var type_hash: int = 0
 var genetics: Dictionary = {}
 var phenotype: Dictionary = {}
 
-var life_stage = LIFE_STAGES.SEED
+var life_stage = Constants.LIFE_STAGES.SEED
+var life_days := 0
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
 var value := 1
@@ -65,6 +69,7 @@ func add_gene(feature, gene) -> void:
 
 func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
+	
 	_reveal_phenotype()
 
 func meiosis() -> Dictionary:
@@ -74,20 +79,29 @@ func meiosis() -> Dictionary:
 		result[feature] = Utils.shuffle_and_pop_front(genes)
 	return result
 
-func age(days: int = 1) -> void:
+func age(days: int) -> void:
+	life_days += days
 	match life_stage:
-		LIFE_STAGES.SEED:
-			life_stage = LIFE_STAGES.SPROUT
-		LIFE_STAGES.SPROUT:
-			life_stage = LIFE_STAGES.ADULT
-		LIFE_STAGES.ADULT:
-			life_stage = LIFE_STAGES.DEAD
-		LIFE_STAGES.DEAD:
-			printerr("I'm dead! :(")
+		Constants.LIFE_STAGES.SEED:
+			life_stage = Constants.LIFE_STAGES.SPROUT
+		Constants.LIFE_STAGES.SPROUT:
+			life_stage = Constants.LIFE_STAGES.TEENAGE
+		Constants.LIFE_STAGES.TEENAGE:
+			life_stage = Constants.LIFE_STAGES.ADULT
+		Constants.LIFE_STAGES.ADULT:
+			life_stage = Constants.LIFE_STAGES.DEAD
+			close_up_plant.die()
+	
+	emit_signal("ask_for_close_up_plant", self)
 
 func water(amount: int = 1) -> void:
+	# warning-ignore:narrowing_conversion
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
 	print("New watered amount: ", watered_amount)
+	emit_signal("water_level_changed", watered_amount)
+
+func plant() -> void:
+	emit_signal("ask_for_close_up_plant", self)
 
 # Get identifer code for unique seed
 func get_seed_code() -> String:
