@@ -18,25 +18,31 @@ func _ready():
 
 func set_age(age : int):
 	match age:
-		Plant.LIFE_STAGES.SEED:
+		Constants.LIFE_STAGES.SEED:
 			$Seed.visible = true
 			$Sprout.visible = false
 			$Teenage.visible = false
 			$AdultPlant.visible = false
 			$Dead.visible = false
-		Plant.LIFE_STAGES.SPROUT:
+		Constants.LIFE_STAGES.SPROUT:
 			$Seed.visible = false
 			$Sprout.visible = true
 			$Teenage.visible = false
 			$AdultPlant.visible = false
 			$Dead.visible = false
-		Plant.LIFE_STAGES.ADULT:
+		Constants.LIFE_STAGES.TEENAGE:
+			$Seed.visible = false
+			$Sprout.visible = false
+			$Teenage.visible = true
+			$AdultPlant.visible = false
+			$Dead.visible = false
+		Constants.LIFE_STAGES.ADULT:
 			$Seed.visible = false
 			$Sprout.visible = false
 			$Teenage.visible = false
 			$AdultPlant.visible = true
 			$Dead.visible = false
-		Plant.LIFE_STAGES.DEAD:
+		Constants.LIFE_STAGES.DEAD:
 			$Seed.visible = false
 			$Sprout.visible = false
 			$Teenage.visible = false

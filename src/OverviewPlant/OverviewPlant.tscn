@@ -11,15 +11,12 @@
 script = ExtResource( 1 )
 
 [node name="Seed" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 3 )
 
 [node name="Sprout" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 5 )
 
 [node name="Teenage" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 6 )
 
 [node name="AdultPlant" type="Sprite" parent="."]
@@ -34,5 +31,4 @@ polygons = [ PoolIntArray( 0, 16, 15, 14, 13, 1 ), PoolIntArray( 0, 16, 4, 5, 7,
 internal_vertex_count = 13
 
 [node name="Dead" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 4 )
