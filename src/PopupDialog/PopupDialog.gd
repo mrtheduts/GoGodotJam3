@@ -87,7 +87,7 @@ func _on_WaterButton_button_down():
 
 func _on_SellButton_pressed():
 	if (plant != null):
-		emit_signal("sell_button_clicked", plant.value)
+		emit_signal("sell_button_clicked", plant)
 	self.rect_pivot_offset = Vector2(0, 0)
 	$TweenClose.interpolate_property(
 		self, "rect_scale",
@@ -103,7 +103,8 @@ func _on_SellButton_pressed():
 	$TweenClose.start()
 
 func _on_TweenClose_tween_all_completed():
-	if (close_up_plant):
+	if (close_up_plant and is_instance_valid(close_up_plant)):
+		print('close_up_plant ', close_up_plant)
 		close_up_plant.get_parent().remove_child(close_up_plant)
 	emit_signal("closed", plant)
 	self.queue_free()

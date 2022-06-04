@@ -218,3 +218,25 @@ func load_stats(stats):
 func show_popup_plant(plant: Plant) -> void:
 	emit_signal("show_close_up_plant", plant)
 	
+	
+func get_crop_id_by_plant(plant: Plant) -> String:
+	for key in crop_tiles:
+		if crop_tiles[key]["plant"] == plant:
+			return key
+	return ""
+
+func _on_UILayer_remove_plant(plant: Plant):
+	print("Removendo planta ", plant)
+	var crop_id = get_crop_id_by_plant(plant);
+	
+	var overview_plant = plant.overview_plant
+	plant.overview_plant = null
+	overview_plant.queue_free()
+	
+	var close_up_plant = plant.close_up_plant
+	plant.close_up_plant = null
+	close_up_plant.queue_free()
+	
+	crop_tiles[crop_id].plant = null
+	print("Planta removida")
+	pass # Replace with function body.
