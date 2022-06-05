@@ -52,7 +52,7 @@ expand = true
 margin_left = 134.0
 margin_top = 68.0
 margin_right = 634.0
-margin_bottom = 412.0
+margin_bottom = 430.0
 rect_min_size = Vector2( 500, 300 )
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -61,20 +61,20 @@ alignment = 1
 [node name="Page1" parent="VBoxContainer/HBoxContainerMid" instance=ExtResource( 3 )]
 margin_top = 0.0
 margin_right = 200.0
-margin_bottom = 344.0
+margin_bottom = 362.0
 
 [node name="Page2" parent="VBoxContainer/HBoxContainerMid" instance=ExtResource( 3 )]
 margin_left = 300.0
 margin_top = 0.0
 margin_right = 500.0
-margin_bottom = 344.0
+margin_bottom = 362.0
 size_flags_horizontal = 10
 
 [node name="HBoxContainerBot" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 436.0
 margin_right = 768.0
 margin_bottom = 500.0
-size_flags_horizontal = 11
+size_flags_horizontal = 15
 size_flags_vertical = 10
 
 [node name="BackButton" type="TextureButton" parent="VBoxContainer/HBoxContainerBot"]

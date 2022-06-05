@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://raw_assets/images/ui-icons/unknown.png" type="Texture" id=1]
 [ext_resource path="res://src/PlantIndex/IndexEntry/IndexEntry.gd" type="Script" id=2]
@@ -12,6 +12,9 @@ bg_color = Color( 0.8, 0.8, 0.8, 1 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.8, 0.8, 0.8, 1 )
 
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.8, 0.8, 0.8, 1 )
+
 [node name="IndexEntry" type="MarginContainer"]
 margin_top = 20.0
 margin_right = 40.0
@@ -20,7 +23,7 @@ script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 200.0
-margin_bottom = 344.0
+margin_bottom = 362.0
 custom_constants/separation = 20
 
 [node name="Photo" type="TextureRect" parent="VBoxContainer"]
@@ -34,7 +37,7 @@ stretch_mode = 6
 [node name="DataContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 120.0
 margin_right = 200.0
-margin_bottom = 344.0
+margin_bottom = 362.0
 
 [node name="Name" type="LineEdit" parent="VBoxContainer/DataContainer"]
 margin_right = 200.0
@@ -58,5 +61,17 @@ custom_colors/guide_color = Color( 0.8, 0.8, 0.8, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_styles/bg = SubResource( 2 )
 auto_height = true
+
+[node name="Label" type="Label" parent="VBoxContainer/DataContainer"]
+margin_left = 79.0
+margin_top = 228.0
+margin_right = 121.0
+margin_bottom = 242.0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 4 )
+text = "Page 1"
+valign = 2
 
 [connection signal="text_changed" from="VBoxContainer/DataContainer/Name" to="." method="_on_Name_text_changed"]

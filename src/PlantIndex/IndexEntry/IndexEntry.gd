@@ -5,11 +5,14 @@ class_name IndexEntry
 onready var _feature_list: ItemList = $VBoxContainer/DataContainer/FeatureList
 onready var _name_edit: LineEdit = $VBoxContainer/DataContainer/Name
 onready var _image: TextureRect = $VBoxContainer/Photo
+onready var _label: Label = $VBoxContainer/DataContainer/Label
 
 var _plant: Plant = null
+var _page: int
 
-func init_plant(plant: Plant):
+func init_plant(plant: Plant, page: int):
 	_plant = plant
+	_page = page
 	var features: Dictionary = plant.phenotype
 	var size = features.size()
 	
@@ -24,6 +27,7 @@ func init_plant(plant: Plant):
 		item_string = key + ": " + String(features[key])
 		add_feature(item_string)
 	
+	_label.text = "Page " + String(_page)
 	# Name and photo
 	if PlayerState.check_plant(plant):
 		_name_edit.editable = true
