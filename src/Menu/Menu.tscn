@@ -80,10 +80,13 @@ margin_bottom = 324.0
 rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -10.0
 autoplay = true
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="pressed" from="MainContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="tree_entered" from="Tween" to="." method="_on_Tween_tree_entered"]

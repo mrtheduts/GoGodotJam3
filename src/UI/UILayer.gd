@@ -39,6 +39,7 @@ func _on_Garden_combine_plants(plants: Array, new_plant: Plant):
 
 	var combine_animation: CombineAnimation = COMBINE_ANIMATION_SCENE.instance()
 	combine_animation.init(new_plant, get_viewport().size/2)
+	$Eureka.play()
 	add_child(combine_animation)
 
 

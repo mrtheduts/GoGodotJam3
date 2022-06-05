@@ -157,7 +157,8 @@ func plant_crop(crop_id: String, plant: Plant):
 	var colors = DNA.get_colors(feature_name, flower_color)
 	var color = Utils.mix_colors(colors)
 	overview_plant.set_flower_color(color)
-
+	
+	$Plant.play()
 	add_child(overview_plant)
 	overview_plant.position = map_to_world(new_coord) + cell_size/2
 
@@ -171,6 +172,7 @@ func add_new_crop_area(coord: Vector2):
 		"plant" : null
 	}
 
+	$Hoe.play()
 	# warning-ignore:narrowing_conversion
 	# warning-ignore:narrowing_conversion
 	set_cell(coord.x, coord.y, PLANT_TILE_ID)

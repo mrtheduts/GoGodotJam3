@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://src/PopupDialog/PopupDialog.gd" type="Script" id=2]
@@ -12,6 +12,10 @@
 [ext_resource path="res://raw_assets/images/ui-icons/close-pressed.png" type="Texture" id=10]
 [ext_resource path="res://raw_assets/images/ui-icons/combine.png" type="Texture" id=11]
 [ext_resource path="res://raw_assets/images/ui-icons/combine-pressed.png" type="Texture" id=12]
+[ext_resource path="res://raw_assets/sounds/effects/watering2.tres" type="AudioStream" id=13]
+[ext_resource path="res://raw_assets/sounds/effects/shuttle.tres" type="AudioStream" id=14]
+[ext_resource path="res://raw_assets/sounds/effects/flash.tres" type="AudioStream" id=15]
+[ext_resource path="res://raw_assets/sounds/effects/trash2.tres" type="AudioStream" id=16]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -29,6 +33,18 @@ rect_pivot_offset = Vector2( 414, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource( 2 )
+
+[node name="Watering" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="Shuttle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="Flash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="Trash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
 
 [node name="Tween" type="Tween" parent="."]
 

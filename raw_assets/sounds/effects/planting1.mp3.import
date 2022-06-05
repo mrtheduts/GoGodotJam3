@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/planting1.mp3-ad4b8dccf2db048b7027a70b3ec894c1.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/planting1.mp3"
+dest_files=[ "res://.import/planting1.mp3-ad4b8dccf2db048b7027a70b3ec894c1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

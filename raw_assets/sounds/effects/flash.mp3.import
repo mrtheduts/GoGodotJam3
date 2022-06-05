@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/flash.mp3-5821f7c6d3ab38121b3f2f93c43b7422.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/flash.mp3"
+dest_files=[ "res://.import/flash.mp3-5821f7c6d3ab38121b3f2f93c43b7422.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
