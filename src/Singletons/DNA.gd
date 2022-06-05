@@ -101,10 +101,19 @@ var LEAF_TYPE_SCENES = {
 
 # Flower
 const FLOWER_TYPE_TYPE := SCENE
-enum FLOWER_TYPE_VALUES { DEFAULT }
-const FLOWER_TYPE_DOMINANTS := [ FLOWER_TYPE_VALUES.DEFAULT ]
+enum FLOWER_TYPE_VALUES { DEFAULT, WIDE, SAD, WEIRD, SPLASH, TULIP }
+const FLOWER_TYPE_DOMINANTS := [
+	FLOWER_TYPE_VALUES.DEFAULT,
+	FLOWER_TYPE_VALUES.TULIP,
+	FLOWER_TYPE_VALUES.WIDE
+]
 var FLOWER_TYPE_SCENES = {
-	FLOWER_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Flowers/Flower.tscn")
+	FLOWER_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Flowers/DefaultFlower.tscn"),
+	FLOWER_TYPE_VALUES.WIDE: preload("res://src/CloseUpPlant/Flowers/WideFlower.tscn"),
+	FLOWER_TYPE_VALUES.SAD: preload("res://src/CloseUpPlant/Flowers/SadFlower.tscn"),
+	FLOWER_TYPE_VALUES.WEIRD: preload("res://src/CloseUpPlant/Flowers/WeirdFlower.tscn"),
+	FLOWER_TYPE_VALUES.SPLASH: preload("res://src/CloseUpPlant/Flowers/SplashFlower.tscn"),
+	FLOWER_TYPE_VALUES.TULIP: preload("res://src/CloseUpPlant/Flowers/TulipFlower.tscn")
 }
 
 # Fruit

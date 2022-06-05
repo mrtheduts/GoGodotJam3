@@ -8,7 +8,7 @@
 extents = Vector2( 2, 3 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 414.019
+radius = 221.057
 
 [node name="Fruit" type="Node2D"]
 script = ExtResource( 2 )
@@ -38,12 +38,12 @@ collision_mask = 128
 mass = 100.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBodyFruit"]
-position = Vector2( 1, 421 )
+position = Vector2( 12, 226 )
 shape = SubResource( 3 )
 
 [node name="Polygon2D" type="Polygon2D" parent="RigidBodyFruit"]
 material = ExtResource( 3 )
-offset = Vector2( -625, -250 )
+offset = Vector2( -300, -100 )
 texture = ExtResource( 1 )
 polygon = PoolVector2Array( 31.9999, 0, 1184, 0, 1184, 1280, 31.9999, 1280 )
 uv = PoolVector2Array( 31.9999, 0, 1184, 0, 1184, 1280, 31.9999, 1280 )
