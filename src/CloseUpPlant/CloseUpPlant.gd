@@ -6,6 +6,8 @@ extends Node2D
 
 class_name CloseUpPlant
 
+signal update_ui
+
 const PLANT_OFFSET := Vector2(0, -150)
 const DEPTH_SEED := Vector2(0, 100)
 const DEPTH_SPROUT := Vector2(0, 50)
@@ -97,11 +99,14 @@ func die() -> void:
 	for node in nodes:
 		if (node.has_method("die")):
 			node.die()
+			
+#	emit_signal("update_ui", Constants.LIFE_STAGES.DEAD)
 
 func free_seed() -> void:
 	nodes_with_idle_animation.erase(seed_node)
 	seed_node.queue_free()
 	seed_node = null
+	
 func add_seed(node: Node) -> void:
 	self.seed_node = node
 	add_child(node)
