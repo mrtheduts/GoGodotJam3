@@ -15,6 +15,7 @@ var _stored_plants: Array = []
 var _inventory : Dictionary = {}
 var _inventory_max_slots : int = 10
 var _holding_item : int = -1
+var _sell_per : float = 0.75
 
 onready var _is_editing_garden : bool = false
 onready var _is_planting_seed : bool = false
@@ -84,19 +85,26 @@ func hold_item_used():
 
 func hold_item_cancel():
 	_holding_item = -1
-	_is_planting_seed = false
-	_is_editing_garden = false
+	
+	if _is_planting_seed:
+		_is_planting_seed = false
+		emit_signal("planting_mode", false)
+	
+	if _is_editing_garden:
+		_is_editing_garden = false
+		emit_signal("edit_garden_mode", false)
 	
 func inventory_use_item(item_slot: int):
 	var item = inventory_get_item(item_slot)
-	_holding_item = item_slot
 	
-	if item["id"] == String(Constants.SEED_ITEM_ID):
+	if item["id"] == String(Constants.SEED_ITEM_ID) and !_is_editing_garden:
+		_holding_item = item_slot
 		_is_planting_seed = true
-		emit_signal("planting_mode")
-	elif item["id"] == String(Constants.HOE_ITEM_ID):
+		emit_signal("planting_mode", true)
+	elif item["id"] == String(Constants.HOE_ITEM_ID) and !_is_planting_seed:
+		_holding_item = item_slot
 		_is_editing_garden = true
-		emit_signal("edit_garden_mode")
+		emit_signal("edit_garden_mode", true)
 	
 func inventory_add_item(item_id: int, add_amount: int = 1, seed_obj: Plant = null):
 	# Get Item Data
@@ -137,7 +145,6 @@ func inventory_add_item(item_id: int, add_amount: int = 1, seed_obj: Plant = nul
 	return
 	
 func inventory_get_item(slot: int) -> Dictionary:
-	print(slot)
 	return _inventory[String(slot)]
 
 func inventory_get_empty_slot() -> int:
@@ -169,7 +176,7 @@ func inventory_sell_item(item_slot: int, sell_amount: int):
 	if sell_amount < 0:
 		return
 		
-	var sell_price : int = ItemDatabase.get_item(_inventory[String(item_slot)]["id"])["sell_price"]
+	var sell_price : int = round(ItemDatabase.get_item(_inventory[String(item_slot)]["id"])["sell_price"] * _sell_per)
 	var current_amount : int = _inventory[String(item_slot)]["amount"]
 	
 	if sell_amount > current_amount:

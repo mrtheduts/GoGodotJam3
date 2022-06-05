@@ -16,12 +16,6 @@ var COLOR_MAPPING := {
 
 var seed_plant : Plant = null
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#var testPlant : Plant = PlantFactory.gen_random_plant()
-	#init_seed(testPlant)
-	pass
-
 func middle_color(first_color: Color, second_color: Color) -> Color:
 	return (first_color + second_color)/2
 

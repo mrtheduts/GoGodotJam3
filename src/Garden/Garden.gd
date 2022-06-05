@@ -21,8 +21,6 @@ var crop_tiles : Dictionary = {}
 
 var OVERVIEW_PLANT_SCENE = preload('res://src/OverviewPlant/OverviewPlant.tscn')
 
-onready var planting_mode : bool = false
-onready var increase_garden_mode : bool = false
 onready var selected_tile : Vector2 = OUTBOUND_TILE
 onready var combining_array: Array = []
 
@@ -41,30 +39,35 @@ func _ready():
 func _unhandled_input(event):
 	if Input.is_action_pressed("mouse_leftbtn"):
 		var selected_coord = world_to_map(get_local_mouse_position())
-		if planting_mode or increase_garden_mode:
-
-			if $SelectedTiles.get_cell(selected_coord.x, selected_coord.y) == SELECTION_TILE_HOVER_ID:
-				if planting_mode:
+		if PlayerState._is_planting_seed or PlayerState._is_editing_garden:
+			if $SelectedTiles.get_cell(selected_coord.x, selected_coord.y) == SELECTION_TILE_HOVER_ID or PlayerState._holding_item == -1:
+				if PlayerState._is_planting_seed:
 					var seed_obj : Plant = PlayerState.inventory_get_item(PlayerState._holding_item)["seed_obj"]
-					var crop_id : String = get_crop_id_by_coord(selected_coord)
-					var plant: Plant = PlantFactory.clone_plant(seed_obj)
-					plant_crop(crop_id, plant)
+					
+					if seed_obj == null:
+						PlayerState.hold_item_cancel()
+					else:
+						var crop_id : String = get_crop_id_by_coord(selected_coord)
+						var plant: Plant = PlantFactory.clone_plant(seed_obj)
+						plant_crop(crop_id, plant)
 				else:
 					add_new_crop_area(selected_coord)
 
 				PlayerState.hold_item_used()
-				end_selection_mode()
 			else:
 				PlayerState.hold_item_cancel()
-				end_selection_mode()
 		else:
 			var crop_id: String = get_crop_id_by_coord(selected_coord)
 			if (crop_tiles.has(crop_id) and crop_tiles[crop_id].plant):
 				var plant: Plant = crop_tiles[crop_id].plant
 				show_popup_plant(plant)
-
+	
+	if event.is_action("mouse_rightbtn"):
+		if PlayerState._is_planting_seed or PlayerState._is_editing_garden:
+			PlayerState.hold_item_cancel()
+			
 	if event is InputEventMouseMotion:
-		if planting_mode or increase_garden_mode:
+		if PlayerState._is_planting_seed or PlayerState._is_editing_garden:
 			var selected_coord = world_to_map(get_local_mouse_position())
 
 			if selected_tile != selected_coord:
@@ -76,15 +79,27 @@ func _unhandled_input(event):
 				else:
 					selected_tile = OUTBOUND_TILE
 
-func _on_PlayerState_planting_mode():
-	planting_mode = true
-	for tile_data in crop_tiles.values():
-		if tile_data["plant"] == null:
-			var tile_pos : Vector2 = tile_data["coord"]
-			$SelectedTiles.set_cell(tile_pos.x, tile_pos.y, SELECTION_TILE_ID)
+func _on_PlayerState_planting_mode(active: bool):
+	if !active:
+		end_selection_mode()
+		return
+		
+	if !PlayerState._is_editing_garden:
+		PlayerState._is_planting_seed = true
+		for tile_data in crop_tiles.values():
+			if tile_data["plant"] == null:
+				var tile_pos : Vector2 = tile_data["coord"]
+				$SelectedTiles.set_cell(tile_pos.x, tile_pos.y, SELECTION_TILE_ID)
 
-func _on_PlayerState_edit_garden_mode():
-	increase_garden_mode = true
+func _on_PlayerState_edit_garden_mode(active: bool):
+	if !active:
+		end_selection_mode()
+		return
+		
+	if PlayerState._is_planting_seed:
+		return
+		
+	PlayerState._is_editing_garden = true
 
 	for tile_data in crop_tiles.values():
 		var tile_pos : Vector2 = tile_data["coord"]
@@ -120,8 +135,8 @@ func _on_WorldManager_time_changed() -> void:
 	$Tween.start()
 
 func end_selection_mode():
-	planting_mode = false
-	increase_garden_mode = false
+	PlayerState._is_planting_seed = false
+	PlayerState._is_editing_garden = false
 	selected_tile = OUTBOUND_TILE
 
 	for y in range(MIN_Y, MAX_Y+1):

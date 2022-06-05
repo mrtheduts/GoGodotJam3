@@ -1,6 +1,5 @@
 extends Control
 
-
 const ICON_SIZE : Vector2 = Vector2(64, 64)
 const EMPTY_ICON_PATH : String = "res://raw_assets/images/items_icons/empty_slot.png"
 
@@ -64,9 +63,10 @@ func _input(event):
 						show_item_options(active_item_slot)
 
 			if event.doubleclick:
-				active_item_slot = get_item_at_position(get_local_mouse_position())
-				if active_item_slot >= 0:
-					PlayerState.inventory_use_item(active_item_slot)
+				if event.is_action("mouse_leftbtn"):
+					active_item_slot = get_item_at_position(get_local_mouse_position())
+					if active_item_slot >= 0:
+						PlayerState.inventory_use_item(active_item_slot)
 
 		if event.is_action_released("mouse_leftbtn"):
 			move_merge_item()
@@ -123,7 +123,15 @@ func update_slot(slot: int):
 	$Slots.add_child(new_slot)
 
 func show_item_options(index: int):
-	if is_dragging_item or is_dragging_seed or item_menu_popup != null:
+	
+	if item_menu_popup != null:
+		if item_menu_popup.visible:
+			return
+		else:
+			item_menu_popup.queue_free()
+			item_menu_popup = null
+			
+	if is_dragging_item or is_dragging_seed:
 		return
 
 	sell_item_slot = index
@@ -142,17 +150,24 @@ func show_item_options(index: int):
 
 	str_item_info = "Name: [color="+ NAME_TEXT_COLOR +"] " + item_data["name"] + "[/color]\n"
 	str_item_info = str_item_info + "Type: [color="+ TYPE_TEXT_COLOR +"] " + item_data["type"] + "[/color]\n"
-	str_item_info = str_item_info + "Sell Price: [color="+ SELL_TEXT_COLOR +"] " + String(item_data["sell_price"]) + "[/color] gold\n"
+	str_item_info = str_item_info + "Sell Price: [color="+ SELL_TEXT_COLOR +"] " + String(round(item_data["sell_price"] * PlayerState._sell_per)) + "[/color] gold\n"
 	str_item_info = str_item_info + "\n[color="+ DESC_TEXT_COLOR +"]" + item_data["description"] + "[/color]"
 
 	item_menu_popup = ITEM_MENU_POPUP_SCENE.instance()
 
 	add_child(item_menu_popup)
-	Utils.conn_nodes(item_menu_popup.get_node("MarginContainer/V/Button_SellItem"), "pressed", self, "_on_Item_sell_confirm")
-
+	Utils.conn_nodes(item_menu_popup.get_node("MarginContainer/V/H_Buttons/Button_SellItem"), "pressed", self, "_on_Item_sell_confirm")
+	Utils.conn_nodes(item_menu_popup.get_node("MarginContainer/V/H_Buttons/Button_UseItem"), "pressed", self, "_on_Item_use")
+	
 	var popup_position = selected_slot.rect_global_position + OPTIONS_MENU_PADDING
 	item_menu_popup.rect_position = popup_position
-	item_menu_popup.get_node("MarginContainer/V/H_Desc/TextureRect_Icon").set_texture(ResourceLoader.load(item_data["icon"]))
+	if int(item_data["id"]) == Constants.SEED_ITEM_ID:
+		item_menu_popup.get_node("MarginContainer/V/H_Desc/MarginContainer").visible = true
+		item_menu_popup.get_node("MarginContainer/V/H_Desc/MarginContainer/Seed").init_seed(PlayerState._inventory[String(index)]["seed_obj"])
+		item_menu_popup.get_node("MarginContainer/V/H_Desc/MarginContainer/Seed").visible = true
+	else:
+		item_menu_popup.get_node("MarginContainer/V/H_Desc/TextureRect_Icon").set_texture(ResourceLoader.load(item_data["icon"]))
+		item_menu_popup.get_node("MarginContainer/V/H_Desc/TextureRect_Icon").visible = true
 	item_menu_popup.get_node("MarginContainer/V/H_Desc/MarginContainer_Text/RichTextLabel_ItemInfo").set_bbcode(str_item_info)
 
 	active_item_slot = index
@@ -262,7 +277,13 @@ func _on_Item_sell_confirm():
 	yield(get_tree(), "idle_frame")
 	confirm_menu_popup.popup()
 
+func _on_Item_use():
+	PlayerState.inventory_use_item(sell_item_slot)
+	
 func _on_Sell_stack():
+	if PlayerState._holding_item == sell_item_slot:
+		PlayerState.hold_item_cancel()
+		
 	PlayerState.inventory_sell_item(sell_item_slot, PlayerState._inventory[String(sell_item_slot)]["amount"])
 	update_slot(sell_item_slot)
 	sell_item_slot = -1
@@ -274,6 +295,9 @@ func _on_Sell_stack():
 	item_menu_popup = null
 
 func _on_Sell_confirm():
+	if PlayerState._holding_item == sell_item_slot:
+		PlayerState.hold_item_cancel()
+		
 	PlayerState.inventory_sell_item(sell_item_slot, 1)
 	update_slot(sell_item_slot)
 	sell_item_slot = -1
