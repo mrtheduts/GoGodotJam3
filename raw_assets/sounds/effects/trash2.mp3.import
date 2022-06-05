@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/trash2.mp3-2a9199e32da45092e4c0d6c6b70b7a5e.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/trash2.mp3"
+dest_files=[ "res://.import/trash2.mp3-2a9199e32da45092e4c0d6c6b70b7a5e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

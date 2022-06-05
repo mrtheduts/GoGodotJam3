@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://raw_assets/images/shop/shop.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/Money/Money.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Dialog/Dialog.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/UILayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://raw_assets/sounds/music/vines.tres" type="AudioStream" id=5]
 [ext_resource path="res://src/Shop/Shop.gd" type="Script" id=6]
 
-[node name="Shop" type="Node"]
+[node name="Shop" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="Background" type="Sprite" parent="."]
@@ -28,3 +29,13 @@ margin_bottom = 342.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+autoplay = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="exit_shop" from="UILayer" to="." method="_on_UILayer_exit_shop"]
+[connection signal="tree_entered" from="Tween" to="." method="_on_Tween_tree_entered"]

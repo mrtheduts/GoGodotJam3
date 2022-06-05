@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/eureka.mp3-9c3c58ff1877f8c4c252d69e87660c4d.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/eureka.mp3"
+dest_files=[ "res://.import/eureka.mp3-9c3c58ff1877f8c4c252d69e87660c4d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

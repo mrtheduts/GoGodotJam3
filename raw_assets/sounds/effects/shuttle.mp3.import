@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/shuttle.mp3-b1fab9e34a4fb5f0762b3a32243e2705.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/shuttle.mp3"
+dest_files=[ "res://.import/shuttle.mp3-b1fab9e34a4fb5f0762b3a32243e2705.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

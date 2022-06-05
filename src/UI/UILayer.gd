@@ -8,6 +8,8 @@ extends CanvasLayer
 
 signal remove_plant
 signal combine_crop
+signal exit_main
+signal exit_shop
 
 var POPUP_SCENE = preload("res://src/PopupDialog/PopupDialog.tscn")
 var CLOSE_UP_SOIL_SCENE = preload("res://src/CloseUpPlot/CloseUpPlot.tscn")
@@ -37,6 +39,7 @@ func _on_Garden_combine_plants(plants: Array, new_plant: Plant):
 
 	var combine_animation: CombineAnimation = COMBINE_ANIMATION_SCENE.instance()
 	combine_animation.init(new_plant, get_viewport().size/2)
+	$Eureka.play()
 	add_child(combine_animation)
 
 
@@ -88,8 +91,14 @@ func _on_PopupWindow_combine_button_clicked(plant: Plant):
 
 func _on_Store_pressed():
 	if get_tree().get_current_scene().get_name() == "Main":
+		emit_signal("exit_main")
+		$Store/DoorChime.play()
+		yield($Store/DoorChime,"finished")
 		get_tree().change_scene(SHOP_SCENE_PATH)
 	else:
+		emit_signal("exit_shop")
+		$Store/DoorChime.play()
+		yield($Store/DoorChime,"finished")
 		get_tree().change_scene(MAIN_SCENE_PATH)
 
 func _on_OpenPlantIndex_open_index():

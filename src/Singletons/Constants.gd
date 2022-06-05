@@ -6,6 +6,8 @@ class_name Constants
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
 
+const TRANSITION_DURATION: float = 1.0
+
 # WORLD COLORS
 
 # TIME
