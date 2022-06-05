@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://raw_assets/images/plants/fruits/default.svg" type="Texture" id=1]
-[ext_resource path="res://src/CloseUpPlant/Fruits/Fruit.gd" type="Script" id=2]
-[ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=3]
+[ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=1]
+[ext_resource path="res://raw_assets/images/plants/fruits/berries.svg" type="Texture" id=2]
+[ext_resource path="res://src/CloseUpPlant/Fruits/Fruit.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2, 3 )
@@ -11,7 +11,7 @@ extents = Vector2( 2, 3 )
 radius = 221.057
 
 [node name="Fruit" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -42,10 +42,11 @@ position = Vector2( 12, 226 )
 shape = SubResource( 3 )
 
 [node name="Polygon2D" type="Polygon2D" parent="RigidBodyFruit"]
-material = ExtResource( 3 )
-offset = Vector2( -300, -100 )
-texture = ExtResource( 1 )
-polygon = PoolVector2Array( 31.9999, 0, 1184, 0, 1184, 1280, 31.9999, 1280 )
-uv = PoolVector2Array( 31.9999, 0, 1184, 0, 1184, 1280, 31.9999, 1280 )
+material = ExtResource( 1 )
+rotation = 0.610865
+offset = Vector2( -150, -100 )
+texture = ExtResource( 2 )
+polygon = PoolVector2Array( 31.9999, 0, 672, 0, 672, 640, 32, 640 )
+uv = PoolVector2Array( 31.9999, 0, 672, 0, 672, 640, 32, 640 )
 
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

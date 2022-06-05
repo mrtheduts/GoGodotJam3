@@ -120,7 +120,14 @@ var LEAF_TYPE_SCENES = {
 
 # Flower
 const FLOWER_TYPE_TYPE := SCENE
-enum FLOWER_TYPE_VALUES { DEFAULT, WIDE, SAD, WEIRD, SPLASH, TULIP }
+enum FLOWER_TYPE_VALUES {
+	DEFAULT,
+	WIDE,
+	SAD,
+	WEIRD,
+	SPLASH,
+	TULIP
+}
 const FLOWER_TYPE_DOMINANTS := [
 	FLOWER_TYPE_VALUES.DEFAULT,
 	FLOWER_TYPE_VALUES.TULIP,
@@ -137,10 +144,26 @@ var FLOWER_TYPE_SCENES = {
 
 # Fruit
 const FRUIT_TYPE_TYPE := SCENE
-enum FRUIT_TYPE_VALUES { DEFAULT }
-const FRUIT_TYPE_DOMINANTS := [ FRUIT_TYPE_VALUES.DEFAULT ]
+enum FRUIT_TYPE_VALUES {
+	DEFAULT,
+	BERRIES,
+	FOLIATE,
+	PINMYAPPLE,
+	QUARTET,
+	STRAWBERRY,
+}
+const FRUIT_TYPE_DOMINANTS := [
+	FRUIT_TYPE_VALUES.DEFAULT,
+	FRUIT_TYPE_VALUES.FOLIATE,
+	FRUIT_TYPE_VALUES.QUARTET,
+]
 var FRUIT_TYPE_SCENES = {
-	FRUIT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Fruits/Fruit.tscn")
+	FRUIT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Fruits/DefaultFruit.tscn"),
+	FRUIT_TYPE_VALUES.BERRIES: preload("res://src/CloseUpPlant/Fruits/BerriesFruit.tscn"),
+	FRUIT_TYPE_VALUES.FOLIATE: preload("res://src/CloseUpPlant/Fruits/FoliateFruit.tscn"),
+	FRUIT_TYPE_VALUES.PINMYAPPLE: preload("res://src/CloseUpPlant/Fruits/PinMyAppleFruit.tscn"),
+	FRUIT_TYPE_VALUES.QUARTET: preload("res://src/CloseUpPlant/Fruits/QuartetFruit.tscn"),
+	FRUIT_TYPE_VALUES.STRAWBERRY: preload("res://src/CloseUpPlant/Fruits/StrawberryFruit.tscn"),
 }
 
 # Seed
