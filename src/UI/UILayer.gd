@@ -22,6 +22,7 @@ var MAIN_SCENE_PATH : String = "res://src/Main/Main.tscn"
 var active_scene : String = ""
 var opened_plants := {}
 var index_opened: bool = false
+var shop_animation_ongoing := false
 
 func _ready():
 	if get_parent().get_name() == "Shop":
@@ -93,18 +94,26 @@ func _on_PopupWindow_combine_button_clicked(plant: Plant):
 	emit_signal("combine_crop", plant)
 
 func _on_Store_pressed():
+	if shop_animation_ongoing:
+		return
+
 	if get_tree().get_current_scene().get_name() == "Main":
+		shop_animation_ongoing = true
 		emit_signal("exit_main")
 		$Store/DoorChime.play()
 		yield($Store/DoorChime,"finished")
+		shop_animation_ongoing = false
 
 		var shop = load(SHOP_SCENE_PATH)
 		var scene = shop.instance()
 		SceneManager.change_scene(scene)
 	else:
+		shop_animation_ongoing = true
 		emit_signal("exit_shop")
 		$Store/DoorChime.play()
 		yield($Store/DoorChime,"finished")
+		shop_animation_ongoing = false
+		
 		SceneManager.pop_scene()
 
 		
