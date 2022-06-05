@@ -46,6 +46,9 @@ func die():
 		root.die()
 	$Tween.start()
 
+func get_modulate_color() -> Color:
+	return $Polygons/StalkDown.modulate
+
 func play_idle_animation() -> void:
 	$AnimationPlayer.play("Idle")
 

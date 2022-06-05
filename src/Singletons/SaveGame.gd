@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -8,7 +8,8 @@ var SAVE_FUNC_NAME = "save_stats"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	load_game()
+	self.modulate = Color.black
+#	load_game()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("save"):
@@ -86,3 +87,26 @@ func delete_save():
 	
 	var dir = Directory.new()
 	dir.remove(SAVE_FILENAME)
+
+
+func _on_UILayer_exit_main():
+	$Tween.interpolate_property(
+		self, "modulate",
+		self.modulate, Color.black,
+		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
+	)
+	$Tween.interpolate_property(
+		$Music, "volume_db",
+		$Music.volume_db, -80,
+		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
+	)
+	$Tween.start()
+
+
+func _on_Tween_tree_entered():
+	$Tween.interpolate_property(
+		self, "modulate",
+		Color.black, Color.white,
+		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
+	)
+	$Tween.start()

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/watering2.mp3-e9b3805bd809aabcf89f8e94eb96a5ce.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/watering2.mp3"
+dest_files=[ "res://.import/watering2.mp3-e9b3805bd809aabcf89f8e94eb96a5ce.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

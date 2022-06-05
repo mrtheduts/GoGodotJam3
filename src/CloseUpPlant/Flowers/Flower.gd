@@ -4,6 +4,9 @@ class_name Flower
 
 var has_fallen := false
 
+func _ready():
+	z_index = Constants.Z_INDEX_FLOWER
+
 func die():
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()

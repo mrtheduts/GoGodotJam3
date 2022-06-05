@@ -1,0 +1,218 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/CloseUpPlant/Roots/Root.gd" type="Script" id=2]
+[ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=3]
+[ext_resource path="res://raw_assets/images/plants/roots/tuber.svg" type="Texture" id=4]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Die"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/Bone2D1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/Bone2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/Bone2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Skeleton2D/Bone2D1:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/Bone2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Skeleton2D/Bone2D1:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[node name="Root" type="Node2D"]
+position = Vector2( 0, -15 )
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Die = SubResource( 3 )
+anims/Idle = SubResource( 1 )
+anims/RESET = SubResource( 2 )
+
+[node name="Sprout" type="Node2D" parent="."]
+material = ExtResource( 3 )
+
+[node name="Polygon2D1" type="Polygon2D" parent="Sprout"]
+use_parent_material = true
+offset = Vector2( -575, -1800 )
+texture = ExtResource( 4 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 640, 2304, 1024, 2048, 1024, 1792, 128, 1792, 128, 2048, 512, 2304 )
+uv = PoolVector2Array( 640, 2304, 1024, 2048, 1024, 1792, 128, 1792, 128, 2048, 512, 2304 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="Teenage" type="Node2D" parent="."]
+visible = false
+material = ExtResource( 3 )
+
+[node name="Polygon2D1" type="Polygon2D" parent="Teenage"]
+use_parent_material = true
+offset = Vector2( -575, -1150 )
+texture = ExtResource( 4 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 640, 2304, 1024, 2048, 1024, 1408, 1024, 1152, 128, 1152, 128, 2048, 512, 2304 )
+uv = PoolVector2Array( 640, 2304, 1024, 2048, 1024, 1408, 1024, 1152, 128, 1152, 128, 2048, 512, 2304 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="Adult" type="Node2D" parent="."]
+visible = false
+material = ExtResource( 3 )
+
+[node name="Polygon2D1" type="Polygon2D" parent="Adult"]
+use_parent_material = true
+offset = Vector2( -500, -450 )
+texture = ExtResource( 4 )
+skeleton = NodePath("../../Skeleton2D")
+polygon = PoolVector2Array( 640, 2304, 1024, 2048, 1024, 256, 128, 256, 128, 2048, 512, 2304 )
+uv = PoolVector2Array( 640, 2304, 1024, 2048, 1024, 256, 128, 256, 128, 2048, 512, 2304 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Bone2D1" type="Bone2D" parent="Skeleton2D"]
+rest = Transform2D( 1, 0, 0, 1, 0, 0 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="Bone2D1-1" type="Bone2D" parent="Skeleton2D/Bone2D1"]
+position = Vector2( -118, 181 )
+rest = Transform2D( 1, 0, 0, 1, -118, 181 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Bone2D2" type="Bone2D" parent="Skeleton2D"]
+rotation = -1.18504
+rest = Transform2D( 0.37626, -0.926514, 0.926514, 0.37626, 0, 0 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="Bone2D2-1" type="Bone2D" parent="Skeleton2D/Bone2D2"]
+position = Vector2( -118, 181 )
+rotation = -0.523598
+rest = Transform2D( 0.866026, -0.499999, 0.499999, 0.866026, -118, 181 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="Tween" type="Tween" parent="."]

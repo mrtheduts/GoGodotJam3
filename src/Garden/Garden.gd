@@ -175,7 +175,8 @@ func plant_crop(crop_id: String, plant: Plant):
 		overview_plant = OVERVIEW_PLANT_SCENE.instance()
 		
 	overview_plant.set_age(plant.life_stage)
-
+	
+	$Plant.play()
 	add_child(overview_plant)
 	overview_plant.position = map_to_world(new_coord) + cell_size/2
 
@@ -189,6 +190,7 @@ func add_new_crop_area(coord: Vector2):
 		"plant" : null
 	}
 
+	$Hoe.play()
 	# warning-ignore:narrowing_conversion
 	# warning-ignore:narrowing_conversion
 	set_cell(coord.x, coord.y, PLANT_TILE_ID)
@@ -302,3 +304,4 @@ func _on_UILayer_remove_plant(plant: Plant):
 	var crop_id = get_crop_id_by_plant(plant);
 
 	remove_plant(crop_id)
+

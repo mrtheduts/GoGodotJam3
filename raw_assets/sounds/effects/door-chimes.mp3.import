@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/door-chimes.mp3-4ebb9399cb86a58297708efe92b59f1f.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/door-chimes.mp3"
+dest_files=[ "res://.import/door-chimes.mp3-4ebb9399cb86a58297708efe92b59f1f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

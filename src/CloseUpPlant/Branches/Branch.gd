@@ -10,6 +10,9 @@ var _entry_points := {}
 
 var life_stage = Constants.LIFE_STAGES.TEENAGE
 
+func _ready():
+	z_index = Constants.Z_INDEX_BRANCH
+
 func init_entry_points():
 	_entry_points[$Skeleton2D/BeginBone/MidBone] = []
 
@@ -31,6 +34,10 @@ func age() -> void:
 func die():
 	$AnimationPlayer.play("Dead")
 	return false
+
+func set_modulate_color(color: Color) -> void:
+	for node in [$Teenage, $Adult]:
+		node.modulate = color
 
 func get_mid_bone():
 	return $Skeleton2D/BeginBone/MidBone

@@ -24,7 +24,7 @@ var is_watering := false
 var watering_counter: float = 0
 
 func _ready():
-	Utils.conn_nodes(plant, "plant_is_adult", self, "_on_Plant_plant_is_adult")
+	Utils.conn_nodes(plant, "update_ui", self, "_on_Plant_update_ui")
 	$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.hide()
 
 func _process(delta):
@@ -63,6 +63,8 @@ func _on_PhotoButton_pressed():
 		Color(1,1,1,0.95), Color(1,1,1,0.0),
 		FLASH_DURATION, $Tween.TRANS_QUAD, $Tween.EASE_OUT, FLASH_DURATION
 	)
+	$Shuttle.play()
+	$Flash.play()
 	$Tween.start()
 
 	var photo = $VBoxContainer/CenterContainer/ViewportContainer/Viewport.get_texture().get_data()
@@ -82,11 +84,21 @@ func show_scene(node: CanvasItem) -> void:
 
 
 func _on_WaterButton_button_up():
+	$Tween.interpolate_property(
+		$Watering, "volume_db",
+		$Watering.volume_db,  -80,
+		1, $TweenClose.TRANS_SINE, $TweenClose.EASE_OUT
+	)
+	$Tween.start()
 	is_watering = false
 	emit_signal("water_button_hold", false)
+	yield($Tween, "tween_all_completed")
+	$Watering.stop()
+	$Watering.volume_db = 0
 
 
 func _on_WaterButton_button_down():
+	$Watering.play()
 	is_watering = true
 	emit_signal("water_button_hold", true)
 
@@ -117,6 +129,7 @@ func _on_TweenClose_tween_all_completed():
 
 
 func _on_DiscardButton_pressed():
+	$Trash.play()
 	if (plant != null):
 		emit_signal("discard_button_clicked", plant)
 	self.rect_pivot_offset.x = self.rect_pivot_offset.x/2
@@ -129,7 +142,9 @@ func _on_DiscardButton_pressed():
 
 
 func _on_Plant_update_ui(life_state: int):
-	if(life_state == Constants.LIFE_STAGES.DEAD):
+	if (life_state == Constants.LIFE_STAGES.ADULT):
+		$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.show()
+	elif (life_state == Constants.LIFE_STAGES.DEAD):
 		$VBoxContainer/HBoxContainer/HBoxContainer/SellButton.visible = false
 		$VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton.visible = true
 		

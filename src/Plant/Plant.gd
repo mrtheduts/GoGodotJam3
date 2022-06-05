@@ -8,6 +8,7 @@ class_name Plant
 signal water_level_changed
 signal ask_for_close_up_plant
 signal plant_is_adult
+signal update_ui
 
 var life_duration_stages: Dictionary
 
@@ -15,6 +16,7 @@ var close_up_plant: CloseUpPlant = null
 var overview_plant: OverviewPlant = null
 
 var type_hash: int = 0
+var phenotype_hash: int = 0
 var genetics: Dictionary = {}
 var phenotype: Dictionary = {}
 
@@ -23,6 +25,9 @@ var life_days := 0
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
 var value := 1
+
+var last_photo: Image = null
+var name: String = Constants.DEFAULT_PLANT_NAME
 
 func _init():
 	# Build empty genetics dict
@@ -70,8 +75,8 @@ func add_gene(feature, gene) -> void:
 
 func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
-	
 	_reveal_phenotype()
+	phenotype_hash = phenotype.hash()
 
 func meiosis() -> Dictionary:
 	var result := {}
@@ -89,12 +94,12 @@ func age(days: int) -> void:
 			life_stage = Constants.LIFE_STAGES.TEENAGE
 		Constants.LIFE_STAGES.TEENAGE:
 			life_stage = Constants.LIFE_STAGES.ADULT
-			emit_signal("plant_is_adult")
 		Constants.LIFE_STAGES.ADULT:
 			life_stage = Constants.LIFE_STAGES.DEAD
 			value = 0
 			close_up_plant.die()
 	
+	emit_signal("update_ui", life_stage)
 	overview_plant.set_age(life_stage)
 	emit_signal("ask_for_close_up_plant", self)
 

@@ -6,6 +6,8 @@ class_name Constants
 const STARTING_MONEY: int = 10
 const STARTING_STORAGE_SPACE: int = 5
 
+const TRANSITION_DURATION: float = 1.0
+
 # WORLD COLORS
 
 # TIME
@@ -31,6 +33,21 @@ const METEOR_COLOR_FACTOR = 0.0
 enum LIFE_STAGES { SEED, SPROUT, TEENAGE, ADULT, DEAD}
 const NUM_CHILDREN_PER_ENTRY := 2
 
+const ZOOM_IN_LIFE_STAGES := {
+	LIFE_STAGES.SEED: 3.0,
+	LIFE_STAGES.SPROUT: 5.0,
+	LIFE_STAGES.TEENAGE: 7.0,
+	LIFE_STAGES.ADULT: 12.0,
+	LIFE_STAGES.DEAD: 12.0,
+}
+
+const Z_INDEX_ROOT := -1
+const Z_INDEX_STALK := 0
+const Z_INDEX_BRANCH := -2
+const Z_INDEX_LEAF := -1
+const Z_INDEX_FLOWER := 2
+const Z_INDEX_FRUIT := 1
+
 const DEAD_LEAF_COLOR := Color('#ff6464')
 const DEAD_COLOR := Color("#add5ff")
 const DYING_DURATION := 5
@@ -54,3 +71,8 @@ const SHOP_WARN_TEXT = "Oops. I think you don't have enough %s right now. Come b
 # ITEMS
 const HOE_ITEM_ID : int = 1
 const SEED_ITEM_ID : int = 4
+
+# INDEX
+const LOCKED_PLANT_NAME: String = "LOCKED"
+const DEFAULT_PLANT_NAME: String = "New Plant"
+const INDEX_ENTRIES: int = 20

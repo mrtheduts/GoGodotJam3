@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/growing_cut.mp3-5ba6a694e9520e0d5057c3846942660f.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/music/growing_cut.mp3"
+dest_files=[ "res://.import/growing_cut.mp3-5ba6a694e9520e0d5057c3846942660f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
