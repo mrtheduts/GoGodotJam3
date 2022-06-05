@@ -20,6 +20,8 @@ const OUTBOUND_TILE : Vector2 = Vector2(-1000, -1000)
 var crop_tiles : Dictionary = {}
 
 var OVERVIEW_PLANT_SCENE = preload('res://src/OverviewPlant/OverviewPlant.tscn')
+var OVERVIEW_FLOWER_SCENE = preload('res://src/OverviewPlant/OverviewFlower.tscn')
+var OVERVIEW_FRUIT_SCENE = preload('res://src/OverviewPlant/OverviewFruits.tscn')
 
 onready var selected_tile : Vector2 = OUTBOUND_TILE
 onready var combining_array: Array = []
@@ -149,14 +151,30 @@ func plant_crop(crop_id: String, plant: Plant):
 	plant.plant()
 	var new_coord = crop_tiles[crop_id].coord
 
-	var overview_plant = OVERVIEW_PLANT_SCENE.instance()
+	print(plant.phenotype)
+	
+	var has_flower = DNA.get_feature_name(DNA.FEATURES.HAS_FLOWER)
+	var has_fruit = DNA.get_feature_name(DNA.FEATURES.HAS_FRUIT)
+	var overview_plant
+	
+	if Utils.as_bool(plant.phenotype[has_fruit]):
+		overview_plant = OVERVIEW_FRUIT_SCENE.instance()
+		var feature_name = DNA.get_feature_name(DNA.FEATURES.FLOWER_COLOR)
+		var flower_color = plant.phenotype[feature_name]
+		var colors = DNA.get_colors(feature_name, flower_color)
+		var color = Utils.mix_colors(colors)
+		overview_plant.set_flower_color(color)
+	elif Utils.as_bool(plant.phenotype[has_flower]):
+		overview_plant = OVERVIEW_FLOWER_SCENE.instance()
+		var feature_name = DNA.get_feature_name(DNA.FEATURES.FLOWER_COLOR)
+		var flower_color = plant.phenotype[feature_name]
+		var colors = DNA.get_colors(feature_name, flower_color)
+		var color = Utils.mix_colors(colors)
+		overview_plant.set_flower_color(color)
+	else:
+		overview_plant = OVERVIEW_PLANT_SCENE.instance()
+		
 	overview_plant.set_age(plant.life_stage)
-
-	var feature_name = DNA.get_feature_name(DNA.FEATURES.FLOWER_COLOR)
-	var flower_color = plant.phenotype[feature_name]
-	var colors = DNA.get_colors(feature_name, flower_color)
-	var color = Utils.mix_colors(colors)
-	overview_plant.set_flower_color(color)
 	
 	$Plant.play()
 	add_child(overview_plant)
