@@ -5,7 +5,9 @@
 extends Node
 
 var PLANT_CLASS = preload("res://src/Plant/Plant.gd")
-	
+
+func _ready():
+	var new_plant : Plant = gen_random_plant()
 	
 func _did_mutation_happen() -> bool:
 	randomize()

@@ -136,7 +136,12 @@ func show_item_options(index: int):
 
 	sell_item_slot = index
 	var item_data : Dictionary = ItemDatabase.get_item(String(PlayerState._inventory[String(index)]["id"]))
-
+	var sell_value : int = 0
+	if PlayerState._inventory[String(index)]["id"] == String(Constants.SEED_ITEM_ID):
+		sell_value = PlayerState._inventory[String(index)]["seed_obj"].value
+	else:
+		sell_value = item_data["sell_price"]
+		
 	if int(item_data["id"]) < 1:
 		return
 
@@ -150,7 +155,7 @@ func show_item_options(index: int):
 
 	str_item_info = "Name: [color="+ NAME_TEXT_COLOR +"] " + item_data["name"] + "[/color]\n"
 	str_item_info = str_item_info + "Type: [color="+ TYPE_TEXT_COLOR +"] " + item_data["type"] + "[/color]\n"
-	str_item_info = str_item_info + "Sell Price: [color="+ SELL_TEXT_COLOR +"] " + String(round(item_data["sell_price"] * PlayerState._sell_per)) + "[/color] gold\n"
+	str_item_info = str_item_info + "Sell Price: [color="+ SELL_TEXT_COLOR +"] " + String(round(sell_value * PlayerState._sell_per)) + "[/color] gold\n"
 	str_item_info = str_item_info + "\n[color="+ DESC_TEXT_COLOR +"]" + item_data["description"] + "[/color]"
 
 	item_menu_popup = ITEM_MENU_POPUP_SCENE.instance()
