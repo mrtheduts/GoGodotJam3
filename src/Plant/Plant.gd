@@ -130,7 +130,7 @@ func set_plant_value() -> void:
 			if (!DNA.is_feature_mixable(feature)):
 				if (!DNA.is_gene_dominant(feature, phenotype[feature])):
 					rec_phenotype_count += 1
-		value = life_stage * (1 + pow(rec_phenotype_count, 2)) + BASE_VALUE
+		value = life_stage * (BASE_VALUE + pow(rec_phenotype_count, 2))
 	
 func get_seed_value() -> int:
 	var rec_genes_count := 0
