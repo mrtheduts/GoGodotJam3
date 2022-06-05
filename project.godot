@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Root",
 "language": "GDScript",
-"path": "res://src/CloseUpPlant/Roots/Roots.gd"
+"path": "res://src/CloseUpPlant/Roots/Root.gd"
 }, {
 "base": "Node2D",
 "class": "Seed",

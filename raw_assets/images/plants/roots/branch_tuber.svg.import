@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tuber.svg-3ce0c66645333f6445446f467d734c18.stex"
+path="res://.import/branch_tuber.svg-3cb44e58eb0bca69447124fa1850d7f6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://raw_assets/images/plants/roots/tuber.svg"
-dest_files=[ "res://.import/tuber.svg-3ce0c66645333f6445446f467d734c18.stex" ]
+source_file="res://raw_assets/images/plants/roots/branch_tuber.svg"
+dest_files=[ "res://.import/branch_tuber.svg-3cb44e58eb0bca69447124fa1850d7f6.stex" ]
 
 [params]
 

@@ -69,10 +69,16 @@ var FRUIT_COLOR_MAPPING := {
 
 # Root
 const ROOT_TYPE_TYPE := SCENE
-enum ROOT_TYPE_VALUES { DEFAULT }
+enum ROOT_TYPE_VALUES {
+	DEFAULT,
+	BULB,
+	TUBER
+}
 const ROOT_TYPE_DOMINANTS := [ ROOT_TYPE_VALUES.DEFAULT ]
 var ROOT_TYPE_SCENES = {
-	ROOT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Roots/FibrousRoot.tscn")
+	ROOT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Roots/FibrousRoot.tscn"),
+	ROOT_TYPE_VALUES.BULB: preload("res://src/CloseUpPlant/Roots/BulbRoot.tscn"),
+	ROOT_TYPE_VALUES.TUBER: preload("res://src/CloseUpPlant/Roots/TuberRoot.tscn")
 }
 
 # Stalk
