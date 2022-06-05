@@ -49,6 +49,7 @@ func _on_Garden_show_close_up_plant(plant):
 
 	var close_up_plant: CloseUpPlant = plant.close_up_plant
 	var close_up_plot: CloseUpPlot = CLOSE_UP_SOIL_SCENE.instance()
+	close_up_plot.plant = plant
 	var camera_offset := close_up_plant.get_plant_center()
 	
 	var zoom_level = Constants.ZOOM_IN_LIFE_STAGES[plant.life_stage]

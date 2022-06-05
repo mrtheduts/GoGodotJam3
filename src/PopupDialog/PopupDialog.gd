@@ -106,7 +106,9 @@ func _on_WaterButton_button_down():
 func _on_SellButton_pressed():
 	if (plant != null):
 		emit_signal("sell_button_clicked", plant)
-	self.rect_pivot_offset = Vector2(0, 0)
+
+	var view_size = get_viewport_rect().size
+	self.rect_pivot_offset = Vector2(view_size.x, view_size.y)
 	$TweenClose.interpolate_property(
 		self, "rect_scale",
 		self.rect_scale, Vector2(0, 0),

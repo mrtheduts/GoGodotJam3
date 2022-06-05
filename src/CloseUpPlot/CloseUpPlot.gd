@@ -5,13 +5,18 @@ class_name CloseUpPlot
 const WATER_LEVEL_RATE := 0.05
 const WATER_COLOR_SPEED := 0.75
 
+var plant
+
 func _ready():
 	Utils.conn_nodes(WorldManager, "time_changed", self, "_on_WorldManager_time_changed")
 	self.modulate = WorldManager.current_color()
 
 func add_node_and_focus_camera(new_node: Node2D, cam_offset: Vector2 = Vector2.ZERO, cam_zoom: float = 1.0):
 	add_child(new_node)
-	$Camera2D.position += cam_offset
+	focus_camera(cam_offset, cam_zoom)
+
+func focus_camera(cam_offset: Vector2 = Vector2.ZERO, cam_zoom: float = 1.0):
+	$Camera2D.position = cam_offset
 	$Camera2D.zoom = Vector2(cam_zoom, cam_zoom)
 
 func set_WateringParticles_state(state: bool) -> void:
@@ -37,3 +42,9 @@ func _on_WorldManager_time_changed():
 		Constants.TIME_TRANSITION_CURVE, Constants.TIME_TRANSITION_EASE
 	)
 	$Tween.start()
+	
+	# Wait for age
+	yield(plant, "ask_for_close_up_plant")
+	var camera_offset = plant.close_up_plant.get_plant_center()
+	var zoom_level = Constants.ZOOM_IN_LIFE_STAGES[plant.life_stage]
+	focus_camera(camera_offset, zoom_level)
