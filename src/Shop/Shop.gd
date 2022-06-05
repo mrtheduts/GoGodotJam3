@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 var SEED_PACKET_SCENE = load("res://src/Shop/SeedPacket/SeedPacket.tscn")
@@ -40,6 +40,7 @@ func _input(event):
 				$Dialog.skip_dialog = true
 	
 func _ready():
+	self.modulate = Color.black
 	if PlayerState._shop_can_restock:
 		PlayerState._shop_can_restock = false
 		restock()
@@ -154,4 +155,27 @@ func get_item_by_id(id : String):
 	for item in PlayerState._shop_items:
 		if str(item["id"]) == id:
 			return item
+
+
+func _on_UILayer_exit_shop():
+	$Tween.interpolate_property(
+		self, "modulate",
+		self.modulate, Color.black,
+		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
+	)
+	$Tween.interpolate_property(
+		$Music, "volume_db",
+		$Music.volume_db, -80,
+		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
+	)
+	$Tween.start()
+
+
+func _on_Tween_tree_entered():
+	$Tween.interpolate_property(
+		self, "modulate",
+		Color.black, Color.white,
+		1, $Tween.TRANS_SINE, $Tween.EASE_OUT
+	)
+	$Tween.start()
 

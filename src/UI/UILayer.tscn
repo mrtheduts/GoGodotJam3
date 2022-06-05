@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UI/UILayer.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/Money/Money.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/UI/PlayerInventory/PlayerInventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://raw_assets/images/ui/shop_icon.png" type="Texture" id=5]
 [ext_resource path="res://src/UI/OpenPlantIndex/OpenPlantIndex.tscn" type="PackedScene" id=6]
+[ext_resource path="res://raw_assets/sounds/effects/door-chimes.tres" type="AudioStream" id=7]
 
 [node name="UILayer" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -39,6 +40,9 @@ margin_top = -63.2
 margin_right = 96.0
 margin_bottom = 0.799988
 texture_normal = ExtResource( 5 )
+
+[node name="DoorChime" type="AudioStreamPlayer" parent="Store"]
+stream = ExtResource( 7 )
 
 [node name="OpenPlantIndex" parent="." instance=ExtResource( 6 )]
 margin_right = 64.0

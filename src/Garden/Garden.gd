@@ -284,3 +284,4 @@ func _on_UILayer_remove_plant(plant: Plant):
 	var crop_id = get_crop_id_by_plant(plant);
 
 	remove_plant(crop_id)
+
