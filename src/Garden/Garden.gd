@@ -7,12 +7,13 @@ signal combine_plants
 # Constants
 const PLANT_TILE_ID : int = 8
 const GRASS_TILE_ID : int = 9
+const FENCE_TILE_ID : int = 11
 const SELECTION_TILE_ID : int = 0
 const SELECTION_TILE_HOVER_ID : int = 1
 
-const MIN_X : int = -4
+const MIN_X : int = -6
 const MIN_Y : int = -3
-const MAX_X : int = 12
+const MAX_X : int = 15
 const MAX_Y : int = 7
 
 const OUTBOUND_TILE : Vector2 = Vector2(-1000, -1000)
@@ -35,6 +36,7 @@ func _ready():
 		init_garden()
 
 	draw_grass_area()
+	draw_fence_area()
 	draw_garden_tiles()
 	self.modulate = WorldManager.current_color()
 
@@ -210,9 +212,26 @@ func draw_garden_tiles():
 		update_bitmask_area(Vector2(tile_pos.x, tile_pos.y))
 
 func draw_grass_area():
-	for y in range(MIN_Y, MAX_Y+1):
-		for x in range(MIN_X, MAX_X):
+	for y in range(MIN_Y-1, MAX_Y+1):
+		for x in range(MIN_X-1, MAX_X+1):
 			set_cell(x, y, GRASS_TILE_ID)
+
+func draw_fence_area():
+	for y in range(MIN_Y, MAX_Y-2):
+		set_cell(MIN_X+1, y, FENCE_TILE_ID)
+		update_bitmask_area(Vector2(MIN_X+1, y))
+		
+	for y in range(MIN_Y+1, MAX_Y-2):
+		set_cell(MAX_X-2, y, FENCE_TILE_ID)
+		update_bitmask_area(Vector2(MAX_X-2, y))
+		
+	for x in range(MIN_X+1, MAX_X-1):
+		set_cell(x, MIN_Y, FENCE_TILE_ID)
+		update_bitmask_area(Vector2(x, MIN_Y+1))
+		
+	for x in range(MIN_X+1, MAX_X-1):
+		set_cell(x, MAX_Y-2, FENCE_TILE_ID)
+		update_bitmask_area(Vector2(x, MAX_Y-2))
 
 func init_garden():
 	crop_tiles = {
