@@ -22,33 +22,33 @@ func set_age(age : int):
 			$Seed.visible = true
 			$Sprout.visible = false
 			$Teenage.visible = false
-			$Adult.visible = false
+			$AdultPlant.visible = false
 			$Dead.visible = false
 		Constants.LIFE_STAGES.SPROUT:
 			$Seed.visible = false
 			$Sprout.visible = true
 			$Teenage.visible = false
-			$Adult.visible = false
+			$AdultPlant.visible = false
 			$Dead.visible = false
 		Constants.LIFE_STAGES.TEENAGE:
 			$Seed.visible = false
 			$Sprout.visible = false
 			$Teenage.visible = true
-			$Adult.visible = false
+			$AdultPlant.visible = false
 			$Dead.visible = false
 		Constants.LIFE_STAGES.ADULT:
 			$Seed.visible = false
 			$Sprout.visible = false
 			$Teenage.visible = false
-			$Adult.visible = true
+			$AdultPlant.visible = true
 			$Dead.visible = false
 		Constants.LIFE_STAGES.DEAD:
 			$Seed.visible = false
 			$Sprout.visible = false
 			$Teenage.visible = false
-			$Adult.visible = false
+			$AdultPlant.visible = false
 			$Dead.visible = true
 			printerr("I'm dead! :(")
 
 func set_flower_color(color : Color):
-	$Adult/Polygon2D.color = color
+	$AdultPlant/Polygon2D.color = color

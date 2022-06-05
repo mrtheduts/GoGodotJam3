@@ -82,6 +82,7 @@ func _build_adult_plant(close_up_plant: CloseUpPlant, build_parts: Dictionary) -
 		_fill_with(flower_scene, close_up_plant, flower_amount, true, flower_color)
 
 	if (build_parts[DNA.FEATURES.HAS_FRUIT]):
+		print('HAS FRUIT')
 		var fruit_scene = build_parts[DNA.FEATURES.FRUIT_TYPE]
 		var fruit_color = build_parts[DNA.FEATURES.FRUIT_COLOR]
 		var fruit_amount = Utils.randi_range(1,3)
@@ -107,7 +108,9 @@ func _fill_with(scene, close_up_plant: CloseUpPlant, amount: int = -1, has_color
 
 func create_close_up_plant_from(plant: Plant) -> CloseUpPlant:
 	var close_up_plant: CloseUpPlant = CLOSE_UP_PLANT_SCENE.instance() if not plant.close_up_plant else plant.close_up_plant
+	print(plant.close_up_plant, close_up_plant)
 	var build_parts = _get_build_parts_from_plant(plant)
+	print("Create_close_up - plant life stage: ", plant.life_stage)
 	match plant.life_stage:
 		Constants.LIFE_STAGES.SEED:
 			close_up_plant = _build_seed_plant(close_up_plant, build_parts)
