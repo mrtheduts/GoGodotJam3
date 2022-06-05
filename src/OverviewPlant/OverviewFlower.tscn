@@ -2,10 +2,10 @@
 
 [ext_resource path="res://src/OverviewPlant/OverviewPlant.gd" type="Script" id=1]
 [ext_resource path="res://raw_assets/images/plants/overview/plant-overview-2.png" type="Texture" id=2]
-[ext_resource path="res://raw_assets/images/plants/overview/plant-seed-overview-2.png" type="Texture" id=3]
-[ext_resource path="res://raw_assets/images/plants/overview/plant-dead.png" type="Texture" id=4]
-[ext_resource path="res://raw_assets/images/plants/overview/plant-sprout.png" type="Texture" id=5]
-[ext_resource path="res://raw_assets/images/plants/overview/plant-teenage.png" type="Texture" id=6]
+[ext_resource path="res://raw_assets/images/plants/overview/plant-seed.png" type="Texture" id=3]
+[ext_resource path="res://raw_assets/images/plants/overview/plant-dead-2.png" type="Texture" id=4]
+[ext_resource path="res://raw_assets/images/plants/overview/plant-sprout-2.png" type="Texture" id=5]
+[ext_resource path="res://raw_assets/images/plants/overview/plant-teenage-2.png" type="Texture" id=6]
 
 [node name="OverviewPlant" type="Node2D"]
 script = ExtResource( 1 )

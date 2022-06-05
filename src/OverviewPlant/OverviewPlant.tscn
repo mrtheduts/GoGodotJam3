@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/OverviewPlant/OverviewPlant.gd" type="Script" id=1]
 [ext_resource path="res://raw_assets/images/plants/overview/plant-overview-1.png" type="Texture" id=2]
-[ext_resource path="res://raw_assets/images/plants/overview/plant-seed-overview-2.png" type="Texture" id=3]
+[ext_resource path="res://raw_assets/images/plants/overview/plant-seed.png" type="Texture" id=3]
 [ext_resource path="res://raw_assets/images/plants/overview/plant-dead-1.png" type="Texture" id=4]
 [ext_resource path="res://raw_assets/images/plants/overview/plant-teenage-1.png" type="Texture" id=5]
 [ext_resource path="res://raw_assets/images/plants/overview/plant-sprout-1.png" type="Texture" id=6]
