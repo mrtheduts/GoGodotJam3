@@ -77,10 +77,18 @@ var ROOT_TYPE_SCENES = {
 
 # Stalk
 const STALK_TYPE_TYPE := SCENE
-enum STALK_TYPE_VALUES { DEFAULT }
+enum STALK_TYPE_VALUES {
+	DEFAULT,
+	BAMBOO,
+	CACTUS,
+	WINDING
+}
 const STALK_TYPE_DOMINANTS := [ STALK_TYPE_VALUES.DEFAULT ]
 var STALK_TYPE_SCENES = {
-	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/DefaultStalk.tscn")
+	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/DefaultStalk.tscn"),
+	STALK_TYPE_VALUES.BAMBOO: preload("res://src/CloseUpPlant/Stalks/BambooStalk.tscn"),
+	STALK_TYPE_VALUES.CACTUS: preload("res://src/CloseUpPlant/Stalks/CactusStalk.tscn"),
+	STALK_TYPE_VALUES.WINDING: preload("res://src/CloseUpPlant/Stalks/WindingStalk.tscn")
 }
 
 # Branch
