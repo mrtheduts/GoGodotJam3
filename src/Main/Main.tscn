@@ -20,4 +20,9 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 autoplay = true
 
+[connection signal="combine_plants" from="Garden" to="UILayer" method="_on_Garden_combine_plants"]
+[connection signal="show_close_up_plant" from="Garden" to="UILayer" method="_on_Garden_show_close_up_plant"]
+[connection signal="combine_crop" from="UILayer" to="Garden" method="_on_UILayer_combine_crop"]
+[connection signal="exit_main" from="UILayer" to="." method="_on_UILayer_exit_main"]
+[connection signal="remove_plant" from="UILayer" to="Garden" method="_on_UILayer_remove_plant"]
 [connection signal="tree_entered" from="Tween" to="." method="_on_Tween_tree_entered"]
