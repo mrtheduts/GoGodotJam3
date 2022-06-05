@@ -197,9 +197,16 @@ func inventory_sell_item(item_slot: int, sell_amount: int):
 	
 	if sell_amount < 0:
 		return
+	
+	var item_data : Dictionary = _inventory[String(item_slot)]
+	
+	var sell_price : int = 0
+	if item_data["id"] == String(Constants.SEED_ITEM_ID):
+		sell_price = round(item_data["seed_obj"].value * _sell_per)
+	else:
+		sell_price = round(ItemDatabase.get_item(item_data["id"])["sell_price"] * _sell_per)
 		
-	var sell_price : int = round(ItemDatabase.get_item(_inventory[String(item_slot)]["id"])["sell_price"] * _sell_per)
-	var current_amount : int = _inventory[String(item_slot)]["amount"]
+	var current_amount : int = item_data["amount"]
 	
 	if sell_amount > current_amount:
 		sell_amount = current_amount
@@ -210,7 +217,7 @@ func inventory_sell_item(item_slot: int, sell_amount: int):
 	if new_amount == 0:
 		inventory_update_item(item_slot, 0, 0, null)
 	else:
-		inventory_update_item(item_slot, int(_inventory[String(item_slot)]["id"]), new_amount, _inventory[String(item_slot)]["seed_obj"])
+		inventory_update_item(item_slot, int(item_data["id"]), new_amount, item_data["seed_obj"])
 		
 	set_money(new_money)
 	

@@ -25,7 +25,6 @@ var watering_counter: float = 0
 
 func _ready():
 	Utils.conn_nodes(plant, "update_ui", self, "_on_Plant_update_ui")
-	$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.hide()
 
 func _process(delta):
 	if (is_watering and plant != null):
@@ -106,7 +105,9 @@ func _on_WaterButton_button_down():
 func _on_SellButton_pressed():
 	if (plant != null):
 		emit_signal("sell_button_clicked", plant)
-	self.rect_pivot_offset = Vector2(0, 0)
+
+	var view_size = get_viewport_rect().size
+	self.rect_pivot_offset = Vector2(view_size.x, view_size.y)
 	$TweenClose.interpolate_property(
 		self, "rect_scale",
 		self.rect_scale, Vector2(0, 0),
@@ -142,14 +143,15 @@ func _on_DiscardButton_pressed():
 
 
 func _on_Plant_update_ui(life_state: int):
+	ui_for_life_stage(life_state)
+
+func ui_for_life_stage(life_state: int):
 	if (life_state == Constants.LIFE_STAGES.ADULT):
 		$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.show()
+		$VBoxContainer/HBoxContainer/HBoxContainer/PhotoButton.show()
 	elif (life_state == Constants.LIFE_STAGES.DEAD):
 		$VBoxContainer/HBoxContainer/HBoxContainer/SellButton.visible = false
 		$VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton.visible = true
-		
+
 func _on_CombineButton_pressed():
 	emit_signal("combine_button_clicked", plant)
-
-func _on_Plant_plant_is_adult():
-	$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.show()

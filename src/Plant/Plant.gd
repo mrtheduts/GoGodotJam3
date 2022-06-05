@@ -10,6 +10,8 @@ signal ask_for_close_up_plant
 signal plant_is_adult
 signal update_ui
 
+const BASE_VALUE : int = 5
+
 var life_duration_stages: Dictionary
 
 var close_up_plant: CloseUpPlant = null
@@ -22,9 +24,10 @@ var phenotype: Dictionary = {}
 
 var life_stage = Constants.LIFE_STAGES.SEED
 var life_days := 0
+var days_without_water := 0
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
-var value := 1
+var value := BASE_VALUE
 
 var last_photo: Image = null
 var name: String = Constants.DEFAULT_PLANT_NAME
@@ -77,7 +80,8 @@ func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
 	_reveal_phenotype()
 	phenotype_hash = phenotype.hash()
-
+	set_plant_value()
+	
 func meiosis() -> Dictionary:
 	var result := {}
 	for feature in genetics.keys():
@@ -87,28 +91,57 @@ func meiosis() -> Dictionary:
 
 func age(days: int) -> void:
 	life_days += days
-	match life_stage:
-		Constants.LIFE_STAGES.SEED:
-			life_stage = Constants.LIFE_STAGES.SPROUT
-		Constants.LIFE_STAGES.SPROUT:
-			life_stage = Constants.LIFE_STAGES.TEENAGE
-		Constants.LIFE_STAGES.TEENAGE:
-			life_stage = Constants.LIFE_STAGES.ADULT
-		Constants.LIFE_STAGES.ADULT:
-			life_stage = Constants.LIFE_STAGES.DEAD
-			value = 0
-			close_up_plant.die()
 	
-	emit_signal("update_ui", life_stage)
-	overview_plant.set_age(life_stage)
-	emit_signal("ask_for_close_up_plant", self)
+	if watered_amount >= Constants.MIN_WATER_TO_AGE:
+		match life_stage:
+			Constants.LIFE_STAGES.SEED:
+				life_stage = Constants.LIFE_STAGES.SPROUT
+				set_plant_value()
+			Constants.LIFE_STAGES.SPROUT:
+				life_stage = Constants.LIFE_STAGES.TEENAGE
+				set_plant_value()
+			Constants.LIFE_STAGES.TEENAGE:
+				life_stage = Constants.LIFE_STAGES.ADULT
+				set_plant_value()
+			Constants.LIFE_STAGES.ADULT:
+				life_stage = Constants.LIFE_STAGES.DEAD
+				value = 0
+				close_up_plant.die()
+		
+		emit_signal("update_ui", life_stage)
+		overview_plant.set_age(life_stage)
+		emit_signal("ask_for_close_up_plant", self)
+	
+	if watered_amount > 0:
+		water(-1)
 
 func water(amount: int = 1) -> void:
 	# warning-ignore:narrowing_conversion
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
 	print("New watered amount: ", watered_amount)
 	emit_signal("water_level_changed", watered_amount)
-
+	
+func set_plant_value() -> void:
+	if life_stage == Constants.LIFE_STAGES.SEED:
+		value = get_seed_value()
+	else:
+		var rec_phenotype_count := 0
+		for feature in phenotype.keys():
+			if (!DNA.is_feature_mixable(feature)):
+				if (!DNA.is_gene_dominant(feature, phenotype[feature])):
+					rec_phenotype_count += 1
+		value = life_stage * (BASE_VALUE + pow(rec_phenotype_count, 2))
+	
+func get_seed_value() -> int:
+	var rec_genes_count := 0
+	for feature in genetics.keys():
+		if (!DNA.is_feature_mixable(feature)):
+			for gene in genetics[feature]:
+				if (!DNA.is_gene_dominant(feature, gene)):
+					rec_genes_count += 1
+	
+	return rec_genes_count + BASE_VALUE
+		
 func plant() -> void:
 	emit_signal("ask_for_close_up_plant", self)
 

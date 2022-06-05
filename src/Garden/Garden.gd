@@ -12,8 +12,8 @@ const SELECTION_TILE_HOVER_ID : int = 1
 
 const MIN_X : int = -4
 const MIN_Y : int = -3
-const MAX_X : int = 7
-const MAX_Y : int = 6
+const MAX_X : int = 12
+const MAX_Y : int = 7
 
 const OUTBOUND_TILE : Vector2 = Vector2(-1000, -1000)
 

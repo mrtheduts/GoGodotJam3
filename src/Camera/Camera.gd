@@ -15,9 +15,6 @@ var _zoom_level := 1.0 setget _set_zoom_level
 
 # We store a reference to the scene's tween node.
 onready var tween: Tween = $Tween
-
-func _ready():
-	update_position()
 	
 func _set_zoom_level(value: float) -> void:
 	# We limit the value between `min_zoom` and `max_zoom`
@@ -48,4 +45,7 @@ func _unhandled_input(event):
 
 func update_position():
 	self.position = get_parent().get_garden_center()
-	pass
+	self.current = true
+
+func _on_Camera2D_tree_entered():
+	update_position()

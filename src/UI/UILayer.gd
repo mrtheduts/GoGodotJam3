@@ -49,6 +49,7 @@ func _on_Garden_show_close_up_plant(plant):
 
 	var close_up_plant: CloseUpPlant = plant.close_up_plant
 	var close_up_plot: CloseUpPlot = CLOSE_UP_SOIL_SCENE.instance()
+	close_up_plot.plant = plant
 	var camera_offset := close_up_plant.get_plant_center()
 	
 	var zoom_level = Constants.ZOOM_IN_LIFE_STAGES[plant.life_stage]
@@ -68,6 +69,8 @@ func _on_Garden_show_close_up_plant(plant):
 
 	popup_window.plant = plant
 	popup_window.close_up_plant = plant.close_up_plant
+	
+	popup_window.ui_for_life_stage(plant.life_stage)
 	add_child(popup_window)
 	popup_window.show_scene(close_up_plot)
 
@@ -94,13 +97,17 @@ func _on_Store_pressed():
 		emit_signal("exit_main")
 		$Store/DoorChime.play()
 		yield($Store/DoorChime,"finished")
-		get_tree().change_scene(SHOP_SCENE_PATH)
+
+		var shop = load(SHOP_SCENE_PATH)
+		var scene = shop.instance()
+		SceneManager.change_scene(scene)
 	else:
 		emit_signal("exit_shop")
 		$Store/DoorChime.play()
 		yield($Store/DoorChime,"finished")
-		get_tree().change_scene(MAIN_SCENE_PATH)
+		SceneManager.pop_scene()
 
+		
 func _on_OpenPlantIndex_open_index():
 	if not index_opened:
 		var index: PlantIndex = INDEX_SCENE.instance()

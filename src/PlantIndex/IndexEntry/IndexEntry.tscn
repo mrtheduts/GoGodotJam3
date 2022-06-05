@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://raw_assets/images/ui-icons/unknown.png" type="Texture" id=1]
 [ext_resource path="res://src/PlantIndex/IndexEntry/IndexEntry.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.8, 0.8, 0.8, 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.8, 0.8, 0.8, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.8, 0.8, 0.8, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.8, 0.8, 0.8, 1 )
 
 [node name="IndexEntry" type="MarginContainer"]
 margin_top = 20.0
@@ -9,35 +21,57 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 2 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 268.0
-margin_bottom = 228.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 200.0
+margin_bottom = 362.0
+custom_constants/separation = 20
 
-[node name="Photo" type="TextureRect" parent="HBoxContainer"]
-margin_right = 64.0
-margin_bottom = 228.0
+[node name="Photo" type="TextureRect" parent="VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 1 )
+expand = true
 stretch_mode = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 68.0
-margin_right = 268.0
-margin_bottom = 228.0
-
-[node name="Name" type="LineEdit" parent="HBoxContainer/VBoxContainer"]
+[node name="DataContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 120.0
 margin_right = 200.0
-margin_bottom = 24.0
+margin_bottom = 362.0
+
+[node name="Name" type="LineEdit" parent="VBoxContainer/DataContainer"]
+margin_right = 200.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
+custom_styles/read_only = SubResource( 3 )
+custom_styles/normal = SubResource( 1 )
 align = 1
 
-[node name="FeatureList" type="ItemList" parent="HBoxContainer/VBoxContainer"]
-margin_top = 28.0
+[node name="FeatureList" type="ItemList" parent="VBoxContainer/DataContainer"]
+margin_top = 24.0
 margin_right = 200.0
-margin_bottom = 228.0
+margin_bottom = 224.0
 rect_min_size = Vector2( 200, 200 )
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_colors/guide_color = Color( 0.8, 0.8, 0.8, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/bg = SubResource( 2 )
 auto_height = true
 
-[connection signal="text_changed" from="HBoxContainer/VBoxContainer/Name" to="." method="_on_Name_text_changed"]
+[node name="Label" type="Label" parent="VBoxContainer/DataContainer"]
+margin_left = 79.0
+margin_top = 228.0
+margin_right = 121.0
+margin_bottom = 242.0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 4 )
+text = "Page 1"
+valign = 2
+
+[connection signal="text_changed" from="VBoxContainer/DataContainer/Name" to="." method="_on_Name_text_changed"]

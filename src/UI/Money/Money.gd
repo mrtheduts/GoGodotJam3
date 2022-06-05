@@ -12,9 +12,10 @@ func _ready():
 	$HBoxContainer/Label.text = String(PlayerState._money)
 
 func _on_PlayerState_money_changed(value: int):
-	$AudioStreamPlayer.play()
-	var diff = value - current_money
-	show_purchase_animation(diff)
+	if get_tree() != null:
+		$AudioStreamPlayer.play()
+		var diff = value - current_money
+		show_purchase_animation(diff)
 	$HBoxContainer/Label.text = String(value)
 	current_money = value
 
