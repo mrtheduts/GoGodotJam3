@@ -93,10 +93,29 @@ var BRANCH_TYPE_SCENES = {
 
 # Leaf
 const LEAF_TYPE_TYPE := SCENE
-enum LEAF_TYPE_VALUES { DEFAULT }
-const LEAF_TYPE_DOMINANTS := [ LEAF_TYPE_VALUES.DEFAULT ]
+enum LEAF_TYPE_VALUES {
+	DEFAULT,
+	BIG,
+	CURLY,
+	FAN,
+	THIN,
+	THORN,
+	WING,
+}
+const LEAF_TYPE_DOMINANTS := [
+	LEAF_TYPE_VALUES.DEFAULT,
+	LEAF_TYPE_VALUES.FAN,
+	LEAF_TYPE_VALUES.THORN,
+	LEAF_TYPE_VALUES.WING
+]
 var LEAF_TYPE_SCENES = {
-	LEAF_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Leaves/Leaf.tscn")
+	LEAF_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Leaves/DefaultLeaf.tscn"),
+	LEAF_TYPE_VALUES.BIG: preload("res://src/CloseUpPlant/Leaves/BigLeaf.tscn"),
+	LEAF_TYPE_VALUES.CURLY: preload("res://src/CloseUpPlant/Leaves/CurlyLeaf.tscn"),
+	LEAF_TYPE_VALUES.FAN: preload("res://src/CloseUpPlant/Leaves/FanLeaf.tscn"),
+	LEAF_TYPE_VALUES.THIN: preload("res://src/CloseUpPlant/Leaves/ThinLeaf.tscn"),
+	LEAF_TYPE_VALUES.THORN: preload("res://src/CloseUpPlant/Leaves/ThornLeaf.tscn"),
+	LEAF_TYPE_VALUES.WING: preload("res://src/CloseUpPlant/Leaves/WingLeaf.tscn"),
 }
 
 # Flower

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://raw_assets/images/plants/flower/wide-petals.svg" type="Texture" id=1]
+[ext_resource path="res://raw_assets/images/plants/flower/weird.svg" type="Texture" id=1]
 [ext_resource path="res://src/CloseUpPlant/Flowers/Flower.gd" type="Script" id=2]
 [ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=3]
 

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://raw_assets/images/plants/leaves/thorn-2.svg" type="Texture" id=1]
+[ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=2]
+[ext_resource path="res://src/CloseUpPlant/Leaves/Leaf.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 100, 19 )
+
+[node name="Leaf" type="RigidBody2D"]
+collision_mask = 128
+mode = 1
+sleeping = true
+script = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color( 0.576471, 1, 0.458824, 1 )
+material = ExtResource( 2 )
+offset = Vector2( -200, -450 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 32, 0, 416, 0, 416, 640, 32, 640 )
+uv = PoolVector2Array( 32, 0, 416, 0, 416, 640, 32, 640 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -6, -80.0001 )
+rotation = 1.56276
+shape = SubResource( 1 )
+
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
