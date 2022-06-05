@@ -29,3 +29,5 @@ format = 1
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 
 [node name="Tween" type="Tween" parent="."]
+
+[connection signal="tree_entered" from="Camera2D" to="Camera2D" method="_on_Camera2D_tree_entered"]

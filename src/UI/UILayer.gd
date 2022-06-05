@@ -94,13 +94,17 @@ func _on_Store_pressed():
 		emit_signal("exit_main")
 		$Store/DoorChime.play()
 		yield($Store/DoorChime,"finished")
-		get_tree().change_scene(SHOP_SCENE_PATH)
+
+		var shop = load(SHOP_SCENE_PATH)
+		var scene = shop.instance()
+		SceneManager.change_scene(scene)
 	else:
 		emit_signal("exit_shop")
 		$Store/DoorChime.play()
 		yield($Store/DoorChime,"finished")
-		get_tree().change_scene(MAIN_SCENE_PATH)
+		SceneManager.pop_scene()
 
+		
 func _on_OpenPlantIndex_open_index():
 	if not index_opened:
 		var index: PlantIndex = INDEX_SCENE.instance()
