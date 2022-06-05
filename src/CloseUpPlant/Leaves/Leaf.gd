@@ -4,6 +4,9 @@ class_name Leaf
 
 var has_fallen := false
 
+func _ready():
+	z_index = Constants.Z_INDEX_LEAF
+
 func die():
 	has_fallen = Utils.randi_range(0, 1)
 	$Tween.interpolate_property(
@@ -12,7 +15,6 @@ func die():
 		Constants.DYING_DURATION, $Tween.TRANS_LINEAR, $Tween.EASE_OUT
 	)
 	$Tween.start()
-
 	return has_fallen
 
 

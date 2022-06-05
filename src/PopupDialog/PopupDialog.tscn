@@ -94,8 +94,11 @@ visible = false
 margin_left = 204.0
 margin_right = 268.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+toggle_mode = true
 texture_normal = ExtResource( 11 )
 texture_pressed = ExtResource( 12 )
+expand = true
 
 [node name="CloseButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 margin_left = 336.0

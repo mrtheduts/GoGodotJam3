@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://raw_assets/images/plants/seeds/gravity.svg" type="Texture" id=1]
 [ext_resource path="res://raw_assets/images/plants/seeds/bean.svg" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://raw_assets/images/plants/seeds/dry-grain.svg" type="Texture" id=5]
 [ext_resource path="res://raw_assets/images/plants/seeds/fall.svg" type="Texture" id=6]
 [ext_resource path="res://src/CloseUpPlant/Seeds/Seed.gd" type="Script" id=7]
+[ext_resource path="res://godot_assets/shaders/pixelate.tres" type="Material" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -41,6 +42,7 @@ tracks/0/keys = {
 }
 
 [node name="Seed" type="Node2D"]
+material = ExtResource( 8 )
 script = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -49,42 +51,52 @@ anims/RESET = SubResource( 2 )
 
 [node name="Bean" type="Polygon2D" parent="."]
 visible = false
-offset = Vector2( -370, -480 )
+modulate = Color( 0.321569, 0.239216, 0.239216, 1 )
+use_parent_material = true
+offset = Vector2( -1100, -1450 )
 texture = ExtResource( 2 )
-polygon = PoolVector2Array( 304, 439, 368, 391, 432, 439, 432, 551, 368, 583, 304, 551 )
-uv = PoolVector2Array( 304, 439, 368, 391, 432, 439, 432, 551, 368, 583, 304, 551 )
+polygon = PoolVector2Array( 925.049, 1304, 1101.38, 1171.75, 1277.72, 1304, 1277.72, 1612.59, 1101.38, 1700.76, 925.049, 1612.59 )
+uv = PoolVector2Array( 925.049, 1304, 1101.38, 1171.75, 1277.72, 1304, 1277.72, 1612.59, 1101.38, 1700.76, 925.049, 1612.59 )
 
 [node name="Fall" type="Polygon2D" parent="."]
 visible = false
-offset = Vector2( -435, -615 )
+modulate = Color( 0.827451, 0.921569, 0.568627, 1 )
+use_parent_material = true
+offset = Vector2( -1350, -1750 )
 texture = ExtResource( 6 )
-polygon = PoolVector2Array( 306.644, 478.536, 400, 408.519, 493.356, 478.536, 493.356, 641.91, 400, 688.588, 306.644, 641.91 )
-uv = PoolVector2Array( 328.49, 467.408, 416, 401.775, 503.51, 467.408, 503.51, 620.551, 416, 664.306, 328.49, 620.551 )
+polygon = PoolVector2Array( 963.495, 1416.94, 1223.08, 1222.25, 1482.66, 1416.94, 1482.66, 1871.21, 1223.08, 2001, 963.495, 1871.21 )
+uv = PoolVector2Array( 963.495, 1416.94, 1223.08, 1222.25, 1482.66, 1416.94, 1482.66, 1871.21, 1223.08, 2001, 963.495, 1871.21 )
 
 [node name="Unit" type="Polygon2D" parent="."]
 visible = false
-offset = Vector2( -302, -557 )
+use_parent_material = true
+offset = Vector2( -900, -1650 )
 texture = ExtResource( 4 )
-polygon = PoolVector2Array( 263.682, 522.735, 304, 492.497, 344.318, 522.735, 344.318, 593.291, 304, 613.45, 263.682, 593.291 )
-uv = PoolVector2Array( 260.414, 520.012, 304, 487.322, 347.586, 520.012, 347.586, 596.287, 304, 618.08, 260.414, 596.287 )
+polygon = PoolVector2Array( 825.037, 1605.68, 899.455, 1549.87, 973.872, 1605.68, 973.872, 1735.91, 899.455, 1773.12, 825.037, 1735.91 )
+uv = PoolVector2Array( 825.037, 1605.68, 899.455, 1549.87, 973.872, 1605.68, 973.872, 1735.91, 899.455, 1773.12, 825.037, 1735.91 )
 
 [node name="Grain" type="Polygon2D" parent="."]
 visible = false
-offset = Vector2( -380, -470 )
+modulate = Color( 1, 0.686275, 0.380392, 1 )
+use_parent_material = true
+offset = Vector2( -1200, -1400 )
 texture = ExtResource( 3 )
-polygon = PoolVector2Array( 336.657, 436.881, 384, 401.374, 431.343, 436.881, 431.343, 519.731, 384, 543.402, 336.657, 519.731 )
-uv = PoolVector2Array( 345.247, 430.705, 400, 389.64, 454.753, 430.705, 454.753, 526.524, 400, 553.901, 345.247, 526.524 )
+polygon = PoolVector2Array( 1046.62, 1311.85, 1170.96, 1218.6, 1295.29, 1311.85, 1295.29, 1529.44, 1170.96, 1591.6, 1046.62, 1529.44 )
+uv = PoolVector2Array( 1046.62, 1311.85, 1170.96, 1218.6, 1295.29, 1311.85, 1295.29, 1529.44, 1170.96, 1591.6, 1046.62, 1529.44 )
 
 [node name="Gravity" type="Polygon2D" parent="."]
 visible = false
-offset = Vector2( -342, -520 )
+modulate = Color( 0.917647, 1, 0.843137, 1 )
+use_parent_material = true
+offset = Vector2( -1100, -1600 )
 texture = ExtResource( 1 )
-polygon = PoolVector2Array( 258.589, 337.157, 368, 255.099, 477.411, 337.157, 477.411, 528.627, 368, 583.333, 258.589, 528.627 )
-uv = PoolVector2Array( 270.799, 333.999, 384, 249.098, 497.201, 333.999, 497.201, 532.101, 384, 588.702, 270.799, 532.101 )
+polygon = PoolVector2Array( 799.827, 1010.65, 1128.87, 763.87, 1457.91, 1010.65, 1457.91, 1586.48, 1128.87, 1751, 799.827, 1586.48 )
+uv = PoolVector2Array( 799.827, 1010.65, 1128.87, 763.87, 1457.91, 1010.65, 1457.91, 1586.48, 1128.87, 1751, 799.827, 1586.48 )
 
 [node name="Dry" type="Polygon2D" parent="."]
 visible = false
-offset = Vector2( -290, -400 )
+use_parent_material = true
+offset = Vector2( -575, -800 )
 texture = ExtResource( 5 )
-polygon = PoolVector2Array( 155.864, 302.22, 288, 203.118, 420.136, 302.22, 420.136, 533.458, 288, 599.526, 155.864, 533.458 )
-uv = PoolVector2Array( 160.857, 306.381, 288, 211.024, 415.143, 306.381, 415.143, 528.881, 288, 592.452, 160.857, 528.881 )
+polygon = PoolVector2Array( 335.14, 605.239, 583.652, 418.855, 832.165, 605.239, 832.165, 1040.14, 583.652, 1164.39, 335.14, 1040.14 )
+uv = PoolVector2Array( 335.14, 605.239, 583.652, 418.855, 832.165, 605.239, 832.165, 1040.14, 583.652, 1164.39, 335.14, 1040.14 )

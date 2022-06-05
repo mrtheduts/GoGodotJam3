@@ -6,6 +6,7 @@ var has_fallen := false
 
 func _ready():
 	$RigidBodyFruit/CollisionShape2D2.set_deferred("disabled", false)
+	z_index = Constants.Z_INDEX_FRUIT
 
 func die():
 	has_fallen = Utils.randi_range(0, 1)
@@ -15,7 +16,6 @@ func die():
 		Constants.DYING_DURATION, $Tween.TRANS_LINEAR, $Tween.EASE_OUT
 	)
 	$Tween.start()
-
 	return has_fallen
 
 func set_color(color: Color) -> void:

@@ -69,50 +69,127 @@ var FRUIT_COLOR_MAPPING := {
 
 # Root
 const ROOT_TYPE_TYPE := SCENE
-enum ROOT_TYPE_VALUES { DEFAULT }
+enum ROOT_TYPE_VALUES {
+	DEFAULT,
+	BULB,
+	TUBER
+}
 const ROOT_TYPE_DOMINANTS := [ ROOT_TYPE_VALUES.DEFAULT ]
 var ROOT_TYPE_SCENES = {
-	ROOT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Roots/FibrousRoot.tscn")
+	ROOT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Roots/FibrousRoot.tscn"),
+	ROOT_TYPE_VALUES.BULB: preload("res://src/CloseUpPlant/Roots/BulbRoot.tscn"),
+	ROOT_TYPE_VALUES.TUBER: preload("res://src/CloseUpPlant/Roots/TuberRoot.tscn")
 }
 
 # Stalk
 const STALK_TYPE_TYPE := SCENE
-enum STALK_TYPE_VALUES { DEFAULT }
-const STALK_TYPE_DOMINANTS := [ STALK_TYPE_VALUES.DEFAULT ]
+enum STALK_TYPE_VALUES {
+	DEFAULT,
+	BAMBOO,
+	CACTUS,
+	WINDING
+}
+const STALK_TYPE_DOMINANTS := [
+	STALK_TYPE_VALUES.DEFAULT,
+	STALK_TYPE_VALUES.WINDING
+]
 var STALK_TYPE_SCENES = {
-	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/DefaultStalk.tscn")
+	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/DefaultStalk.tscn"),
+	STALK_TYPE_VALUES.BAMBOO: preload("res://src/CloseUpPlant/Stalks/BambooStalk.tscn"),
+	STALK_TYPE_VALUES.CACTUS: preload("res://src/CloseUpPlant/Stalks/CactusStalk.tscn"),
+	STALK_TYPE_VALUES.WINDING: preload("res://src/CloseUpPlant/Stalks/WindingStalk.tscn")
 }
 
 # Branch
 const BRANCH_TYPE_TYPE := SCENE
-enum BRANCH_TYPE_VALUES { DEFAULT }
-const BRANCH_TYPE_DOMINANTS := [ BRANCH_TYPE_VALUES.DEFAULT ]
+enum BRANCH_TYPE_VALUES {
+	DEFAULT,
+	CACTUS,
+	WAVY
+}
+const BRANCH_TYPE_DOMINANTS := [
+	BRANCH_TYPE_VALUES.DEFAULT,
+	BRANCH_TYPE_VALUES.WAVY
+]
 var BRANCH_TYPE_SCENES = {
-	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/DefaultBranch.tscn")
+	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/DefaultBranch.tscn"),
+	BRANCH_TYPE_VALUES.CACTUS: preload("res://src/CloseUpPlant/Branches/CactusBranch.tscn"),
+	BRANCH_TYPE_VALUES.WAVY: preload("res://src/CloseUpPlant/Branches/WavyBranch.tscn")
 }
 
 # Leaf
 const LEAF_TYPE_TYPE := SCENE
-enum LEAF_TYPE_VALUES { DEFAULT }
-const LEAF_TYPE_DOMINANTS := [ LEAF_TYPE_VALUES.DEFAULT ]
+enum LEAF_TYPE_VALUES {
+	DEFAULT,
+	BIG,
+	CURLY,
+	FAN,
+	THIN,
+	THORN,
+	WING,
+}
+const LEAF_TYPE_DOMINANTS := [
+	LEAF_TYPE_VALUES.DEFAULT,
+	LEAF_TYPE_VALUES.FAN,
+	LEAF_TYPE_VALUES.THORN,
+	LEAF_TYPE_VALUES.WING
+]
 var LEAF_TYPE_SCENES = {
-	LEAF_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Leaves/Leaf.tscn")
+	LEAF_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Leaves/DefaultLeaf.tscn"),
+	LEAF_TYPE_VALUES.BIG: preload("res://src/CloseUpPlant/Leaves/BigLeaf.tscn"),
+	LEAF_TYPE_VALUES.CURLY: preload("res://src/CloseUpPlant/Leaves/CurlyLeaf.tscn"),
+	LEAF_TYPE_VALUES.FAN: preload("res://src/CloseUpPlant/Leaves/FanLeaf.tscn"),
+	LEAF_TYPE_VALUES.THIN: preload("res://src/CloseUpPlant/Leaves/ThinLeaf.tscn"),
+	LEAF_TYPE_VALUES.THORN: preload("res://src/CloseUpPlant/Leaves/ThornLeaf.tscn"),
+	LEAF_TYPE_VALUES.WING: preload("res://src/CloseUpPlant/Leaves/WingLeaf.tscn"),
 }
 
 # Flower
 const FLOWER_TYPE_TYPE := SCENE
-enum FLOWER_TYPE_VALUES { DEFAULT }
-const FLOWER_TYPE_DOMINANTS := [ FLOWER_TYPE_VALUES.DEFAULT ]
+enum FLOWER_TYPE_VALUES {
+	DEFAULT,
+	WIDE,
+	SAD,
+	WEIRD,
+	SPLASH,
+	TULIP
+}
+const FLOWER_TYPE_DOMINANTS := [
+	FLOWER_TYPE_VALUES.DEFAULT,
+	FLOWER_TYPE_VALUES.TULIP,
+	FLOWER_TYPE_VALUES.WIDE
+]
 var FLOWER_TYPE_SCENES = {
-	FLOWER_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Flowers/Flower.tscn")
+	FLOWER_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Flowers/DefaultFlower.tscn"),
+	FLOWER_TYPE_VALUES.WIDE: preload("res://src/CloseUpPlant/Flowers/WideFlower.tscn"),
+	FLOWER_TYPE_VALUES.SAD: preload("res://src/CloseUpPlant/Flowers/SadFlower.tscn"),
+	FLOWER_TYPE_VALUES.WEIRD: preload("res://src/CloseUpPlant/Flowers/WeirdFlower.tscn"),
+	FLOWER_TYPE_VALUES.SPLASH: preload("res://src/CloseUpPlant/Flowers/SplashFlower.tscn"),
+	FLOWER_TYPE_VALUES.TULIP: preload("res://src/CloseUpPlant/Flowers/TulipFlower.tscn")
 }
 
 # Fruit
 const FRUIT_TYPE_TYPE := SCENE
-enum FRUIT_TYPE_VALUES { DEFAULT }
-const FRUIT_TYPE_DOMINANTS := [ FRUIT_TYPE_VALUES.DEFAULT ]
+enum FRUIT_TYPE_VALUES {
+	DEFAULT,
+	BERRIES,
+	FOLIATE,
+	PINMYAPPLE,
+	QUARTET,
+	STRAWBERRY,
+}
+const FRUIT_TYPE_DOMINANTS := [
+	FRUIT_TYPE_VALUES.DEFAULT,
+	FRUIT_TYPE_VALUES.FOLIATE,
+	FRUIT_TYPE_VALUES.QUARTET,
+]
 var FRUIT_TYPE_SCENES = {
-	FRUIT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Fruits/Fruit.tscn")
+	FRUIT_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Fruits/DefaultFruit.tscn"),
+	FRUIT_TYPE_VALUES.BERRIES: preload("res://src/CloseUpPlant/Fruits/BerriesFruit.tscn"),
+	FRUIT_TYPE_VALUES.FOLIATE: preload("res://src/CloseUpPlant/Fruits/FoliateFruit.tscn"),
+	FRUIT_TYPE_VALUES.PINMYAPPLE: preload("res://src/CloseUpPlant/Fruits/PinMyAppleFruit.tscn"),
+	FRUIT_TYPE_VALUES.QUARTET: preload("res://src/CloseUpPlant/Fruits/QuartetFruit.tscn"),
+	FRUIT_TYPE_VALUES.STRAWBERRY: preload("res://src/CloseUpPlant/Fruits/StrawberryFruit.tscn"),
 }
 
 # Seed

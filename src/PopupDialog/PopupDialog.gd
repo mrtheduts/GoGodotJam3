@@ -24,7 +24,7 @@ var is_watering := false
 var watering_counter: float = 0
 
 func _ready():
-	Utils.conn_nodes(plant, "plant_is_adult", self, "_on_Plant_plant_is_adult")
+	Utils.conn_nodes(plant, "update_ui", self, "_on_Plant_update_ui")
 	$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.hide()
 
 func _process(delta):
@@ -129,7 +129,9 @@ func _on_DiscardButton_pressed():
 
 
 func _on_Plant_update_ui(life_state: int):
-	if(life_state == Constants.LIFE_STAGES.DEAD):
+	if (life_state == Constants.LIFE_STAGES.ADULT):
+		$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.show()
+	elif (life_state == Constants.LIFE_STAGES.DEAD):
 		$VBoxContainer/HBoxContainer/HBoxContainer/SellButton.visible = false
 		$VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton.visible = true
 		

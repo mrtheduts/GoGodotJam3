@@ -8,6 +8,7 @@ class_name Plant
 signal water_level_changed
 signal ask_for_close_up_plant
 signal plant_is_adult
+signal update_ui
 
 var life_duration_stages: Dictionary
 
@@ -74,7 +75,6 @@ func add_gene(feature, gene) -> void:
 
 func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
-	
 	_reveal_phenotype()
 	phenotype_hash = phenotype.hash()
 
@@ -94,12 +94,12 @@ func age(days: int) -> void:
 			life_stage = Constants.LIFE_STAGES.TEENAGE
 		Constants.LIFE_STAGES.TEENAGE:
 			life_stage = Constants.LIFE_STAGES.ADULT
-			emit_signal("plant_is_adult")
 		Constants.LIFE_STAGES.ADULT:
 			life_stage = Constants.LIFE_STAGES.DEAD
 			value = 0
 			close_up_plant.die()
 	
+	emit_signal("update_ui", life_stage)
 	overview_plant.set_age(life_stage)
 	emit_signal("ask_for_close_up_plant", self)
 

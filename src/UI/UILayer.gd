@@ -47,8 +47,9 @@ func _on_Garden_show_close_up_plant(plant):
 	var close_up_plant: CloseUpPlant = plant.close_up_plant
 	var close_up_plot: CloseUpPlot = CLOSE_UP_SOIL_SCENE.instance()
 	var camera_offset := close_up_plant.get_plant_center()
-
-	close_up_plot.add_node_and_focus_camera(close_up_plant, camera_offset, 3.5)
+	
+	var zoom_level = Constants.ZOOM_IN_LIFE_STAGES[plant.life_stage]
+	close_up_plot.add_node_and_focus_camera(close_up_plant, camera_offset, zoom_level)
 	Utils.conn_nodes(plant, "water_level_changed", close_up_plot, "change_water_level")
 
 	var popup_window: PopupWindow = POPUP_SCENE.instance()
