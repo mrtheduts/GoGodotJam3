@@ -17,10 +17,14 @@ var _inventory_max_slots : int = 10
 var _holding_item : int = -1
 var _sell_per : float = 0.75
 
+var _shop_items : Array = []
+var _shop_can_restock : bool = true
+
 onready var _is_editing_garden : bool = false
 onready var _is_planting_seed : bool = false
 
-func _ready():	
+func _ready():
+	Utils.conn_nodes(WorldManager, "new_day", self, "_on_WorldManager_new_day")
 	if _inventory.empty():
 		var dict:Dictionary = {}
 		for slot in range (0, _inventory_max_slots):
@@ -66,6 +70,9 @@ func load_stats(stats):
 
 func _on_UILayer_plant_sold(value: int):
 	add_money(value)
+	
+func _on_WorldManager_new_day():
+	_shop_can_restock = true
 
 func hold_item_used():
 	if _holding_item < 0:
