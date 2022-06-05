@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://src/PopupDialog/PopupDialog.gd" type="Script" id=2]
+[ext_resource path="res://raw_assets/images/ui-icons/sell.png" type="Texture" id=3]
+[ext_resource path="res://raw_assets/images/ui-icons/camera.png" type="Texture" id=4]
+[ext_resource path="res://raw_assets/images/ui-icons/close.png" type="Texture" id=5]
+[ext_resource path="res://raw_assets/images/ui-icons/watering-can.png" type="Texture" id=6]
+[ext_resource path="res://raw_assets/images/ui-icons/sell-pressed.png" type="Texture" id=7]
+[ext_resource path="res://raw_assets/images/ui-icons/watering-can-pressed.png" type="Texture" id=8]
+[ext_resource path="res://raw_assets/images/ui-icons/camera-pressed.png" type="Texture" id=9]
+[ext_resource path="res://raw_assets/images/ui-icons/close-pressed.png" type="Texture" id=10]
+[ext_resource path="res://raw_assets/images/ui-icons/combine.png" type="Texture" id=11]
+[ext_resource path="res://raw_assets/images/ui-icons/combine-pressed.png" type="Texture" id=12]
+
+[sub_resource type="ImageTexture" id=1]
 
 [node name="PopupDialog" type="PanelContainer"]
 anchor_left = 1.0
@@ -39,24 +51,34 @@ margin_right = 200.0
 margin_bottom = 64.0
 
 [node name="WaterButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
-modulate = Color( 0.305882, 0.509804, 1, 1 )
 margin_right = 64.0
 margin_bottom = 64.0
-texture_normal = ExtResource( 1 )
+rect_min_size = Vector2( 64, 64 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+expand = true
 
 [node name="PhotoButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
-modulate = Color( 0.537255, 0.537255, 0.537255, 1 )
 margin_left = 68.0
 margin_right = 132.0
 margin_bottom = 64.0
-texture_normal = ExtResource( 1 )
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 9 )
+expand = true
 
 [node name="SellButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
-modulate = Color( 1, 0.898039, 0.337255, 1 )
 margin_left = 136.0
 margin_right = 200.0
 margin_bottom = 64.0
-texture_normal = ExtResource( 1 )
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 7 )
+expand = true
 
 [node name="DiscardButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
 visible = false
@@ -65,22 +87,26 @@ margin_left = 204.0
 margin_right = 268.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 1 )
+texture_pressed = SubResource( 1 )
 
 [node name="CombineButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
 visible = false
 margin_left = 204.0
 margin_right = 268.0
 margin_bottom = 64.0
-texture_normal = ExtResource( 1 )
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
 
 [node name="CloseButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
-modulate = Color( 1, 0.368627, 0.368627, 1 )
 margin_left = 336.0
 margin_right = 400.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 size_flags_horizontal = 10
 size_flags_vertical = 10
-texture_normal = ExtResource( 1 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+expand = true
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 68.0

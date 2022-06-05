@@ -132,6 +132,7 @@ func _on_Plant_update_ui(life_state: int):
 	if(life_state == Constants.LIFE_STAGES.DEAD):
 		$VBoxContainer/HBoxContainer/HBoxContainer/SellButton.visible = false
 		$VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton.visible = true
+		
 func _on_CombineButton_pressed():
 	emit_signal("combine_button_clicked", plant)
 
