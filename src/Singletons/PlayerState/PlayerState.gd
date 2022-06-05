@@ -9,7 +9,7 @@ signal inventory_changed
 signal edit_garden_mode
 signal planting_mode
 
-var _money: int = 150
+var _money: int = 250
 var _stored_plants: Array = []
 
 var _inventory : Dictionary = {}
