@@ -5,19 +5,21 @@
 extends CanvasLayer
 
 # Signals
-signal photo_took
+
 signal remove_plant
 signal combine_crop
 
 var POPUP_SCENE = preload("res://src/PopupDialog/PopupDialog.tscn")
 var CLOSE_UP_SOIL_SCENE = preload("res://src/CloseUpPlot/CloseUpPlot.tscn")
 var COMBINE_ANIMATION_SCENE = preload("res://src/UI/CombineAnimation/CombineAnimation.tscn")
+var INDEX_SCENE = preload("res://src/PlantIndex/PlantIndex.tscn")
 
 var SHOP_SCENE_PATH : String = "res://src/Shop/Shop.tscn"
 var MAIN_SCENE_PATH : String = "res://src/Main/Main.tscn"
 
 var active_scene : String = ""
 var opened_plants := {}
+var index_opened: bool = false
 
 func _ready():
 	if get_tree().get_current_scene().get_name() == "Shop":
@@ -38,7 +40,7 @@ func _on_Garden_combine_plants(plants: Array, new_plant: Plant):
 	add_child(combine_animation)
 
 
-func _on_Garden_show_close_up_plant(plant: Plant):
+func _on_Garden_show_close_up_plant(plant):
 	if (opened_plants.has(plant)):
 		return
 
@@ -66,7 +68,7 @@ func _on_Garden_show_close_up_plant(plant: Plant):
 	popup_window.show_scene(close_up_plot)
 
 func _on_PopupWindow_photo_button_clicked(plant: Plant, photo: Image):
-	emit_signal("photo_took", plant, photo)
+	PlayerState.collect_plant(plant, photo)
 
 func _on_PopupWindow_sell_button_clicked(plant: Plant):
 	PlayerState.add_money(plant.value)
@@ -88,3 +90,13 @@ func _on_Store_pressed():
 		get_tree().change_scene(SHOP_SCENE_PATH)
 	else:
 		get_tree().change_scene(MAIN_SCENE_PATH)
+
+func _on_OpenPlantIndex_open_index():
+	if not index_opened:
+		var index: PlantIndex = INDEX_SCENE.instance()
+		Utils.conn_nodes(index, "index_closed", self, "_on_OpenPlantIndex_index_closed")
+		add_child(index)
+		index_opened = true
+
+func _on_OpenPlantIndex_index_closed():
+	index_opened = false
