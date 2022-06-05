@@ -8,6 +8,9 @@ class_name Root
 
 var life_stage = Constants.LIFE_STAGES.SPROUT
 
+func _ready():
+	z_index = Constants.Z_INDEX_ROOT
+
 func age() -> void:
 	$AnimationPlayer.play("RESET")
 	match life_stage + 1:
@@ -21,7 +24,13 @@ func age() -> void:
 			$Adult.visible = true
 
 func die():
-	$AnimationPlayer.stop()
+	$Tween.interpolate_property(
+		self, "modulate",
+		self.modulate, Constants.DEAD_COLOR, 
+		Constants.DYING_DURATION, $Tween.TRANS_LINEAR, $Tween.EASE_OUT
+	)
+	$Tween.start()
+	$AnimationPlayer.play("Dead")
 
 func set_modulate_color(color: Color) -> void:
 	for node in [$Sprout, $Teenage, $Adult]:

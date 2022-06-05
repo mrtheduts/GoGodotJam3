@@ -215,3 +215,5 @@ rest = Transform2D( 0.866026, -0.499999, 0.499999, 0.866026, -118, 181 )
 __meta__ = {
 "_edit_bone_": true
 }
+
+[node name="Tween" type="Tween" parent="."]

@@ -10,6 +10,9 @@ var _entry_points := {}
 
 var life_stage = Constants.LIFE_STAGES.TEENAGE
 
+func _ready():
+	z_index = Constants.Z_INDEX_BRANCH
+
 func init_entry_points():
 	_entry_points[$Skeleton2D/BeginBone/MidBone] = []
 
