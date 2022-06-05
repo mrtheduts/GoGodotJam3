@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/page.mp3-1633e74eb874805f0585845338718c9b.mp3str"
+
+[deps]
+
+source_file="res://raw_assets/sounds/effects/page.mp3"
+dest_files=[ "res://.import/page.mp3-1633e74eb874805f0585845338718c9b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

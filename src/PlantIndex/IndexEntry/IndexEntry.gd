@@ -2,9 +2,9 @@ extends MarginContainer
 class_name IndexEntry
 
 # References of the feature list, name label and texture rect
-onready var _feature_list: ItemList = $HBoxContainer/VBoxContainer/FeatureList
-onready var _name_edit: LineEdit = $HBoxContainer/VBoxContainer/Name
-onready var _image: TextureRect = $HBoxContainer/Photo
+onready var _feature_list: ItemList = $VBoxContainer/DataContainer/FeatureList
+onready var _name_edit: LineEdit = $VBoxContainer/DataContainer/Name
+onready var _image: TextureRect = $VBoxContainer/Photo
 
 var _plant: Plant = null
 

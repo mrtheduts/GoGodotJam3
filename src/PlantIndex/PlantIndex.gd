@@ -39,10 +39,12 @@ func _on_TweenClose_tween_all_completed():
 
 func _on_BackButton_pressed():
 	change_page(-2)
+	$AudioStreamPlayer.play()
 	update_buttons()
 
 func _on_NextButton_pressed():
 	change_page(2)
+	$AudioStreamPlayer.play()
 	update_buttons()
 
 func change_page(increment: int):
