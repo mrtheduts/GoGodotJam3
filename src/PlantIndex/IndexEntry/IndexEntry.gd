@@ -6,7 +6,10 @@ onready var _feature_list: ItemList = $HBoxContainer/VBoxContainer/FeatureList
 onready var _name_edit: LineEdit = $HBoxContainer/VBoxContainer/Name
 onready var _image: TextureRect = $HBoxContainer/Photo
 
+var _plant: Plant = null
+
 func init_plant(plant: Plant):
+	_plant = plant
 	var features: Dictionary = plant.phenotype
 	var size = features.size()
 	
@@ -41,3 +44,6 @@ func set_list_size(size: int):
 
 func clear_list():
 	_feature_list.clear()
+
+func _on_Name_text_changed(new_text: String) -> void:
+	_plant.name = new_text

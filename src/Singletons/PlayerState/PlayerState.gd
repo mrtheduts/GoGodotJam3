@@ -41,7 +41,6 @@ func _ready():
 			var plant = PlantFactory.gen_random_plant()
 			_plant_goal_list.append(plant)
 			_plant_goal_status[plant.phenotype_hash] = false
-
 	
 func set_money(value: int) -> void:
 	_money = value
