@@ -1,12 +1,12 @@
 extends MarginContainer
 
-var ICON_DAY_TEXTURE = preload("res://icon.png")
-var ICON_NIGHT_TEXTURE = preload("res://raw_assets/images/shop/chest.png")
+var ICON_DAY_TEXTURE = preload("res://raw_assets/images/ui-icons/sun.png")
+var ICON_NIGHT_TEXTURE = preload("res://raw_assets/images/ui-icons/moon.png")
 
-var ICON_CLEAR_TEXTURE = preload("res://icon.png")
-var ICON_CLOUDY_TEXTURE = preload("res://raw_assets/images/shop/bag.png")
-var ICON_RAINY_TEXTURE = preload("res://raw_assets/images/shop/coin.png")
-var ICON_METEOR_TEXTURE = preload("res://raw_assets/images/shop/shop.png")
+var ICON_CLEAR_TEXTURE = preload("res://raw_assets/images/ui-icons/clear-weather.png")
+var ICON_CLOUDY_TEXTURE = preload("res://raw_assets/images/ui-icons/cloudy-weather.png")
+var ICON_RAINY_TEXTURE = preload("res://raw_assets/images/ui-icons/rainy-weather.png")
+var ICON_METEOR_TEXTURE = preload("res://raw_assets/images/ui-icons/meteor-weather.png")
 
 func _ready():
 	Utils.conn_nodes(WorldManager, "new_day", self, "_on_WorldManager_new_day")
