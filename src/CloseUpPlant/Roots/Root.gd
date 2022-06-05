@@ -30,7 +30,7 @@ func die():
 		Constants.DYING_DURATION, $Tween.TRANS_LINEAR, $Tween.EASE_OUT
 	)
 	$Tween.start()
-	$AnimationPlayer.play("Dead")
+	$AnimationPlayer.play("RESET")
 
 func set_modulate_color(color: Color) -> void:
 	for node in [$Sprout, $Teenage, $Adult]:
