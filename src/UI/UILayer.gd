@@ -24,7 +24,7 @@ var opened_plants := {}
 var index_opened: bool = false
 
 func _ready():
-	if get_tree().get_current_scene().get_name() == "Shop":
+	if get_parent().get_name() == "Shop":
 		$WorldUI.visible = false
 		
 func _on_Garden_combine_plants(plants: Array, new_plant: Plant):
