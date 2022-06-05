@@ -120,7 +120,6 @@ anims/RESET = SubResource( 2 )
 material = ExtResource( 3 )
 
 [node name="Polygon2D1" type="Polygon2D" parent="Sprout"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 offset = Vector2( -600, -1700 )
 texture = ExtResource( 1 )
@@ -130,7 +129,6 @@ uv = PoolVector2Array( 32, 2432, 544, 2432, 800, 1920, 416, 1536, 32, 2048 )
 bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="Polygon2D2" type="Polygon2D" parent="Sprout"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 scale = Vector2( -1, 1 )
 offset = Vector2( -600, -1700 )
@@ -145,7 +143,6 @@ visible = false
 material = ExtResource( 3 )
 
 [node name="Polygon2D1" type="Polygon2D" parent="Teenage"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 offset = Vector2( -750, -1400 )
 texture = ExtResource( 1 )
@@ -155,7 +152,6 @@ uv = PoolVector2Array( 32, 2432, 544, 2432, 1056, 1536, 544, 1280, 32, 1920 )
 bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="Polygon2D2" type="Polygon2D" parent="Teenage"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 scale = Vector2( -1, 1 )
 offset = Vector2( -750, -1400 )
@@ -170,7 +166,6 @@ visible = false
 material = ExtResource( 3 )
 
 [node name="Polygon2D1" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 offset = Vector2( -1000, -250 )
 texture = ExtResource( 1 )
@@ -180,7 +175,6 @@ uv = PoolVector2Array( 1184, 256, 1053.26, 1376.73, 780.86, 1989.62, 372.265, 25
 bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="Polygon2D2" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 scale = Vector2( -1, 1 )
 offset = Vector2( -1000, -250 )

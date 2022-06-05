@@ -32,6 +32,10 @@ func die():
 	$AnimationPlayer.play("Dead")
 	return false
 
+func set_modulate_color(color: Color) -> void:
+	for node in [$Teenage, $Adult]:
+		node.modulate = color
+
 func get_mid_bone():
 	return $Skeleton2D/BeginBone/MidBone
 

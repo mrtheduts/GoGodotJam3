@@ -13,9 +13,11 @@ const DEPTH_SPROUT := Vector2(0, 50)
 var _entry_points := {}
 var nodes_with_idle_animation := []
 
-var seed_node = null
-var root_node = null
-var stalk_node = null
+var modulate_color := Color.white
+
+var seed_node: Seed = null
+var root_node: Root = null
+var stalk_node: Stalk  = null
 
 var branch_nodes := []
 var leaf_nodes := []
@@ -52,6 +54,7 @@ func add_to_random_entry_point(node: Node) -> bool:
 				if (node is Leaf):
 					leaf_nodes.push_back(node)
 				elif (node is Branch):
+					node.set_modulate_color(modulate_color)
 					branch_nodes.push_back(node)
 				
 				var node_entry_points = node.get("_entry_points")
@@ -105,10 +108,12 @@ func add_seed(node: Node) -> void:
 
 func add_root(node: Node) -> void:
 	self.root_node = node
-	stalk_node.get_stalk_down().add_child(node) # Fixed entry point for root
+	root_node.set_modulate_color(modulate_color)
+	add_child(node) # Fixed entry point for root
 
 func add_stalk(node: Node) -> void:
 	self.stalk_node = node
+	modulate_color = stalk_node.get_modulate_color()
 	add_child(stalk_node)
 	_entry_points = Utils.merge_dicts_of_arrays(_entry_points, node._entry_points, true)
 

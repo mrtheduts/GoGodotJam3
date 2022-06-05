@@ -19,10 +19,13 @@ func age() -> void:
 			life_stage += 1
 			$Teenage.visible = false
 			$Adult.visible = true
-	
 
 func die():
 	$AnimationPlayer.stop()
+
+func set_modulate_color(color: Color) -> void:
+	for node in [$Sprout, $Teenage, $Adult]:
+		node.modulate = color
 
 func play_idle_animation() -> void:
 	$AnimationPlayer.play("Idle")

@@ -173,7 +173,6 @@ material = ExtResource( 3 )
 position = Vector2( -3, 0 )
 
 [node name="End" type="Polygon2D" parent="Teenage"]
-modulate = Color( 0.74902, 0.709804, 0.435294, 1 )
 use_parent_material = true
 offset = Vector2( -680, -475 )
 texture = ExtResource( 4 )
@@ -186,7 +185,6 @@ bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRea
 visible = false
 
 [node name="Begin" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.74902, 0.709804, 0.435294, 1 )
 material = ExtResource( 3 )
 offset = Vector2( -110, -900 )
 texture = ExtResource( 4 )
@@ -196,7 +194,6 @@ uv = PoolVector2Array( 32, 1152, 32, 512, 672, 128, 672, 896 )
 bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="End" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.74902, 0.709804, 0.435294, 1 )
 material = ExtResource( 3 )
 offset = Vector2( -110, -900 )
 texture = ExtResource( 4 )
@@ -206,7 +203,6 @@ uv = PoolVector2Array( 672, 1024, 672, 0, 1440, -128, 1568, 256 )
 bones = [ "BeginBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="End2" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.74902, 0.709804, 0.435294, 1 )
 material = ExtResource( 3 )
 offset = Vector2( -110, -900 )
 texture = ExtResource( 4 )

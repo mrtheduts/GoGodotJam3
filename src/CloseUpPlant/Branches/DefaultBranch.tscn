@@ -181,7 +181,6 @@ anims/Idle = SubResource( 2 )
 anims/RESET = SubResource( 4 )
 
 [node name="Teenage" type="Node2D" parent="."]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 material = ExtResource( 2 )
 position = Vector2( -3, 0 )
 
@@ -198,7 +197,6 @@ bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRea
 visible = false
 
 [node name="Begin" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 material = ExtResource( 2 )
 offset = Vector2( -110, -625 )
 texture = ExtResource( 3 )
@@ -208,7 +206,6 @@ uv = PoolVector2Array( 32, 768, 288, 768, 672, 640, 672, 0, 32, 384 )
 bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRealArray( 0, 0, 0, 0, 0 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="End" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 material = ExtResource( 2 )
 offset = Vector2( -125, -615 )
 texture = ExtResource( 3 )

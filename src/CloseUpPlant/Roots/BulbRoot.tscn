@@ -149,7 +149,6 @@ anims/RESET = SubResource( 2 )
 material = ExtResource( 3 )
 
 [node name="Polygon2D1" type="Polygon2D" parent="Sprout"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 offset = Vector2( -575, -1800 )
 texture = ExtResource( 4 )
@@ -163,7 +162,6 @@ visible = false
 material = ExtResource( 3 )
 
 [node name="Polygon2D1" type="Polygon2D" parent="Teenage"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 offset = Vector2( -575, -1150 )
 texture = ExtResource( 4 )
@@ -177,7 +175,6 @@ visible = false
 material = ExtResource( 3 )
 
 [node name="Polygon2D1" type="Polygon2D" parent="Adult"]
-modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 offset = Vector2( -500, -450 )
 texture = ExtResource( 4 )
