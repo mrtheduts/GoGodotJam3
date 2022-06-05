@@ -24,6 +24,7 @@ var phenotype: Dictionary = {}
 
 var life_stage = Constants.LIFE_STAGES.SEED
 var life_days := 0
+var days_without_water := 0
 var watered_amount := Constants.MIN_WATERED_AMOUNT
 
 var value := BASE_VALUE
@@ -90,24 +91,29 @@ func meiosis() -> Dictionary:
 
 func age(days: int) -> void:
 	life_days += days
-	match life_stage:
-		Constants.LIFE_STAGES.SEED:
-			life_stage = Constants.LIFE_STAGES.SPROUT
-			set_plant_value()
-		Constants.LIFE_STAGES.SPROUT:
-			life_stage = Constants.LIFE_STAGES.TEENAGE
-			set_plant_value()
-		Constants.LIFE_STAGES.TEENAGE:
-			life_stage = Constants.LIFE_STAGES.ADULT
-			set_plant_value()
-		Constants.LIFE_STAGES.ADULT:
-			life_stage = Constants.LIFE_STAGES.DEAD
-			value = 0
-			close_up_plant.die()
 	
-	emit_signal("update_ui", life_stage)
-	overview_plant.set_age(life_stage)
-	emit_signal("ask_for_close_up_plant", self)
+	if watered_amount >= Constants.MIN_WATER_TO_AGE:
+		match life_stage:
+			Constants.LIFE_STAGES.SEED:
+				life_stage = Constants.LIFE_STAGES.SPROUT
+				set_plant_value()
+			Constants.LIFE_STAGES.SPROUT:
+				life_stage = Constants.LIFE_STAGES.TEENAGE
+				set_plant_value()
+			Constants.LIFE_STAGES.TEENAGE:
+				life_stage = Constants.LIFE_STAGES.ADULT
+				set_plant_value()
+			Constants.LIFE_STAGES.ADULT:
+				life_stage = Constants.LIFE_STAGES.DEAD
+				value = 0
+				close_up_plant.die()
+		
+		emit_signal("update_ui", life_stage)
+		overview_plant.set_age(life_stage)
+		emit_signal("ask_for_close_up_plant", self)
+	
+	if watered_amount > 0:
+		water(-1)
 
 func water(amount: int = 1) -> void:
 	# warning-ignore:narrowing_conversion
