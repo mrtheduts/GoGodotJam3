@@ -13,7 +13,7 @@ var _value : int
 
 func init(id: int, plant: Plant):
 	_id = id
-	_value = ItemDatabase.get_item(String(Constants.SEED_ITEM_ID))["sell_price"]
+	_value = plant.value * 4
 	_plant = plant
 	
 	var new_seed = SEED_SCENE.instance()
