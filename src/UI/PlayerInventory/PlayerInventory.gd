@@ -36,11 +36,11 @@ func _ready():
 	set_process(false)
 	set_process_input(true)
 
-	for i in range(1,6):
-		if i >= 4:
-			PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
-		else:
-			PlayerState.inventory_add_item(1)
+	#for i in range(1,6):
+	#	if i >= 4:
+	#		PlayerState.inventory_add_item(4, 4, PlantFactory.gen_random_plant())
+	#	else:
+	#		PlayerState.inventory_add_item(1)
 
 
 func _process(_delta):
@@ -119,7 +119,7 @@ func update_slot(slot: int):
 			return
 
 	var new_slot = INVENTORY_SLOT_SCENE.instance()
-	new_slot.update_item(slot, item_meta_data, amount)
+	new_slot.update_item(slot, item_meta_data, String(amount))
 	$Slots.add_child(new_slot)
 
 func show_item_options(index: int):

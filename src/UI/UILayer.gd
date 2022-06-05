@@ -13,8 +13,16 @@ var POPUP_SCENE = preload("res://src/PopupDialog/PopupDialog.tscn")
 var CLOSE_UP_SOIL_SCENE = preload("res://src/CloseUpPlot/CloseUpPlot.tscn")
 var COMBINE_ANIMATION_SCENE = preload("res://src/UI/CombineAnimation/CombineAnimation.tscn")
 
+var SHOP_SCENE_PATH : String = "res://src/Shop/Shop.tscn"
+var MAIN_SCENE_PATH : String = "res://src/Main/Main.tscn"
+
+var active_scene : String = ""
 var opened_plants := {}
 
+func _ready():
+	if get_tree().get_current_scene().get_name() == "Shop":
+		$WorldUI.visible = false
+		
 func _on_Garden_combine_plants(plants: Array, new_plant: Plant):
 	for node in get_children():
 		if node is PopupWindow:
@@ -74,3 +82,9 @@ func _on_PopupWindow_discard_button_clicked(plant: Plant):
 	
 func _on_PopupWindow_combine_button_clicked(plant: Plant):
 	emit_signal("combine_crop", plant)
+
+func _on_Store_pressed():
+	if get_tree().get_current_scene().get_name() == "Main":
+		get_tree().change_scene(SHOP_SCENE_PATH)
+	else:
+		get_tree().change_scene(MAIN_SCENE_PATH)
