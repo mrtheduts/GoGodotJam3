@@ -100,7 +100,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("StalkSkeleton/SkelDown:rotation_degrees")
+tracks/0/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp/SkelTop:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -109,10 +109,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ Vector2( 0, -694 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("StalkSkeleton/SkelDown:position")
+tracks/1/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp/SkelTop:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -121,10 +121,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("StalkSkeleton/SkelDown/SkelMid:position")
+tracks/2/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp/SkelTop:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -133,10 +133,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -200 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("StalkSkeleton/SkelDown/SkelMid:rotation_degrees")
+tracks/3/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -145,10 +145,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ Vector2( 0, -640 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("StalkSkeleton/SkelDown/SkelMid:scale")
+tracks/4/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -157,10 +157,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ 0.0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("StalkSkeleton/SkelDown:scale")
+tracks/5/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -172,7 +172,7 @@ tracks/5/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp:position")
+tracks/6/path = NodePath("StalkSkeleton/SkelDown/SkelMid:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -181,10 +181,10 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -210 ) ]
+"values": [ Vector2( 0, -570 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp:rotation_degrees")
+tracks/7/path = NodePath("StalkSkeleton/SkelDown/SkelMid:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -196,7 +196,7 @@ tracks/7/keys = {
 "values": [ 0.0 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp:scale")
+tracks/8/path = NodePath("StalkSkeleton/SkelDown/SkelMid:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -208,7 +208,7 @@ tracks/8/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp/SkelTop:position")
+tracks/9/path = NodePath("StalkSkeleton/SkelDown:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -217,10 +217,10 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -180 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp/SkelTop:rotation_degrees")
+tracks/10/path = NodePath("StalkSkeleton/SkelDown:rotation_degrees")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -232,7 +232,7 @@ tracks/10/keys = {
 "values": [ 0.0 ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("StalkSkeleton/SkelDown/SkelMid/SkelUp/SkelTop:scale")
+tracks/11/path = NodePath("StalkSkeleton/SkelDown:scale")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -244,7 +244,7 @@ tracks/11/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[node name="DefaultStalk" type="Node2D"]
+[node name="BambooStalk" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
@@ -260,11 +260,11 @@ material = ExtResource( 3 )
 [node name="StalkDown" type="Polygon2D" parent="Polygons"]
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
-offset = Vector2( -340, -820 )
+offset = Vector2( -210, -1850 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../StalkSkeleton")
-polygon = PoolVector2Array( 400, 823, 272, 823, 272, 615, 400, 615 )
-uv = PoolVector2Array( 400, 823, 272, 823, 272, 615, 400, 615 )
+polygon = PoolVector2Array( 31.9999, 1920, 416, 1920, 416, 1280, 31.9999, 1280 )
+uv = PoolVector2Array( 31.9999, 1920, 416, 1920, 416, 1280, 31.9999, 1280 )
 bones = [ "SkelDown", PoolRealArray( 1, 1, 1, 1 ), "SkelDown/SkelMid", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid/SkelUp", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid/SkelUp/SkelTop", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="StalkMid" type="Polygon2D" parent="Polygons"]
@@ -272,11 +272,11 @@ visible = false
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 position = Vector2( 0, -200 )
-offset = Vector2( -340, -620 )
+offset = Vector2( -210, -1650 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../StalkSkeleton")
-polygon = PoolVector2Array( 272, 615, 400, 615, 400, 407, 272, 407 )
-uv = PoolVector2Array( 272, 615, 400, 615, 400, 407, 272, 407 )
+polygon = PoolVector2Array( 416, 1280, 31.9999, 1280, 31.9999, 640, 416, 640 )
+uv = PoolVector2Array( 416, 1280, 31.9999, 1280, 31.9999, 640, 416, 640 )
 bones = [ "SkelDown", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid", PoolRealArray( 1, 1, 1, 1 ), "SkelDown/SkelMid/SkelUp", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid/SkelUp/SkelTop", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="StalkUp" type="Polygon2D" parent="Polygons"]
@@ -284,11 +284,11 @@ visible = false
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
 position = Vector2( 0, -410 )
-offset = Vector2( -340, -400 )
+offset = Vector2( -210, -1565 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../StalkSkeleton")
-polygon = PoolVector2Array( 272, 407, 416, 407, 416, 183, 272, 183 )
-uv = PoolVector2Array( 272, 407, 416, 407, 416, 183, 272, 183 )
+polygon = PoolVector2Array( 416, 768, 31.9999, 768, 31.9999, 0, 416, 0 )
+uv = PoolVector2Array( 416, 768, 31.9999, 768, 31.9999, 0, 416, 0 )
 bones = [ "SkelDown", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid/SkelUp", PoolRealArray( 1, 1, 1, 1 ), "SkelDown/SkelMid/SkelUp/SkelTop", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="StalkSkeleton" type="Skeleton2D" parent="."]
@@ -301,22 +301,22 @@ __meta__ = {
 }
 
 [node name="SkelMid" type="Bone2D" parent="StalkSkeleton/SkelDown"]
-position = Vector2( 0, -200 )
-rest = Transform2D( 1, 0, 0, 1, 0, -200 )
+position = Vector2( 0, -570 )
+rest = Transform2D( 1, 0, 0, 1, 0, -570 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="SkelUp" type="Bone2D" parent="StalkSkeleton/SkelDown/SkelMid"]
-position = Vector2( 0, -210 )
-rest = Transform2D( 1, 0, 0, 1, 0, -210 )
+position = Vector2( 0, -640 )
+rest = Transform2D( 1, 0, 0, 1, 0, -640 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="SkelTop" type="Bone2D" parent="StalkSkeleton/SkelDown/SkelMid/SkelUp"]
-position = Vector2( 0, -180 )
-rest = Transform2D( 1, 0, 0, 1, 0, -180 )
+position = Vector2( 0, -694 )
+rest = Transform2D( 1, 0, 0, 1, 0, -694 )
 __meta__ = {
 "_edit_bone_": true
 }

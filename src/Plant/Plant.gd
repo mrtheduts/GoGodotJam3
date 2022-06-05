@@ -11,6 +11,7 @@ signal ask_for_close_up_plant
 var life_duration_stages: Dictionary
 
 var close_up_plant: CloseUpPlant = null
+var zoom_level: float = Constants.INITIAL_ZOOM_CLOSE_UP
 
 var type_hash: int = 0
 var genetics: Dictionary = {}
@@ -68,7 +69,6 @@ func add_gene(feature, gene) -> void:
 
 func finish_gene_config() -> void:
 	type_hash = genetics.hash() # Regenerate id to reflect its DNA
-	
 	_reveal_phenotype()
 
 func meiosis() -> Dictionary:
@@ -91,6 +91,8 @@ func age(days: int) -> void:
 			life_stage = Constants.LIFE_STAGES.DEAD
 			close_up_plant.die()
 	
+	if (life_stage != Constants.LIFE_STAGES.DEAD):
+		zoom_level = Constants.INITIAL_ZOOM_CLOSE_UP + Constants.ZOOM_CLOSE_UP_FACTOR * life_stage
 	emit_signal("ask_for_close_up_plant", self)
 
 func water(amount: int = 1) -> void:

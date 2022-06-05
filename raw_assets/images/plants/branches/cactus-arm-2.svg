@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="33.612mm"
+   height="39.207779mm"
+   viewBox="0 0 33.612 39.207779"
    version="1.1"
    id="svg7085"
    inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
@@ -38,7 +38,8 @@
   <g
      inkscape:label="Camada 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-58.812242,-142.36688)">
     <path
        style="fill:#000000;fill-opacity:0.987952;stroke-width:0.874001"
        id="path7208"

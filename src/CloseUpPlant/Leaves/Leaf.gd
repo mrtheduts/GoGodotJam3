@@ -12,7 +12,6 @@ func die():
 		Constants.DYING_DURATION, $Tween.TRANS_LINEAR, $Tween.EASE_OUT
 	)
 	$Tween.start()
-
 	return has_fallen
 
 

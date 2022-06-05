@@ -18,10 +18,10 @@ script = ExtResource( 2 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 material = ExtResource( 3 )
-offset = Vector2( -363, -295 )
+offset = Vector2( -525, -525 )
 texture = ExtResource( 1 )
-polygon = PoolVector2Array( 192, 128, 544, 128, 544, 480, 192, 480 )
-uv = PoolVector2Array( 192, 128, 544, 128, 544, 480, 192, 480 )
+polygon = PoolVector2Array( 32.0001, 1024, 32.0001, 3.05176e-05, 1056, 3.05176e-05, 1056, 1024 )
+uv = PoolVector2Array( 32.0001, 1024, 32.0001, 3.05176e-05, 1056, 3.05176e-05, 1056, 1024 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, -1 )

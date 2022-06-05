@@ -4,22 +4,22 @@
 
 extends Node2D
 
-func set_age(age: int) -> void:
-	match age:
-		Constants.LIFE_STAGES.SPROUT:
-			$AnimationPlayer.play("RESET")
-			$Sprout.visible = true
-			$Adult.visible = false
+class_name Root
+
+var life_stage = Constants.LIFE_STAGES.SPROUT
+
+func age() -> void:
+	$AnimationPlayer.play("RESET")
+	match life_stage + 1:
 		Constants.LIFE_STAGES.TEENAGE:
-			$AnimationPlayer.play("RESET")
+			life_stage += 1
 			$Sprout.visible = false
-			$Adult.visible = false
+			$Teenage.visible = true
 		Constants.LIFE_STAGES.ADULT:
-			$AnimationPlayer.play("RESET")
-			$Sprout.visible = false
+			life_stage += 1
+			$Teenage.visible = false
 			$Adult.visible = true
-		Constants.LIFE_STAGES.DEAD:
-			$AnimationPlayer.play("Dead")
+	
 
 func die():
 	$AnimationPlayer.stop()

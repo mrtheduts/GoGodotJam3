@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1/Bone2D2-1-1:scale")
+tracks/1/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -33,7 +33,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1:scale")
+tracks/2/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -45,36 +45,12 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1/Bone2D1-1-1:scale")
+tracks/3/path = NodePath("Skeleton2D/Bone2D1:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Skeleton2D/Bone2D1:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0, 2.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -96,7 +72,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1/Bone2D2-1-1:scale")
+tracks/1/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -108,7 +84,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Skeleton2D/Bone2D2/Bone2D2-1:scale")
+tracks/2/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -120,36 +96,12 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1/Bone2D1-1-1:scale")
+tracks/3/path = NodePath("Skeleton2D/Bone2D1:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Skeleton2D/Bone2D1/Bone2D1-1:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Skeleton2D/Bone2D1:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -170,51 +122,48 @@ material = ExtResource( 3 )
 [node name="Polygon2D1" type="Polygon2D" parent="Sprout"]
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
-rotation = 0.349066
-offset = Vector2( -250, -650 )
+offset = Vector2( -600, -1700 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 240, 759, 320, 711, 336, 663, 160, 599, 128, 695, 160, 743 )
-uv = PoolVector2Array( 240, 759, 320, 711, 336, 663, 160, 599, 128, 695, 160, 743 )
-bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D1/Bone2D1-1/Bone2D1-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1/Bone2D2-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ) ]
+polygon = PoolVector2Array( 32, 2432, 544, 2432, 800, 1920, 416, 1536, 32, 2048 )
+uv = PoolVector2Array( 32, 2432, 544, 2432, 800, 1920, 416, 1536, 32, 2048 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="Polygon2D2" type="Polygon2D" parent="Sprout"]
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
-rotation = -0.349066
 scale = Vector2( -1, 1 )
-offset = Vector2( -250, -650 )
+offset = Vector2( -600, -1700 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 240, 759, 320, 711, 336, 663, 160, 599, 128, 695, 160, 743 )
-uv = PoolVector2Array( 240, 759, 320, 711, 336, 663, 160, 599, 128, 695, 160, 743 )
-bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D1/Bone2D1-1/Bone2D1-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1/Bone2D2-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ) ]
+polygon = PoolVector2Array( 32, 2432, 544, 2432, 800, 1920, 416, 1536, 32, 2048 )
+uv = PoolVector2Array( 32, 2432, 544, 2432, 800, 1920, 416, 1536, 32, 2048 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="Teenage" type="Node2D" parent="."]
+visible = false
 material = ExtResource( 3 )
 
 [node name="Polygon2D1" type="Polygon2D" parent="Teenage"]
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
-rotation = 0.349066
-offset = Vector2( -350, -475 )
+offset = Vector2( -750, -1400 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 240, 759, 320, 711, 416, 471, 272, 455, 128, 695, 160, 743 )
-uv = PoolVector2Array( 240, 759, 320, 711, 400, 455, 272, 423, 128, 695, 160, 743 )
-bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D1/Bone2D1-1/Bone2D1-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1/Bone2D2-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ) ]
+polygon = PoolVector2Array( 32, 2432, 544, 2432, 1056, 1536, 544, 1280, 32, 1920 )
+uv = PoolVector2Array( 32, 2432, 544, 2432, 1056, 1536, 544, 1280, 32, 1920 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="Polygon2D2" type="Polygon2D" parent="Teenage"]
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
-rotation = -0.349066
 scale = Vector2( -1, 1 )
-offset = Vector2( -350, -475 )
+offset = Vector2( -750, -1400 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 240, 759, 320, 711, 416, 487, 256, 423, 128, 695, 160, 743 )
-uv = PoolVector2Array( 240, 759, 320, 711, 416, 487, 256, 423, 128, 695, 160, 743 )
-bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D1/Bone2D1-1/Bone2D1-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1/Bone2D2-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0 ) ]
+polygon = PoolVector2Array( 32, 2432, 544, 2432, 1056, 1536, 544, 1280, 32, 1920 )
+uv = PoolVector2Array( 32, 2432, 544, 2432, 1056, 1536, 544, 1280, 32, 1920 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0 ) ]
 
 [node name="Adult" type="Node2D" parent="."]
 visible = false
@@ -223,25 +172,23 @@ material = ExtResource( 3 )
 [node name="Polygon2D1" type="Polygon2D" parent="Adult"]
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
-rotation = 0.349066
-offset = Vector2( -370, -300 )
+offset = Vector2( -1000, -250 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 400, 272, 400, 496, 336, 640, 240, 768, 144, 736, 144, 656, 256, 480, 304, 272 )
-uv = PoolVector2Array( 400, 272, 400, 496, 336, 640, 240, 768, 144, 736, 144, 656, 256, 480, 304, 272 )
-bones = [ "Bone2D1", PoolRealArray( 1, 0.49, 0, 0, 0, 0, 0.49, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0.49, 0.49, 0, 0, 0.49, 0.49, 0 ), "Bone2D1/Bone2D1-1/Bone2D1-1-1", PoolRealArray( 0, 0, 0.49, 1, 1, 0.49, 0, 0 ) ]
+polygon = PoolVector2Array( 1184, 256, 1053.26, 1376.73, 780.86, 1989.62, 372.265, 2534.41, -36.3302, 2398.21, -36.3302, 2057.72, 440.364, 1308.63, 800, 128 )
+uv = PoolVector2Array( 1184, 256, 1053.26, 1376.73, 780.86, 1989.62, 372.265, 2534.41, -36.3302, 2398.21, -36.3302, 2057.72, 440.364, 1308.63, 800, 128 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="Polygon2D2" type="Polygon2D" parent="Adult"]
 modulate = Color( 0.341176, 0.231373, 0.231373, 1 )
 use_parent_material = true
-rotation = -0.349066
 scale = Vector2( -1, 1 )
-offset = Vector2( -370, -300 )
+offset = Vector2( -1000, -250 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 400, 272, 400, 496, 336, 640, 240, 768, 144, 736, 144, 656, 256, 480, 304, 272 )
-uv = PoolVector2Array( 400, 272, 400, 496, 336, 640, 240, 768, 144, 736, 144, 656, 256, 480, 304, 272 )
-bones = [ "Bone2D1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D1/Bone2D1-1/Bone2D1-1-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 1, 0.5, 0, 0, 0, 0, 0.5, 1 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0.5, 0.5, 0, 0, 0.5, 0.5, 0 ), "Bone2D2/Bone2D2-1/Bone2D2-1-1", PoolRealArray( 0, 0, 0.5, 1, 1, 0.5, 0, 0 ) ]
+polygon = PoolVector2Array( 1184, 256, 1053.26, 1376.73, 780.86, 1989.62, 372.265, 2534.41, -36.3302, 2398.21, -36.3302, 2057.72, 440.364, 1308.63, 800, 128 )
+uv = PoolVector2Array( 1184, 256, 1053.26, 1376.73, 780.86, 1989.62, 372.265, 2534.41, -36.3302, 2398.21, -36.3302, 2057.72, 440.364, 1308.63, 800, 128 )
+bones = [ "Bone2D1", PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "Bone2D1/Bone2D1-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ), "Bone2D2/Bone2D2-1", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 
@@ -259,13 +206,6 @@ __meta__ = {
 "_edit_bone_": true
 }
 
-[node name="Bone2D1-1-1" type="Bone2D" parent="Skeleton2D/Bone2D1/Bone2D1-1"]
-position = Vector2( -167, 145 )
-rest = Transform2D( 1, 0, 0, 1, -167, 145 )
-__meta__ = {
-"_edit_bone_": true
-}
-
 [node name="Bone2D2" type="Bone2D" parent="Skeleton2D"]
 rotation = -1.18504
 rest = Transform2D( 0.376261, -0.926514, 0.926514, 0.376261, 0, 0 )
@@ -278,14 +218,6 @@ __meta__ = {
 position = Vector2( -118, 181 )
 rotation = -0.523598
 rest = Transform2D( 0.866026, -0.499999, 0.499999, 0.866026, -118, 181 )
-__meta__ = {
-"_edit_bone_": true
-}
-
-[node name="Bone2D2-1-1" type="Bone2D" parent="Skeleton2D/Bone2D2/Bone2D2-1"]
-position = Vector2( -167, 145 )
-rotation = 1.48993
-rest = Transform2D( 0.0807788, 0.996732, -0.996732, 0.0807788, -167, 145 )
 __meta__ = {
 "_edit_bone_": true
 }
