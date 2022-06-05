@@ -83,7 +83,10 @@ enum STALK_TYPE_VALUES {
 	CACTUS,
 	WINDING
 }
-const STALK_TYPE_DOMINANTS := [ STALK_TYPE_VALUES.DEFAULT ]
+const STALK_TYPE_DOMINANTS := [
+	STALK_TYPE_VALUES.DEFAULT,
+	STALK_TYPE_VALUES.WINDING
+]
 var STALK_TYPE_SCENES = {
 	STALK_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Stalks/DefaultStalk.tscn"),
 	STALK_TYPE_VALUES.BAMBOO: preload("res://src/CloseUpPlant/Stalks/BambooStalk.tscn"),
@@ -93,10 +96,19 @@ var STALK_TYPE_SCENES = {
 
 # Branch
 const BRANCH_TYPE_TYPE := SCENE
-enum BRANCH_TYPE_VALUES { DEFAULT }
-const BRANCH_TYPE_DOMINANTS := [ BRANCH_TYPE_VALUES.DEFAULT ]
+enum BRANCH_TYPE_VALUES {
+	DEFAULT,
+	CACTUS,
+	WAVY
+}
+const BRANCH_TYPE_DOMINANTS := [
+	BRANCH_TYPE_VALUES.DEFAULT,
+	BRANCH_TYPE_VALUES.WAVY
+]
 var BRANCH_TYPE_SCENES = {
-	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/DefaultBranch.tscn")
+	BRANCH_TYPE_VALUES.DEFAULT: preload("res://src/CloseUpPlant/Branches/DefaultBranch.tscn"),
+	BRANCH_TYPE_VALUES.CACTUS: preload("res://src/CloseUpPlant/Branches/CactusBranch.tscn"),
+	BRANCH_TYPE_VALUES.WAVY: preload("res://src/CloseUpPlant/Branches/WavyBranch.tscn")
 }
 
 # Leaf
