@@ -147,7 +147,6 @@ func plant_crop(crop_id: String, plant: Plant):
 	overview_plant.position = map_to_world(new_coord) + cell_size/2
 
 	plant.overview_plant = overview_plant
-	print(crop_tiles[crop_id])
 
 func add_new_crop_area(coord: Vector2):
 	var new_crop_id : int = int(crop_tiles.keys()[-1])+1
@@ -218,7 +217,7 @@ func remove_plant(crop_id: String):
 	close_up_plant.queue_free()
 
 	crop_tiles[crop_id].plant = null
-	
+
 func save_stats():
 	var save_dict = {
 		"filename" : get_filename(),
@@ -267,8 +266,6 @@ func _on_UILayer_combine_crop(plant: Plant):
 		combining_array = []
 
 func _on_UILayer_remove_plant(plant: Plant):
-	print("Removendo planta ", plant)
 	var crop_id = get_crop_id_by_plant(plant);
 
 	remove_plant(crop_id)
-	print("Planta removida")
