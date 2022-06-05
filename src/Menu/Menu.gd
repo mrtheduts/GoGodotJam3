@@ -42,3 +42,12 @@ func _on_Tween_tree_entered():
 		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
 	)
 	$Tween.start()
+
+
+func _on_CreditsButton_pressed():
+	$Music.stream_paused = true
+	$VideoPlayer.start()
+
+
+func _on_VideoPlayer_hide():
+	$Music.stream_paused = false

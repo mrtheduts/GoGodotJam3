@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://raw_assets/images/ui-icons/coin.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/Money/Money.gd" type="Script" id=2]
 [ext_resource path="res://raw_assets/sounds/effects/coins.tres" type="AudioStream" id=3]
+[ext_resource path="res://godot_assets/theme/main.theme" type="Theme" id=4]
 
 [node name="Money" type="MarginContainer"]
 anchor_left = 0.5
@@ -15,6 +16,7 @@ margin_right = 44.0
 margin_bottom = 34.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = ExtResource( 4 )
 custom_constants/margin_right = 2
 custom_constants/margin_top = 2
 custom_constants/margin_left = 2
@@ -22,9 +24,9 @@ custom_constants/margin_bottom = 2
 script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 18.0
+margin_left = 19.0
 margin_top = 18.0
-margin_right = 70.0
+margin_right = 69.0
 margin_bottom = 50.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -40,9 +42,9 @@ expand = true
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 margin_left = 36.0
-margin_top = 9.0
-margin_right = 52.0
-margin_bottom = 23.0
+margin_top = 4.0
+margin_right = 50.0
+margin_bottom = 28.0
 size_flags_horizontal = 4
 text = "10"
 align = 2

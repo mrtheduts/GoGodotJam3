@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://raw_assets/images/ui-icons/next-day.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/WorldUI/WorldUI.gd" type="Script" id=2]
+[ext_resource path="res://godot_assets/theme/main.theme" type="Theme" id=3]
 
 [node name="WorldUI" type="MarginContainer"]
 anchor_left = 1.0
@@ -10,6 +11,7 @@ margin_left = -133.0
 margin_bottom = 68.0
 grow_horizontal = 0
 size_flags_horizontal = 8
+theme = ExtResource( 3 )
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 script = ExtResource( 2 )
@@ -27,14 +29,14 @@ alignment = 1
 
 [node name="Day" type="Label" parent="HBoxContainer/VBoxContainer"]
 margin_right = 80.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 80, 20 )
 align = 1
 valign = 1
 autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 24.0
+margin_top = 28.0
 margin_right = 80.0
 margin_bottom = 64.0
 size_flags_horizontal = 11
@@ -42,7 +44,7 @@ size_flags_vertical = 11
 
 [node name="TimeIcon" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_right = 38.0
-margin_bottom = 40.0
+margin_bottom = 36.0
 size_flags_horizontal = 11
 size_flags_vertical = 11
 expand = true
@@ -51,7 +53,7 @@ stretch_mode = 5
 [node name="WeatherIcon" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 42.0
 margin_right = 80.0
-margin_bottom = 40.0
+margin_bottom = 36.0
 size_flags_horizontal = 11
 size_flags_vertical = 11
 expand = true

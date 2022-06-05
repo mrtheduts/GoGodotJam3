@@ -27,12 +27,12 @@ var displayed_tools_id : Array = [1]
 func _on_SeedPacket_selection(id: int):
 	selected_item = get_item_by_id(str(id))
 	shopper_sell(selected_item["dialog"])
-	Utils.conn_nodes($Dialog/BuyButton, "pressed", self, "make_purchase")
+	Utils.conn_nodes($Dialog/VBoxContainer/BuyButton, "pressed", self, "make_purchase")
 
 func _on_Tool_selection(id: String):
 	selected_item = get_item_by_id(id)
 	shopper_sell(selected_item["dialog"])
-	Utils.conn_nodes($Dialog/BuyButton, "pressed", self, "make_purchase")
+	Utils.conn_nodes($Dialog/VBoxContainer/BuyButton, "pressed", self, "make_purchase")
 
 func _input(event):
 	if event is InputEventKey and event.pressed:

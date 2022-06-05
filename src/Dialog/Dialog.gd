@@ -29,10 +29,10 @@ func talk(text: String):
 	skip_dialog = false
 	buy_option = false
 	
-	$BuyButton.visible = false
-	$DialogText.bbcode_text = text
+	$VBoxContainer/BuyButton.visible = false
+	$VBoxContainer/DialogText.bbcode_text = text
 	
-	$DialogText.visible_characters = 0
+	$VBoxContainer/DialogText.visible_characters = 0
 	visible_chars = 0
 	
 	popup()
@@ -42,10 +42,10 @@ func sell(text: String):
 	skip_dialog = false
 	buy_option = true
 	
-	$BuyButton.visible = false
-	$DialogText.bbcode_text = text
+	$VBoxContainer/BuyButton.visible = false
+	$VBoxContainer/DialogText.bbcode_text = text
 	
-	$DialogText.visible_characters = 0
+	$VBoxContainer/DialogText.visible_characters = 0
 	visible_chars = 0
 	
 	popup()
@@ -56,18 +56,21 @@ func _process(delta):
 	if visible_chars > 0:
 		if skip_dialog:
 			speed = SKIP_SPEED
-		elif $DialogText.text[round(visible_chars) - 1] in ["!", ".", "?"]:
+		elif $VBoxContainer/DialogText.text[round(visible_chars) - 1] in ["!", ".", "?"]:
 			speed = BREAK_SPEED
 		else:
 			speed = MAX_SPEED
 
 	visible_chars += speed * delta
-	$DialogText.visible_characters = round(visible_chars)
+	$VBoxContainer/DialogText.visible_characters = round(visible_chars)
 	
-	if $DialogText.visible_characters >= len($DialogText.text):
+	if $VBoxContainer/DialogText.visible_characters >= len($VBoxContainer/DialogText.text):
 		if (buy_option):
-			$BuyButton.visible = true
+			$VBoxContainer/BuyButton.visible = true
 		set_process(false)
+	
+	self.rect_size = $VBoxContainer.rect_size
+	self.rect_size += Vector2(20, 40)
 
 func set_text_size():
-	$DialogText.rect_size = rect_size - Vector2(TEXT_MARGIN * 2, rect_size.y/2)
+	$VBoxContainer/DialogText.rect_size = rect_size - Vector2(TEXT_MARGIN * 2, rect_size.y/2)
