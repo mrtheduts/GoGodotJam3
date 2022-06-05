@@ -14,7 +14,7 @@ const SHELF_Y : Array = [-160, -20]
 const HOE_POSITION : Vector2 = Vector2(-330, 180)
 const CHEST_POSITION : Vector2 = Vector2(55, -40)
 const BAG_POSITION : Vector2 = Vector2(-195, 160)
-const DIALOG_POSITION : Vector2 = Vector2(-325, 239)
+const DIALOG_POSITION : Vector2 = Vector2(64, -110)
 
 var ITEM_ID_MAPPING : Dictionary = {
 	"Hoe" : Constants.HOE_ITEM_ID
