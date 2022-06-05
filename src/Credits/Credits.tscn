@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://raw_assets/videos/credits-no-music.webm" type="VideoStream" id=1]
+[ext_resource path="res://raw_assets/sounds/music/that-funny-feeling.tres" type="AudioStream" id=2]
+[ext_resource path="res://src/Credits/Credits.gd" type="Script" id=3]
+[ext_resource path="res://godot_assets/theme/main.theme" type="Theme" id=4]
+
+[node name="VideoPlayer" type="VideoPlayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1024, 600 )
+stream = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -211.0
+margin_top = -24.0
+margin_right = 211.0
+theme = ExtResource( 4 )
+text = "That Funny Feeling of Bo Burnham - Cover by Joao Spuri"
+align = 1
+
+[connection signal="finished" from="." to="." method="_on_VideoPlayer_finished"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

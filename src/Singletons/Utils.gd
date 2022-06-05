@@ -14,7 +14,7 @@ func conn_nodes(src_obj: Object,
 		binds: Array = [],
 		flags: int = 0) -> void:
 
-	if (!src_obj.is_connected(src_signal, dest_obj, dest_func)):
+	if (src_obj and dest_obj and !src_obj.is_connected(src_signal, dest_obj, dest_func)):
 		var error := src_obj.connect(src_signal, dest_obj, dest_func, binds, flags)
 		if (error):
 			printerr("Error (" + String(error) + ") connecting " + src_signal + " to " + dest_func)
