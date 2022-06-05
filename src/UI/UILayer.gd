@@ -69,6 +69,8 @@ func _on_Garden_show_close_up_plant(plant):
 
 	popup_window.plant = plant
 	popup_window.close_up_plant = plant.close_up_plant
+	
+	popup_window.ui_for_life_stage(plant.life_stage)
 	add_child(popup_window)
 	popup_window.show_scene(close_up_plot)
 

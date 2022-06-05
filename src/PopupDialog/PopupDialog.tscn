@@ -62,7 +62,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 200.0
+margin_right = 132.0
 margin_bottom = 64.0
 
 [node name="WaterButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
@@ -73,7 +73,19 @@ texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 8 )
 expand = true
 
+[node name="SellButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 7 )
+expand = true
+
 [node name="PhotoButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+visible = false
 margin_left = 68.0
 margin_right = 132.0
 margin_bottom = 64.0
@@ -82,17 +94,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 9 )
-expand = true
-
-[node name="SellButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 7 )
 expand = true
 
 [node name="DiscardButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
@@ -155,8 +156,8 @@ render_target_update_mode = 3
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer" to="." method="_on_HBoxContainer_gui_input"]
 [connection signal="button_down" from="VBoxContainer/HBoxContainer/HBoxContainer/WaterButton" to="." method="_on_WaterButton_button_down"]
 [connection signal="button_up" from="VBoxContainer/HBoxContainer/HBoxContainer/WaterButton" to="." method="_on_WaterButton_button_up"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/PhotoButton" to="." method="_on_PhotoButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/SellButton" to="." method="_on_SellButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/PhotoButton" to="." method="_on_PhotoButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton" to="." method="_on_DiscardButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/HBoxContainer/CombineButton" to="." method="_on_CombineButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
