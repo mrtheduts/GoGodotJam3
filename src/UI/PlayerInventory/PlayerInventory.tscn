@@ -40,5 +40,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[connection signal="mouse_entered" from="." to="." method="_on_PlayerInventory_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_PlayerInventory_mouse_exited"]
+[connection signal="mouse_entered" from="Slots" to="." method="_on_Slots_mouse_entered"]
+[connection signal="mouse_exited" from="Slots" to="." method="_on_Slots_mouse_exited"]

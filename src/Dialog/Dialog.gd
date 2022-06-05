@@ -23,7 +23,6 @@ func _input(event):
 				skip_dialog = true
 		elif event is InputEventKey and event.pressed:
 			if event.scancode == KEY_ENTER:
-				print("HEY")
 				skip_dialog = true
 	
 func talk(text: String):
