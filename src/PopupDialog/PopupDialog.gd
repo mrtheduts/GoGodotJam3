@@ -151,7 +151,9 @@ func ui_for_life_stage(life_state: int):
 		$VBoxContainer/HBoxContainer/HBoxContainer/PhotoButton.show()
 	elif (life_state == Constants.LIFE_STAGES.DEAD):
 		$VBoxContainer/HBoxContainer/HBoxContainer/SellButton.visible = false
-		$VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton.visible = true
+		$VBoxContainer/HBoxContainer/HBoxContainer/CombineButton.visible = false
+		$VBoxContainer/HBoxContainer/HBoxContainer/PhotoButton.visible = false
+		$VBoxContainer/HBoxContainer/HBoxContainer/DiscardButton.show()
 
 func _on_CombineButton_pressed():
 	emit_signal("combine_button_clicked", plant)

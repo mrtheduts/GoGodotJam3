@@ -7,7 +7,7 @@ class_name Plant
 # Signals
 signal water_level_changed
 signal ask_for_close_up_plant
-signal plant_is_adult
+
 signal update_ui
 
 const BASE_VALUE : int = 5

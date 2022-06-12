@@ -12,7 +12,7 @@ func _ready():
 	Utils.conn_nodes(WorldManager, "time_changed", self, "_on_WorldManager_time_changed")
 	self.modulate = WorldManager.current_color()
 
-func _process(delta):
+func _process(_delta):
 	if $WateringParticles.emitting == true and water_amount >= Constants.MIN_WATER_TO_AGE:
 		$Ground/WaterCheckParticles.emitting = true
 	else:

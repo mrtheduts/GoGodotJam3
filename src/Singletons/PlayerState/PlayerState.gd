@@ -202,8 +202,10 @@ func inventory_sell_item(item_slot: int, sell_amount: int):
 	
 	var sell_price : int = 0
 	if item_data["id"] == String(Constants.SEED_ITEM_ID):
+		# warning-ignore:narrowing_conversion
 		sell_price = round(item_data["seed_obj"].value * _sell_per)
 	else:
+		# warning-ignore:narrowing_conversion
 		sell_price = round(ItemDatabase.get_item(item_data["id"])["sell_price"] * _sell_per)
 		
 	var current_amount : int = item_data["amount"]

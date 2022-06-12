@@ -63,7 +63,6 @@ func _on_Garden_show_close_up_plant(plant):
 	Utils.conn_nodes(popup_window, "sell_button_clicked", self, "_on_PopupWindow_sell_button_clicked")
 	Utils.conn_nodes(popup_window, "discard_button_clicked", self, "_on_PopupWindow_discard_button_clicked")
 	Utils.conn_nodes(popup_window, "closed", self, "_on_PopupWindow_closed")
-	Utils.conn_nodes(close_up_plant, "update_ui", popup_window, "_on_Plant_update_ui")
 	Utils.conn_nodes(popup_window, "combine_button_clicked", self, "_on_PopupWindow_combine_button_clicked")
 
 	opened_plants[plant] = popup_window

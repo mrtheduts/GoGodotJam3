@@ -6,7 +6,6 @@ extends Node2D
 
 class_name CloseUpPlant
 
-signal update_ui
 
 const PLANT_OFFSET := Vector2(0, -150)
 const DEPTH_SEED := Vector2(0, 100)
@@ -91,7 +90,7 @@ func die() -> void:
 		var curr_children: Array = _entry_points[entry]
 		var new_children := []
 		for child in curr_children:
-			var has_fallen: bool = child.die() if (child.has_method("die")) else false
+			#var has_fallen: bool = child.die() if (child.has_method("die")) else false
 			new_children.push_back(child)
 		_entry_points[entry] = new_children
 	
