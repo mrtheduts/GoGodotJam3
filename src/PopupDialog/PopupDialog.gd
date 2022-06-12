@@ -123,7 +123,6 @@ func _on_SellButton_pressed():
 
 func _on_TweenClose_tween_all_completed():
 	if (close_up_plant and is_instance_valid(close_up_plant)):
-		print('close_up_plant ', close_up_plant)
 		close_up_plant.get_parent().remove_child(close_up_plant)
 	emit_signal("closed", plant)
 	self.queue_free()

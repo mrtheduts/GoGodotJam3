@@ -1,7 +1,7 @@
 extends VideoPlayer
 
 func start() -> void:
-	print("OI")
+
 	self.visible = true
 	$Music.play()
 	self.play()

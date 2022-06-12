@@ -152,8 +152,6 @@ func plant_crop(crop_id: String, plant: Plant):
 	crop_tiles[crop_id]["plant"] = plant
 	plant.plant()
 	var new_coord = crop_tiles[crop_id].coord
-
-	print(plant.phenotype)
 	
 	var has_flower = DNA.get_feature_name(DNA.FEATURES.HAS_FLOWER)
 	var has_fruit = DNA.get_feature_name(DNA.FEATURES.HAS_FRUIT)

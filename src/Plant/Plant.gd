@@ -7,7 +7,6 @@ class_name Plant
 # Signals
 signal water_level_changed
 signal ask_for_close_up_plant
-
 signal update_ui
 
 const BASE_VALUE : int = 5
@@ -118,7 +117,6 @@ func age(days: int) -> void:
 func water(amount: int = 1) -> void:
 	# warning-ignore:narrowing_conversion
 	watered_amount = min(watered_amount + amount, Constants.MAX_WATERED_AMOUNT)
-	print("New watered amount: ", watered_amount)
 	emit_signal("water_level_changed", watered_amount)
 	
 func set_plant_value() -> void:
