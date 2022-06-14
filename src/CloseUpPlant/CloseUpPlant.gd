@@ -57,6 +57,10 @@ func add_to_random_entry_point(node: Node) -> bool:
 				elif (node is Branch):
 					node.set_modulate_color(modulate_color)
 					branch_nodes.push_back(node)
+				elif (node is Fruit):
+					fruit_nodes.push_back(node)
+				elif (node is Flower):
+					flower_nodes.push_back(node)
 				
 				var node_entry_points = node.get("_entry_points")
 				if (node_entry_points != null):
@@ -66,6 +70,15 @@ func add_to_random_entry_point(node: Node) -> bool:
 	return is_node_added
 
 func erase_node(node: Node) -> void:
+	if (node is Leaf):
+		leaf_nodes.erase(node)
+	elif (node is Branch):
+		branch_nodes.erase(node)
+	elif (node is Fruit):
+		fruit_nodes.erase(node)
+	elif (node is Flower):
+		flower_nodes.erase(node)
+	
 	for entry in _entry_points.keys():
 		var entry_children: Array = _entry_points[entry]
 		if (node in entry_children):
@@ -94,12 +107,10 @@ func die() -> void:
 			new_children.push_back(child)
 		_entry_points[entry] = new_children
 	
-	var nodes = [root_node, stalk_node] + branch_nodes
+	var nodes = [root_node, stalk_node] + branch_nodes + leaf_nodes + flower_nodes + fruit_nodes
 	for node in nodes:
 		if (node.has_method("die")):
 			node.die()
-			
-#	emit_signal("update_ui", Constants.LIFE_STAGES.DEAD)
 
 func free_seed() -> void:
 	nodes_with_idle_animation.erase(seed_node)
@@ -124,8 +135,6 @@ func add_stalk(node: Node) -> void:
 func erase_leaves(leaves: Array = leaf_nodes) -> void:
 	for leaf in leaves:
 		erase_node(leaf)
-	for leaf in leaves:
-		leaf_nodes.erase(leaf)
 
 func move_seed_to_top() -> void:
 	move_child(seed_node, get_child_count() - 1)

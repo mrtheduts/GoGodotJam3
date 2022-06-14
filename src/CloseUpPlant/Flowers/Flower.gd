@@ -8,9 +8,7 @@ func _ready():
 	z_index = Constants.Z_INDEX_FLOWER
 
 func die():
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	has_fallen = rng.randi_range(0, 1)
+	has_fallen = Utils.randi_range(0, 1)
 	$Tween.interpolate_property(
 		self, "modulate",
 		self.modulate, Constants.DEAD_LEAF_COLOR, 

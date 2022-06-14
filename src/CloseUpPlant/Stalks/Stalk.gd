@@ -42,7 +42,7 @@ func die():
 		Constants.DYING_DURATION, $Tween.TRANS_LINEAR, $Tween.EASE_OUT
 	)
 	$AnimationPlayer.play("Dead")
-	if (root != null and root.get("die")):
+	if (root != null and root.has_method("die")):
 		root.die()
 	$Tween.start()
 
