@@ -31,6 +31,9 @@ func set_WateringParticles_state(state: bool) -> void:
 	$WateringParticles.position = pos
 	$WateringParticles.emitting = state
 
+func set_water_level(water_level: int) -> void:
+	$Ground.modulate = Color.white.darkened(water_level * WATER_LEVEL_RATE)
+
 func change_water_level(water_level: int) -> void:
 	water_amount = water_level
 	var final_color = Color.white.darkened(water_level * WATER_LEVEL_RATE)

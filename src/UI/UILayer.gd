@@ -52,6 +52,7 @@ func _on_Garden_show_close_up_plant(plant):
 	var close_up_plot: CloseUpPlot = CLOSE_UP_SOIL_SCENE.instance()
 	close_up_plot.plant = plant
 	var camera_offset := close_up_plant.get_plant_center()
+	close_up_plot.set_water_level(plant.watered_amount)
 	
 	var zoom_level = Constants.ZOOM_IN_LIFE_STAGES[plant.life_stage]
 	close_up_plot.add_node_and_focus_camera(close_up_plant, camera_offset, zoom_level)
