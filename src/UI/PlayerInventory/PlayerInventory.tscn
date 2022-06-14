@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://godot_assets/theme/main.theme" type="Theme" id=1]
 [ext_resource path="res://src/UI/PlayerInventory/PlayerInventory.gd" type="Script" id=2]
-[ext_resource path="res://raw_assets/themes/Inventory.tres" type="Theme" id=3]
 [ext_resource path="res://src/CloseUpPlant/Seed/Seed.tscn" type="PackedScene" id=4]
 
 [node name="PlayerInventory" type="MarginContainer"]
@@ -15,7 +15,7 @@ margin_right = 512.0
 margin_bottom = 300.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource( 3 )
+theme = ExtResource( 1 )
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
