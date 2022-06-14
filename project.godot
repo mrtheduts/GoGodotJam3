@@ -116,9 +116,12 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Umbrella Kittens"
+config/name="My Cozy Garden of Hyper Evolved Plants"
+config/description="Our submission for the GoGodotJam3!"
 run/main_scene="res://src/Menu/Menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://raw_assets/images/game_icon/icon.png"
+config/macos_native_icon="res://raw_assets/images/game_icon/icon.icns"
+config/windows_native_icon="res://raw_assets/images/game_icon/icon.ico"
 
 [autoload]
 
