@@ -194,6 +194,7 @@ uv = PoolVector2Array( 1184, 0, 1184, 256, 672, 512, 672, 0 )
 bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="Adult" type="Node2D" parent="."]
+visible = false
 
 [node name="Begin" type="Polygon2D" parent="Adult"]
 material = ExtResource( 2 )

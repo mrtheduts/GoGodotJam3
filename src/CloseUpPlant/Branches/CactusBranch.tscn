@@ -53,7 +53,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Skeleton2D/BeginBone/MidBone:position")
+tracks/0/path = NodePath("Skeleton2D/BeginBone:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -62,10 +62,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 390.913, 10.9194 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Skeleton2D/BeginBone/MidBone:rotation_degrees")
+tracks/1/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -74,10 +74,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ -31.8867 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Skeleton2D/BeginBone/MidBone:scale")
+tracks/2/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -86,10 +86,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Vector2( 341.028, -396.722 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Skeleton2D/BeginBone:position")
+tracks/3/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -98,10 +98,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ 29.9999 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Skeleton2D/BeginBone:rotation_degrees")
+tracks/4/path = NodePath("Skeleton2D/BeginBone/MidBone:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -110,10 +110,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -31.8867 ]
+"values": [ Vector2( 301.011, -116.587 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Skeleton2D/BeginBone:scale")
+tracks/5/path = NodePath("Skeleton2D/BeginBone/MidBone:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -122,43 +122,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 607.389, -14.0469 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 30.0 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Skeleton2D/BeginBone/MidBone/EndBone:scale")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ 0.0 ]
 }
 
 [node name="DefaultBranch" type="Node2D"]
@@ -183,7 +147,6 @@ uv = PoolVector2Array( 800, 256, 800, 768, 288, 1024, 160, 384 )
 bones = [ "BeginBone", PoolRealArray( 1, 1, 1, 1 ), "BeginBone/MidBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone/EndBone", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="Adult" type="Node2D" parent="."]
-visible = false
 
 [node name="Begin" type="Polygon2D" parent="Adult"]
 material = ExtResource( 2 )
@@ -207,6 +170,7 @@ bones = [ "BeginBone", PoolRealArray( 0, 0, 0, 0, 0, 0 ), "BeginBone/MidBone", P
 
 [node name="BeginBone" type="Bone2D" parent="Skeleton2D"]
 rotation = -0.556528
+scale = Vector2( 1, 1 )
 rest = Transform2D( 0.849094, -0.528241, 0.528241, 0.849094, 0, 0 )
 __meta__ = {
 "_edit_bone_": true,
@@ -214,15 +178,15 @@ __meta__ = {
 }
 
 [node name="MidBone" type="Bone2D" parent="Skeleton2D/BeginBone"]
-position = Vector2( 390.913, 10.9194 )
+position = Vector2( 301.011, -116.587 )
 rest = Transform2D( 1, 0, 0, 1, 301.011, -116.587 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="EndBone" type="Bone2D" parent="Skeleton2D/BeginBone/MidBone"]
-position = Vector2( 607.389, -14.0469 )
-rotation = 0.523599
+position = Vector2( 341.028, -396.722 )
+rotation = 0.523598
 rest = Transform2D( 0.866026, 0.499999, -0.499999, 0.866026, 341.028, -396.722 )
 __meta__ = {
 "_edit_bone_": true

@@ -215,7 +215,6 @@ bones = [ "BeginBone", PoolRealArray( 0, 0, 0, 0 ), "BeginBone/MidBone", PoolRea
 
 [node name="BeginBone" type="Bone2D" parent="Skeleton2D"]
 rotation = -0.556528
-scale = Vector2( 1, 1 )
 rest = Transform2D( 0.849094, -0.528241, 0.528241, 0.849094, 0, 0 )
 __meta__ = {
 "_edit_bone_": true,
@@ -231,7 +230,7 @@ __meta__ = {
 
 [node name="EndBone" type="Bone2D" parent="Skeleton2D/BeginBone/MidBone"]
 position = Vector2( 700.168, -33.1441 )
-rotation = 0.523598
+rotation = 0.523599
 rest = Transform2D( 0.866026, 0.499999, -0.499999, 0.866026, 700.168, -33.1441 )
 __meta__ = {
 "_edit_bone_": true
