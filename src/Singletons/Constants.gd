@@ -48,6 +48,8 @@ const Z_INDEX_LEAF := -1
 const Z_INDEX_FLOWER := 2
 const Z_INDEX_FRUIT := 1
 
+const ADULT_STAGE_DAYS: int = 4
+
 const DEAD_LEAF_COLOR := Color('#ff6464')
 const DEAD_COLOR := Color("#add5ff")
 const DYING_DURATION := 5

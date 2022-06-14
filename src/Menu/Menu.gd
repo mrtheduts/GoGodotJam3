@@ -30,7 +30,9 @@ func _on_StartButton_pressed():
 	)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
-	get_tree().change_scene("res://src/Main/Main.tscn")
+	var err = get_tree().change_scene("res://src/Main/Main.tscn")
+	if err:
+		printerr('Error changing main!')
 
 func _on_QuitButton_pressed():
 	get_tree().quit()

@@ -102,11 +102,15 @@ func _on_UILayer_exit_main():
 	)
 	$Tween.start()
 
-
 func _on_Tween_tree_entered():
 	$Tween.interpolate_property(
 		self, "modulate",
 		Color.black, Color.white,
+		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
+	)
+	$Tween.interpolate_property(
+		$Music, "volume_db",
+		$Music.volume_db, -10,
 		Constants.TRANSITION_DURATION, $Tween.TRANS_SINE, $Tween.EASE_OUT
 	)
 	$Tween.start()

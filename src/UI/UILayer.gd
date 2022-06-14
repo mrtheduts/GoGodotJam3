@@ -52,6 +52,7 @@ func _on_Garden_show_close_up_plant(plant):
 	var close_up_plot: CloseUpPlot = CLOSE_UP_SOIL_SCENE.instance()
 	close_up_plot.plant = plant
 	var camera_offset := close_up_plant.get_plant_center()
+	close_up_plot.set_water_level(plant.watered_amount)
 	
 	var zoom_level = Constants.ZOOM_IN_LIFE_STAGES[plant.life_stage]
 	close_up_plot.add_node_and_focus_camera(close_up_plant, camera_offset, zoom_level)
@@ -63,7 +64,6 @@ func _on_Garden_show_close_up_plant(plant):
 	Utils.conn_nodes(popup_window, "sell_button_clicked", self, "_on_PopupWindow_sell_button_clicked")
 	Utils.conn_nodes(popup_window, "discard_button_clicked", self, "_on_PopupWindow_discard_button_clicked")
 	Utils.conn_nodes(popup_window, "closed", self, "_on_PopupWindow_closed")
-	Utils.conn_nodes(close_up_plant, "update_ui", popup_window, "_on_Plant_update_ui")
 	Utils.conn_nodes(popup_window, "combine_button_clicked", self, "_on_PopupWindow_combine_button_clicked")
 
 	opened_plants[plant] = popup_window

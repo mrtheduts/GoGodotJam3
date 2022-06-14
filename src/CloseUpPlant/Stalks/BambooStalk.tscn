@@ -277,6 +277,7 @@ texture = ExtResource( 1 )
 skeleton = NodePath("../../StalkSkeleton")
 polygon = PoolVector2Array( 416, 1760, 32, 1760, 32, 992, 416, 992 )
 uv = PoolVector2Array( 416, 1760, 32, 1760, 32, 992, 416, 992 )
+bones = [ "SkelDown", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid", PoolRealArray( 1, 1, 1, 1 ), "SkelDown/SkelMid/SkelUp", PoolRealArray( 0, 0, 0, 0 ), "SkelDown/SkelMid/SkelUp/SkelTop", PoolRealArray( 0, 0, 0, 0 ) ]
 
 [node name="StalkUp" type="Polygon2D" parent="Polygons"]
 visible = false

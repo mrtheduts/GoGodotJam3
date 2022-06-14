@@ -62,6 +62,7 @@ func set_list_size():
 
 func clear_list():
 	_feature_list.clear()
+	_list_size = 0
 
 func list_features(features: Dictionary):
 	var item_string
@@ -75,12 +76,12 @@ func list_features(features: Dictionary):
 		# Find and return color.
 		if feat_words[0] == "HAS":
 			var value = Utils.as_bool(features[key])
-			features.erase(key)
+			var _erased = features.erase(key)
 			if not value:
 				feat_words.remove(0)
 				key = feat_words.join('_')
-				features.erase(key + '_COLOR')
-				features.erase(key + '_TYPE')
+				var _erased_2 = features.erase(key + '_COLOR')
+				var _erased_3 = features.erase(key + '_TYPE')
 			else:
 				continue
 			
